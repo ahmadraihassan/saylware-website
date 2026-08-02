@@ -57,29 +57,16 @@ export default function LeadForm({
   return (
     <div
       id={id}
-      className="relative rounded-2xl p-8 sm:p-12 overflow-hidden"
-      style={{
-        background: "var(--bg-card)",
-        border: "1px solid var(--border)",
-      }}
+      className="relative rounded-3xl p-8 sm:p-12 overflow-hidden bg-white border border-[#1c1917]/5 shadow-xl shadow-[#1c1917]/5"
     >
       {/* Top accent line */}
-      <div
-        className="absolute top-0 left-0 right-0 h-[3px]"
-        style={{ background: gradient }}
-      />
-
-      {/* Glow effect */}
-      <div
-        className="absolute -top-24 -right-24 w-48 h-48 rounded-full blur-[100px] opacity-15 pointer-events-none"
-        style={{ background: accent }}
-      />
+      <div className="absolute top-0 left-0 right-0 h-1" style={{ background: gradient }} />
 
       <div className="relative z-10">
-        <h3 className="font-display text-2xl sm:text-3xl md:text-4xl font-bold text-white">
+        <h3 className="font-display text-2xl sm:text-3xl font-bold text-[#1c1917]">
           {heading}
         </h3>
-        <p className="mt-3 text-sm text-[var(--ink-soft)]">
+        <p className="mt-3 text-sm text-[#78716c]">
           {subheading}
         </p>
 
@@ -102,69 +89,49 @@ export default function LeadForm({
         ) : (
           <form onSubmit={handleSubmit} className="mt-10 grid grid-cols-1 sm:grid-cols-2 gap-6">
             <div className="sm:col-span-1">
-              <label htmlFor={`${id}-name`} className="block text-xs font-medium mb-2.5 text-[var(--ink-soft)] uppercase tracking-wider">
-                Full name
-              </label>
+              <label className="block text-xs font-semibold mb-2.5 text-[#78716c] uppercase tracking-wider">Full name</label>
               <input
-                id={`${id}-name`}
                 name="name"
                 type="text"
                 required
-                className="w-full rounded-xl border px-4 py-3.5 text-sm outline-none transition-all duration-300 bg-[var(--bg-elevated)] text-white placeholder:text-[var(--ink-muted)] focus:border-[var(--signal-security)] focus:shadow-[0_0_0_3px_rgba(227,30,36,0.1)]"
-                style={{ borderColor: "var(--border)" }}
+                className="w-full rounded-2xl border border-[#1c1917]/8 px-5 py-3.5 text-sm bg-[#faf6f0] text-[#1c1917] placeholder:text-[#a8a29e] outline-none"
                 placeholder="John Doe"
               />
             </div>
             <div className="sm:col-span-1">
-              <label htmlFor={`${id}-email`} className="block text-xs font-medium mb-2.5 text-[var(--ink-soft)] uppercase tracking-wider">
-                Work email
-              </label>
+              <label className="block text-xs font-semibold mb-2.5 text-[#78716c] uppercase tracking-wider">Work email</label>
               <input
-                id={`${id}-email`}
                 name="email"
                 type="email"
                 required
-                className="w-full rounded-xl border px-4 py-3.5 text-sm outline-none transition-all duration-300 bg-[var(--bg-elevated)] text-white placeholder:text-[var(--ink-muted)] focus:border-[var(--signal-security)] focus:shadow-[0_0_0_3px_rgba(227,30,36,0.1)]"
-                style={{ borderColor: "var(--border)" }}
+                className="w-full rounded-2xl border border-[#1c1917]/8 px-5 py-3.5 text-sm bg-[#faf6f0] text-[#1c1917] placeholder:text-[#a8a29e] outline-none"
                 placeholder="john@company.com"
               />
             </div>
             <div className="sm:col-span-1">
-              <label htmlFor={`${id}-company`} className="block text-xs font-medium mb-2.5 text-[var(--ink-soft)] uppercase tracking-wider">
-                Company
-              </label>
+              <label className="block text-xs font-semibold mb-2.5 text-[#78716c] uppercase tracking-wider">Company</label>
               <input
-                id={`${id}-company`}
                 name="company"
                 type="text"
-                className="w-full rounded-xl border px-4 py-3.5 text-sm outline-none transition-all duration-300 bg-[var(--bg-elevated)] text-white placeholder:text-[var(--ink-muted)] focus:border-[var(--signal-security)] focus:shadow-[0_0_0_3px_rgba(227,30,36,0.1)]"
-                style={{ borderColor: "var(--border)" }}
+                className="w-full rounded-2xl border border-[#1c1917]/8 px-5 py-3.5 text-sm bg-[#faf6f0] text-[#1c1917] placeholder:text-[#a8a29e] outline-none"
                 placeholder="Acme Inc."
               />
             </div>
             <div className="sm:col-span-1">
-              <label htmlFor={`${id}-phone`} className="block text-xs font-medium mb-2.5 text-[var(--ink-soft)] uppercase tracking-wider">
-                Phone (optional)
-              </label>
+              <label className="block text-xs font-semibold mb-2.5 text-[#78716c] uppercase tracking-wider">Phone (optional)</label>
               <input
-                id={`${id}-phone`}
                 name="phone"
                 type="tel"
-                className="w-full rounded-xl border px-4 py-3.5 text-sm outline-none transition-all duration-300 bg-[var(--bg-elevated)] text-white placeholder:text-[var(--ink-muted)] focus:border-[var(--signal-security)] focus:shadow-[0_0_0_3px_rgba(227,30,36,0.1)]"
-                style={{ borderColor: "var(--border)" }}
+                className="w-full rounded-2xl border border-[#1c1917]/8 px-5 py-3.5 text-sm bg-[#faf6f0] text-[#1c1917] placeholder:text-[#a8a29e] outline-none"
                 placeholder="+1 (555) 000-0000"
               />
             </div>
             <div className="sm:col-span-2">
-              <label htmlFor={`${id}-message`} className="block text-xs font-medium mb-2.5 text-[var(--ink-soft)] uppercase tracking-wider">
-                What do you need help with?
-              </label>
+              <label className="block text-xs font-semibold mb-2.5 text-[#78716c] uppercase tracking-wider">What do you need help with?</label>
               <textarea
-                id={`${id}-message`}
                 name="message"
                 rows={4}
-                className="w-full rounded-xl border px-4 py-3.5 text-sm outline-none transition-all duration-300 bg-[var(--bg-elevated)] text-white placeholder:text-[var(--ink-muted)] focus:border-[var(--signal-security)] focus:shadow-[0_0_0_3px_rgba(227,30,36,0.1)] resize-none"
-                style={{ borderColor: "var(--border)" }}
+                className="w-full rounded-2xl border border-[#1c1917]/8 px-5 py-3.5 text-sm bg-[#faf6f0] text-[#1c1917] placeholder:text-[#a8a29e] outline-none resize-none"
                 placeholder="Tell us about your environment..."
               />
             </div>
@@ -173,7 +140,7 @@ export default function LeadForm({
               <button
                 type="submit"
                 disabled={status === "loading"}
-                className="rounded-full px-8 py-3.5 text-sm font-semibold text-white transition-all duration-300 hover:scale-105 hover:shadow-[0_0_30px_rgba(227,30,36,0.35)] disabled:opacity-60 disabled:hover:scale-100 border border-white/10"
+                className="rounded-full px-8 py-3.5 text-sm font-bold text-white transition-all duration-300 hover:scale-105 hover:shadow-xl disabled:opacity-60 disabled:hover:scale-100"
                 style={{ background: gradient }}
               >
                 {status === "loading" ? (
@@ -189,7 +156,7 @@ export default function LeadForm({
                 )}
               </button>
               {status === "error" && (
-                <p className="text-xs text-red-400">
+                <p className="text-xs text-red-500">
                   {notConfigured
                     ? "Form isn't connected yet — add your Formspree ID in lib/content.ts."
                     : "Something went wrong. Please try again or email us directly."}

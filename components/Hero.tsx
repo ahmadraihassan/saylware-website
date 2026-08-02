@@ -4,58 +4,58 @@ import { hero } from "@/lib/content";
 
 export default function Hero() {
   return (
-    <section className="relative min-h-[95vh] flex items-center justify-center overflow-hidden pt-20">
-      {/* Background effects */}
-      <div className="absolute inset-0 grid-pattern opacity-40" />
-      
-      {/* Ambient glow orbs */}
-      <div
-        className="absolute top-1/3 left-1/3 w-[500px] h-[500px] rounded-full blur-[150px] opacity-20 animate-pulse-glow"
-        style={{ background: "var(--signal-security)" }}
-      />
-      <div
-        className="absolute bottom-1/4 right-1/4 w-[400px] h-[400px] rounded-full blur-[150px] opacity-10 animate-pulse-glow"
-        style={{ background: "var(--signal-support)", animationDelay: "2s" }}
-      />
+    <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20" style={{ background: "var(--gradient-hero)" }}>
+      {/* Subtle dot pattern */}
+      <div className="absolute inset-0 dots-pattern opacity-50" />
 
-      {/* Decorative grid lines */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-0 left-1/4 w-px h-full bg-gradient-to-b from-transparent via-white/[0.04] to-transparent" />
-        <div className="absolute top-0 right-1/4 w-px h-full bg-gradient-to-b from-transparent via-white/[0.04] to-transparent" />
-      </div>
+      {/* Floating decorative circles */}
+      <div className="absolute top-32 left-[8%] w-16 h-16 rounded-full bg-[var(--signal-security)]/10 animate-float" />
+      <div className="absolute top-48 right-[12%] w-24 h-24 rounded-full bg-[var(--signal-support)]/10 animate-float" style={{ animationDelay: "2s" }} />
+      <div className="absolute bottom-32 left-[15%] w-12 h-12 rounded-full bg-[#1c1917]/5 animate-float" style={{ animationDelay: "4s" }} />
 
-      <div className="relative mx-auto max-w-5xl px-6 text-center z-10">
+      <div className="relative mx-auto max-w-6xl px-6 text-center z-10">
         <p className="eyebrow mb-8">{hero.eyebrow}</p>
 
-        <h1 className="font-display text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold tracking-tight leading-[1.05]">
-          <span className="gradient-text">{hero.headline.split(" — ")[0]}</span>
-          <br />
-          <span className="text-white">{hero.headline.split(" — ")[1] || ""}</span>
+        <h1 className="font-display text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold tracking-tight leading-[1.05] text-[#1c1917]">
+          <span className="block">Secure What</span>
+          <span className="inline-flex items-center gap-4 justify-center flex-wrap">
+            <span>Matters</span>
+            {/* Ellipse image in headline */}
+            <span className="relative inline-block w-32 h-16 sm:w-48 sm:h-20 md:w-56 md:h-24 rounded-full overflow-hidden shadow-xl ring-4 ring-white/50">
+              <img
+                src="https://images.unsplash.com/photo-1563986768609-322da13575f3?w=400&h=200&fit=crop"
+                alt="Security"
+                className="w-full h-full object-cover"
+              />
+            </span>
+            <span>Most</span>
+          </span>
         </h1>
 
-        <p className="mt-8 text-lg sm:text-xl leading-relaxed max-w-2xl mx-auto text-[var(--ink-soft)]">
+        <p className="mt-8 text-lg sm:text-xl leading-relaxed max-w-2xl mx-auto text-[#78716c]">
           {hero.subheadline}
         </p>
 
         <div className="mt-12 flex flex-col sm:flex-row items-center justify-center gap-4">
           <a
-            href={hero.primaryCta.href}
-            className="group relative w-full sm:w-auto rounded-full px-8 py-4 text-sm font-semibold text-white transition-all duration-300 hover:scale-105 hover:shadow-[0_0_40px_rgba(227,30,36,0.4)] overflow-hidden border border-[var(--signal-security)]/40 bg-[var(--signal-security)]/90"
+            href="#services-security"
+            className="w-full sm:w-auto rounded-full px-10 py-4 text-sm font-bold text-white transition-all duration-300 hover:scale-105 hover:shadow-xl hover:shadow-[var(--signal-security)]/30"
+            style={{ background: "var(--gradient-security)" }}
           >
-            <span className="relative z-10">{hero.primaryCta.label}</span>
+            Cybersecurity
           </a>
           <a
-            href={hero.secondaryCta.href}
-            className="group relative w-full sm:w-auto rounded-full px-8 py-4 text-sm font-semibold text-white transition-all duration-300 hover:scale-105 border border-white/10 hover:border-[var(--signal-support)]/40 bg-white/[0.03] hover:bg-white/[0.06]"
+            href="#services-support"
+            className="w-full sm:w-auto rounded-full px-10 py-4 text-sm font-bold text-[#1c1917] transition-all duration-300 hover:scale-105 border-2 border-[#1c1917]/10 hover:border-[var(--signal-support)] bg-white hover:bg-[var(--signal-support)]/5"
           >
-            {hero.secondaryCta.label}
+            Customer Support
           </a>
         </div>
 
         {/* Scroll indicator */}
-        <div className="mt-24 flex flex-col items-center gap-2 opacity-30">
-          <span className="text-[10px] font-mono uppercase tracking-widest text-[var(--ink-muted)]">Scroll</span>
-          <div className="w-px h-10 bg-gradient-to-b from-[var(--ink-muted)] to-transparent" />
+        <div className="mt-20 flex flex-col items-center gap-2 opacity-40">
+          <span className="text-[10px] font-mono uppercase tracking-widest text-[#a8a29e]">Scroll</span>
+          <div className="w-px h-8 bg-gradient-to-b from-[#a8a29e] to-transparent" />
         </div>
       </div>
     </section>

@@ -5,7 +5,6 @@ import { nav } from "@/lib/content";
 
 export default function Header() {
   const [scrolled, setScrolled] = useState(false);
-  const [mobileOpen, setMobileOpen] = useState(false);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20);
@@ -17,75 +16,45 @@ export default function Header() {
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
         scrolled
-          ? "bg-[#050505]/90 backdrop-blur-xl border-b border-white/[0.06]"
+          ? "bg-white/80 backdrop-blur-xl border-b border-[#1c1917]/6 shadow-sm"
           : "bg-transparent"
       }`}
     >
       <div className="mx-auto max-w-7xl px-6 h-18 flex items-center justify-between">
         <a
           href="#"
-          className="font-display text-xl font-bold tracking-tight text-white hover:opacity-80 transition-opacity"
+          className="font-display text-xl font-bold tracking-tight text-[#1c1917] hover:opacity-80 transition-opacity"
         >
           {nav.logoText}
           <span className="text-[var(--signal-security)]">.</span>
         </a>
 
         {/* Desktop Nav */}
-        <nav className="hidden md:flex items-center gap-1">
+        <nav className="hidden md:flex items-center gap-8">
           {nav.links.map((link) => (
             <a
               key={link.href}
               href={link.href}
-              className="relative px-4 py-2 text-sm font-medium text-[var(--ink-soft)] hover:text-white transition-colors group"
+              className="text-sm font-medium text-[#78716c] hover:text-[#1c1917] transition-colors tracking-wide uppercase"
             >
               {link.label}
-              <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-0 h-[2px] bg-[var(--signal-security)] rounded-full transition-all duration-300 group-hover:w-5" />
             </a>
           ))}
         </nav>
 
-        <a
-          href="#contact"
-          className="hidden md:inline-flex items-center rounded-full px-6 py-2.5 text-sm font-semibold text-white transition-all duration-300 hover:scale-105 hover:shadow-[0_0_25px_rgba(227,30,36,0.35)] border border-[var(--signal-security)]/30 bg-[var(--signal-security)]/10 hover:bg-[var(--signal-security)]/20"
-        >
-          Get in touch
-        </a>
-
-        {/* Mobile hamburger */}
-        <button
-          className="md:hidden text-white p-2"
-          onClick={() => setMobileOpen(!mobileOpen)}
-          aria-label="Toggle menu"
-        >
-          <div className="w-5 h-4 flex flex-col justify-between">
-            <span className={`block h-0.5 bg-current transition-all duration-300 ${mobileOpen ? "rotate-45 translate-y-[7px]" : ""}`} />
-            <span className={`block h-0.5 bg-current transition-all duration-300 ${mobileOpen ? "opacity-0" : ""}`} />
-            <span className={`block h-0.5 bg-current transition-all duration-300 ${mobileOpen ? "-rotate-45 -translate-y-[7px]" : ""}`} />
-          </div>
-        </button>
-      </div>
-
-      {/* Mobile menu */}
-      <div
-        className={`md:hidden overflow-hidden transition-all duration-500 ${
-          mobileOpen ? "max-h-80 opacity-100" : "max-h-0 opacity-0"
-        }`}
-      >
-        <div className="px-6 pb-6 pt-2 space-y-1 bg-[#050505]/98 backdrop-blur-xl border-b border-white/[0.06]">
-          {nav.links.map((link) => (
-            <a
-              key={link.href}
-              href={link.href}
-              onClick={() => setMobileOpen(false)}
-              className="block px-4 py-3 text-sm font-medium text-[var(--ink-soft)] hover:text-white hover:bg-white/[0.04] rounded-lg transition-colors"
-            >
-              {link.label}
-            </a>
-          ))}
+        <div className="hidden md:flex items-center gap-3">
+          <a
+            href="tel:+1234567890"
+            className="w-10 h-10 rounded-full border border-[#1c1917]/10 flex items-center justify-center text-[#1c1917] hover:bg-[#1c1917]/5 transition-colors"
+          >
+            <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+              <path strokeLinecap="round" strokeLinejoin="round" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+            </svg>
+          </a>
           <a
             href="#contact"
-            onClick={() => setMobileOpen(false)}
-            className="block mt-3 text-center rounded-full px-5 py-2.5 text-sm font-semibold text-white border border-[var(--signal-security)]/30 bg-[var(--signal-security)]/10"
+            className="inline-flex items-center rounded-full px-6 py-2.5 text-sm font-bold text-white transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-[var(--signal-security)]/25"
+            style={{ background: "var(--gradient-security)" }}
           >
             Get in touch
           </a>

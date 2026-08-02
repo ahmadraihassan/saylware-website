@@ -1,102 +1,121 @@
 "use client";
 
-import LeadForm from "./LeadForm";
+import { useState, useEffect } from "react";
+import { cybersecurity, customerService } from "@/lib/content";
 
-type Service = { title: string; description: string };
-type Track = "security" | "support";
+const allServices = [
+  ...cybersecurity.services.map((s, i) => ({ ...s, track: "security" as const, image: `https://images.unsplash.com/photo-${[
+    "1563986768609-322da13575f3",
+    "1555949963-aa79dcee981c",
+    "1544197150-b99a580bb7a8",
+    "1526374965328-7f61d4dc18c5"
+  ][i]}?w=600&h=400&fit=crop` })),
+  ...customerService.services.map((s, i) => ({ ...s, track: "support" as const, image: `https://images.unsplash.com/photo-${[
+    "1516321318423-f06f85e504b3",
+    "1531538606174-0f90ff5dce83",
+    "1553877522-43269d4ea984",
+    "1521737711867-5f2f08c10d7e"
+  ][i]}?w=600&h=400&fit=crop` })),
+];
 
-export default function ServiceTrack({
-  id,
-  eyebrow,
-  headline,
-  description,
-  services,
-  leadForm,
-  track,
-  reversed = false,
-}: {
-  id: string;
-  eyebrow: string;
-  headline: string;
-  description: string;
-  services: Service[];
-  leadForm: { id: string; heading: string; subheading: string; formspreeId: string; submitLabel: string };
-  track: Track;
-  reversed?: boolean;
-}) {
-  const accent = track === "security" ? "var(--signal-security)" : "var(--signal-support)";
-  const accentDim = track === "security" ? "var(--signal-security-dim)" : "var(--signal-support-dim)";
-  const gradient = track === "security" ? "var(--gradient-security)" : "var(--gradient-support)";
+export default function ServiceTrack() {
+  const [activeIndex, setActiveIndex] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setActiveIndex((prev) => (prev + 1) % allServices.length);
+    }, 3000);
+    return () => clearInterval(interval);
+  }, []);
 
   return (
-    <section id={id} className="relative py-24 sm:py-32">
-      {/* Section accent glow */}
-      <div
-        className="absolute top-0 left-1/2 -translate-x-1/2 w-[700px] h-[350px] rounded-full blur-[180px] opacity-8 pointer-events-none"
-        style={{ background: accent }}
-      />
-
+    <section id="services" className="relative py-24 sm:py-32 overflow-hidden bg-[#faf6f0]">
       <div className="relative mx-auto max-w-7xl px-6">
-        <div className={`max-w-2xl ${reversed ? "ml-auto text-right" : ""}`}>
-          <p className="eyebrow" style={{ color: accent }}>
-            {eyebrow}
-          </p>
-          <h2 className="font-display mt-5 text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight text-white">
-            {headline}
+        <div className="text-center max-w-2xl mx-auto mb-16">
+          <p className="eyebrow mb-4">What We Do</p>
+          <h2 className="font-display text-4xl sm:text-5xl font-bold tracking-tight text-[#1c1917]">
+            Providing Hope And Help<br />During Challenging Times
           </h2>
-          <p className="mt-6 text-lg leading-relaxed text-[var(--ink-soft)] max-w-xl">
-            {description}
-          </p>
         </div>
 
-        {/* Service cards — 2x2 grid */}
-        <div className="mt-20 grid grid-cols-1 sm:grid-cols-2 gap-6">
-          {services.map((service, i) => (
-            <div
-              key={service.title}
-              className="group relative rounded-2xl p-8 sm:p-10 transition-all duration-500 hover:-translate-y-1.5 card-glow"
-              style={{
-                background: "var(--bg-card)",
-                border: "1px solid var(--border)",
-                borderTop: `3px solid ${accent}`,
-              }}
-            >
-              <div
-                className="absolute top-0 left-10 right-10 h-px opacity-0 group-hover:opacity-100 transition-opacity duration-500"
-                style={{
-                  background: `linear-gradient(90deg, transparent, ${accent}, transparent)`,
-                }}
-              />
-              <div className="flex items-start gap-5">
+        {/* Swipe Cards */}
+        <div className="relative">
+          <div className="flex gap-6 overflow-hidden">
+            {allServices.map((service, i) => {
+              const isActive = i === activeIndex;
+              const isPrev = i === (activeIndex - 1 + allServices.length) % allServices.length;
+              const isNext = i === (activeIndex + 1) % allServices.length;
+
+              return (
                 <div
-                  className="flex-shrink-0 w-12 h-12 rounded-xl flex items-center justify-center text-base font-bold font-display"
-                  style={{ background: accentDim, color: accent }}
+                  key={service.title}
+                  className={`flex-shrink-0 w-full sm:w-[calc(50%-12px)] transition-all duration-700 ease-out ${
+                    isActive 
+                      ? "opacity-100 scale-100" 
+                      : isPrev || isNext 
+                        ? "opacity-40 scale-95 blur-[2px]" 
+                        : "opacity-0 scale-90 blur-sm absolute"
+                  }`}
+                  style={{
+                    transform: isActive ? "translateX(0)" : isPrev ? "translateX(-20%)" : "translateX(20%)",
+                  }}
                 >
-                  0{i + 1}
-                </div>
-                <div>
-                  <h3 className="font-display text-xl font-semibold text-white group-hover:text-[var(--ink)] transition-colors">
-                    {service.title}
-                  </h3>
-                  <p className="mt-3 text-sm leading-relaxed text-[var(--ink-soft)]">
-                    {service.description}
-                  </p>
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
+                  <div className={`rounded-3xl overflow-hidden border transition-all duration-500 ${
+                    isActive 
+                      ? "bg-white border-[#1c1917]/8 shadow-xl shadow-[#1c1917]/5" 
+                      : "bg-[#faf6f0] border-[#1c1917]/5"
+                  }`}>
+                    {/* Image on top */}
+                    <div className="relative h-64 overflow-hidden">
+                      <img
+                        src={service.image}
+                        alt={service.title}
+                        className="w-full h-full object-cover transition-transform duration-700 hover:scale-105"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent" />
+                      <div className={`absolute top-4 left-4 px-3 py-1 rounded-full text-xs font-bold text-white ${
+                        service.track === "security" ? "bg-[var(--signal-security)]" : "bg-[var(--signal-support)]"
+                      }`}>
+                        {service.track === "security" ? "Security" : "Support"}
+                      </div>
+                    </div>
 
-        {/* Lead Form */}
-        <div className="mt-20">
-          <LeadForm
-            id={leadForm.id}
-            formspreeId={leadForm.formspreeId}
-            heading={leadForm.heading}
-            subheading={leadForm.subheading}
-            submitLabel={leadForm.submitLabel}
-            track={track}
-          />
+                    {/* Description below */}
+                    <div className="p-8">
+                      <h3 className="font-display text-xl font-bold text-[#1c1917] mb-3">
+                        {service.title}
+                      </h3>
+                      <p className="text-sm leading-relaxed text-[#78716c]">
+                        {service.description}
+                      </p>
+                      <a
+                        href="#contact"
+                        className="inline-flex items-center gap-2 mt-6 text-sm font-bold text-[var(--signal-security)] hover:gap-3 transition-all"
+                      >
+                        Learn More
+                        <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                          <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                        </svg>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+
+          {/* Dots indicator */}
+          <div className="flex justify-center gap-2 mt-10">
+            {allServices.map((_, i) => (
+              <button
+                key={i}
+                onClick={() => setActiveIndex(i)}
+                className={`w-2.5 h-2.5 rounded-full transition-all duration-300 ${
+                  i === activeIndex ? "bg-[var(--signal-security)] w-8" : "bg-[#1c1917]/15 hover:bg-[#1c1917]/25"
+                }`}
+              />
+            ))}
+          </div>
         </div>
       </div>
     </section>

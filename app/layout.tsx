@@ -32,21 +32,17 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="dark scroll-smooth">
+    <html lang="en" className="scroll-smooth">
       <body
-        className={`${spaceGrotesk.variable} ${inter.variable} ${ibmPlexMono.variable} antialiased bg-[#050505] text-white selection:bg-[var(--signal-security)]/30 selection:text-white min-h-screen flex flex-col relative`}
+        className={`${spaceGrotesk.variable} ${inter.variable} ${ibmPlexMono.variable} antialiased bg-[#faf6f0] text-[#1c1917] selection:bg-[var(--signal-security)]/20 selection:text-[#1c1917] min-h-screen flex flex-col relative`}
       >
-        {/* Subtle Tech Scanline Effect */}
-        <div className="fixed inset-0 pointer-events-none scanline z-50 opacity-30" />
-
-        {/* Global Ambient Gradient Mesh */}
+        {/* Warm ambient gradient mesh */}
         <div className="fixed inset-0 pointer-events-none z-0">
-          <div className="absolute top-0 left-1/4 w-[700px] h-[700px] rounded-full bg-[var(--signal-security)]/[0.04] blur-[180px]" />
-          <div className="absolute bottom-1/4 right-1/4 w-[600px] h-[600px] rounded-full bg-[var(--signal-support)]/[0.04] blur-[180px]" />
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] rounded-full bg-purple-500/[0.03] blur-[200px]" />
+          <div className="absolute top-0 left-1/4 w-[600px] h-[600px] rounded-full bg-[var(--signal-security)]/[0.04] blur-[160px]" />
+          <div className="absolute bottom-0 right-1/4 w-[500px] h-[500px] rounded-full bg-[var(--signal-support)]/[0.04] blur-[160px]" />
         </div>
 
-        {/* Main Content Viewport */}
+        {/* Main Content */}
         <div className="relative z-10 flex-1">{children}</div>
       </body>
     </html>
