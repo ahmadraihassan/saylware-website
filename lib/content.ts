@@ -84,7 +84,7 @@ export const cybersecurity = {
     subheading: "Tell us about your environment. We'll follow up within one business day.",
     // Replace with your Formspree form ID for the Cybersecurity funnel.
     // Get this from https://formspree.io after creating a form.
-    formspreeId: "REPLACE_WITH_SECURITY_FORM_ID",
+    formspreeId: "xykrqlpb",
     submitLabel: "Request a security consult",
   },
 };
@@ -125,7 +125,7 @@ export const customerService = {
     heading: "Talk to a customer experience specialist",
     subheading: "Tell us where your support operation needs help. We'll follow up within one business day.",
     // Replace with your Formspree form ID for the Customer Service funnel.
-    formspreeId: "REPLACE_WITH_SUPPORT_FORM_ID",
+    formspreeId: "xzdnlyvy",
     submitLabel: "Request a CX consult",
   },
 };
@@ -167,7 +167,7 @@ export const contact = {
   description: "Send us a general note and we'll point you to the right specialist.",
   email: "hello@saylware.com",
   phone: "+92 000 0000000",
-  formspreeId: "REPLACE_WITH_GENERAL_FORM_ID",
+  formspreeId: "xeeybvzn",
 };
 
 export const footer = {
