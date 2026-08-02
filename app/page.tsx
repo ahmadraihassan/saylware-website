@@ -9,7 +9,7 @@ import { cybersecurity, customerService } from "@/lib/content";
 
 export default function Home() {
   return (
-    <main>
+    <main className="relative overflow-hidden">
       <Header />
       <Hero />
       <TrustBar />
