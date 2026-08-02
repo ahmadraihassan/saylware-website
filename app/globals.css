@@ -1,0 +1,79 @@
+@import "tailwindcss";
+
+:root {
+  /* Base */
+  --ink: #0d1613;
+  --ink-soft: #3a453f;
+  --paper: #f2f4f1;
+  --paper-raised: #ffffff;
+  --line: #dbe0da;
+
+  /* Signal colors — two service tracks */
+  --signal-security: #17836b;   /* deep teal — cybersecurity track */
+  --signal-security-bright: #22b894;
+  --signal-support: #b5791c;    /* warm gold-brass — customer service track */
+  --signal-support-bright: #dda23f;
+
+  --font-display: var(--font-space-grotesk);
+  --font-body: var(--font-inter);
+  --font-mono: var(--font-ibm-plex-mono);
+}
+
+@theme inline {
+  --color-ink: var(--ink);
+  --color-ink-soft: var(--ink-soft);
+  --color-paper: var(--paper);
+  --color-paper-raised: var(--paper-raised);
+  --color-line: var(--line);
+  --color-security: var(--signal-security);
+  --color-security-bright: var(--signal-security-bright);
+  --color-support: var(--signal-support);
+  --color-support-bright: var(--signal-support-bright);
+  --font-display: var(--font-display);
+  --font-body: var(--font-body);
+  --font-mono: var(--font-mono);
+}
+
+* {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-body);
+}
+
+.font-display {
+  font-family: var(--font-display);
+}
+
+.font-mono {
+  font-family: var(--font-mono);
+}
+
+.eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  font-weight: 500;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible {
+  outline: 2px solid var(--ink);
+  outline-offset: 3px;
+}
