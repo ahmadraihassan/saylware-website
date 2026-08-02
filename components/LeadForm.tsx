@@ -57,7 +57,7 @@ export default function LeadForm({
   return (
     <div
       id={id}
-      className="relative rounded-2xl p-8 sm:p-10 overflow-hidden"
+      className="relative rounded-2xl p-8 sm:p-12 overflow-hidden"
       style={{
         background: "var(--bg-card)",
         border: "1px solid var(--border)",
@@ -65,27 +65,27 @@ export default function LeadForm({
     >
       {/* Top accent line */}
       <div
-        className="absolute top-0 left-0 right-0 h-[2px]"
+        className="absolute top-0 left-0 right-0 h-[3px]"
         style={{ background: gradient }}
       />
 
       {/* Glow effect */}
       <div
-        className="absolute -top-20 -right-20 w-40 h-40 rounded-full blur-[80px] opacity-20 pointer-events-none"
+        className="absolute -top-24 -right-24 w-48 h-48 rounded-full blur-[100px] opacity-15 pointer-events-none"
         style={{ background: accent }}
       />
 
       <div className="relative z-10">
-        <h3 className="font-display text-2xl sm:text-3xl font-bold text-white">
+        <h3 className="font-display text-2xl sm:text-3xl md:text-4xl font-bold text-white">
           {heading}
         </h3>
-        <p className="mt-2 text-sm text-[var(--ink-soft)]">
+        <p className="mt-3 text-sm text-[var(--ink-soft)]">
           {subheading}
         </p>
 
         {status === "success" ? (
           <div
-            className="mt-8 rounded-xl px-6 py-5 text-sm font-medium border"
+            className="mt-10 rounded-2xl px-8 py-6 text-sm font-medium border"
             style={{
               background: accentDim,
               borderColor: accent,
@@ -100,9 +100,9 @@ export default function LeadForm({
             </div>
           </div>
         ) : (
-          <form onSubmit={handleSubmit} className="mt-8 grid grid-cols-1 sm:grid-cols-2 gap-5">
+          <form onSubmit={handleSubmit} className="mt-10 grid grid-cols-1 sm:grid-cols-2 gap-6">
             <div className="sm:col-span-1">
-              <label htmlFor={`${id}-name`} className="block text-xs font-medium mb-2 text-[var(--ink-soft)] uppercase tracking-wider">
+              <label htmlFor={`${id}-name`} className="block text-xs font-medium mb-2.5 text-[var(--ink-soft)] uppercase tracking-wider">
                 Full name
               </label>
               <input
@@ -110,13 +110,13 @@ export default function LeadForm({
                 name="name"
                 type="text"
                 required
-                className="w-full rounded-xl border px-4 py-3 text-sm outline-none transition-all duration-300 bg-[var(--bg-elevated)] text-white placeholder:text-[var(--ink-muted)] focus:border-[var(--signal-security)] focus:shadow-[0_0_0_3px_rgba(0,212,170,0.1)]"
+                className="w-full rounded-xl border px-4 py-3.5 text-sm outline-none transition-all duration-300 bg-[var(--bg-elevated)] text-white placeholder:text-[var(--ink-muted)] focus:border-[var(--signal-security)] focus:shadow-[0_0_0_3px_rgba(227,30,36,0.1)]"
                 style={{ borderColor: "var(--border)" }}
                 placeholder="John Doe"
               />
             </div>
             <div className="sm:col-span-1">
-              <label htmlFor={`${id}-email`} className="block text-xs font-medium mb-2 text-[var(--ink-soft)] uppercase tracking-wider">
+              <label htmlFor={`${id}-email`} className="block text-xs font-medium mb-2.5 text-[var(--ink-soft)] uppercase tracking-wider">
                 Work email
               </label>
               <input
@@ -124,46 +124,46 @@ export default function LeadForm({
                 name="email"
                 type="email"
                 required
-                className="w-full rounded-xl border px-4 py-3 text-sm outline-none transition-all duration-300 bg-[var(--bg-elevated)] text-white placeholder:text-[var(--ink-muted)] focus:border-[var(--signal-security)] focus:shadow-[0_0_0_3px_rgba(0,212,170,0.1)]"
+                className="w-full rounded-xl border px-4 py-3.5 text-sm outline-none transition-all duration-300 bg-[var(--bg-elevated)] text-white placeholder:text-[var(--ink-muted)] focus:border-[var(--signal-security)] focus:shadow-[0_0_0_3px_rgba(227,30,36,0.1)]"
                 style={{ borderColor: "var(--border)" }}
                 placeholder="john@company.com"
               />
             </div>
             <div className="sm:col-span-1">
-              <label htmlFor={`${id}-company`} className="block text-xs font-medium mb-2 text-[var(--ink-soft)] uppercase tracking-wider">
+              <label htmlFor={`${id}-company`} className="block text-xs font-medium mb-2.5 text-[var(--ink-soft)] uppercase tracking-wider">
                 Company
               </label>
               <input
                 id={`${id}-company`}
                 name="company"
                 type="text"
-                className="w-full rounded-xl border px-4 py-3 text-sm outline-none transition-all duration-300 bg-[var(--bg-elevated)] text-white placeholder:text-[var(--ink-muted)] focus:border-[var(--signal-security)] focus:shadow-[0_0_0_3px_rgba(0,212,170,0.1)]"
+                className="w-full rounded-xl border px-4 py-3.5 text-sm outline-none transition-all duration-300 bg-[var(--bg-elevated)] text-white placeholder:text-[var(--ink-muted)] focus:border-[var(--signal-security)] focus:shadow-[0_0_0_3px_rgba(227,30,36,0.1)]"
                 style={{ borderColor: "var(--border)" }}
                 placeholder="Acme Inc."
               />
             </div>
             <div className="sm:col-span-1">
-              <label htmlFor={`${id}-phone`} className="block text-xs font-medium mb-2 text-[var(--ink-soft)] uppercase tracking-wider">
+              <label htmlFor={`${id}-phone`} className="block text-xs font-medium mb-2.5 text-[var(--ink-soft)] uppercase tracking-wider">
                 Phone (optional)
               </label>
               <input
                 id={`${id}-phone`}
                 name="phone"
                 type="tel"
-                className="w-full rounded-xl border px-4 py-3 text-sm outline-none transition-all duration-300 bg-[var(--bg-elevated)] text-white placeholder:text-[var(--ink-muted)] focus:border-[var(--signal-security)] focus:shadow-[0_0_0_3px_rgba(0,212,170,0.1)]"
+                className="w-full rounded-xl border px-4 py-3.5 text-sm outline-none transition-all duration-300 bg-[var(--bg-elevated)] text-white placeholder:text-[var(--ink-muted)] focus:border-[var(--signal-security)] focus:shadow-[0_0_0_3px_rgba(227,30,36,0.1)]"
                 style={{ borderColor: "var(--border)" }}
                 placeholder="+1 (555) 000-0000"
               />
             </div>
             <div className="sm:col-span-2">
-              <label htmlFor={`${id}-message`} className="block text-xs font-medium mb-2 text-[var(--ink-soft)] uppercase tracking-wider">
+              <label htmlFor={`${id}-message`} className="block text-xs font-medium mb-2.5 text-[var(--ink-soft)] uppercase tracking-wider">
                 What do you need help with?
               </label>
               <textarea
                 id={`${id}-message`}
                 name="message"
                 rows={4}
-                className="w-full rounded-xl border px-4 py-3 text-sm outline-none transition-all duration-300 bg-[var(--bg-elevated)] text-white placeholder:text-[var(--ink-muted)] focus:border-[var(--signal-security)] focus:shadow-[0_0_0_3px_rgba(0,212,170,0.1)] resize-none"
+                className="w-full rounded-xl border px-4 py-3.5 text-sm outline-none transition-all duration-300 bg-[var(--bg-elevated)] text-white placeholder:text-[var(--ink-muted)] focus:border-[var(--signal-security)] focus:shadow-[0_0_0_3px_rgba(227,30,36,0.1)] resize-none"
                 style={{ borderColor: "var(--border)" }}
                 placeholder="Tell us about your environment..."
               />
@@ -173,7 +173,7 @@ export default function LeadForm({
               <button
                 type="submit"
                 disabled={status === "loading"}
-                className="rounded-full px-8 py-3.5 text-sm font-semibold text-[var(--bg)] transition-all duration-300 hover:scale-105 hover:shadow-[0_0_30px_rgba(0,212,170,0.35)] disabled:opacity-60 disabled:hover:scale-100"
+                className="rounded-full px-8 py-3.5 text-sm font-semibold text-white transition-all duration-300 hover:scale-105 hover:shadow-[0_0_30px_rgba(227,30,36,0.35)] disabled:opacity-60 disabled:hover:scale-100 border border-white/10"
                 style={{ background: gradient }}
               >
                 {status === "loading" ? (

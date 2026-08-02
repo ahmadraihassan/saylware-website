@@ -46,16 +46,16 @@ export default function Contact() {
         <p className="eyebrow" style={{ color: "var(--signal-support)" }}>
           {contact.eyebrow}
         </p>
-        <h2 className="font-display mt-4 text-4xl sm:text-5xl font-bold tracking-tight text-white">
+        <h2 className="font-display mt-5 text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight text-white">
           {contact.headline}
         </h2>
-        <p className="mt-5 text-lg text-[var(--ink-soft)]">
+        <p className="mt-6 text-lg text-[var(--ink-soft)]">
           {contact.description}
         </p>
 
         {status === "success" ? (
           <div
-            className="mt-10 rounded-xl px-6 py-5 text-sm font-medium border inline-block"
+            className="mt-12 rounded-2xl px-8 py-6 text-sm font-medium border inline-block"
             style={{
               background: "var(--signal-security-dim)",
               borderColor: "var(--signal-security)",
@@ -70,19 +70,18 @@ export default function Contact() {
             </div>
           </div>
         ) : (
-          <form onSubmit={handleSubmit} className="mt-10 flex flex-col sm:flex-row gap-3 max-w-lg mx-auto">
+          <form onSubmit={handleSubmit} className="mt-12 flex flex-col sm:flex-row gap-4 max-w-lg mx-auto">
             <input
               type="email"
               name="email"
               required
               placeholder="you@company.com"
-              className="flex-1 rounded-full px-6 py-4 text-sm outline-none transition-all duration-300 bg-[var(--bg-card)] text-white placeholder:text-[var(--ink-muted)] border border-white/[0.08] focus:border-[var(--signal-security)] focus:shadow-[0_0_0_3px_rgba(0,212,170,0.1)]"
+              className="flex-1 rounded-full px-6 py-4 text-sm outline-none transition-all duration-300 bg-[var(--bg-card)] text-white placeholder:text-[var(--ink-muted)] border border-white/[0.08] focus:border-[var(--signal-security)] focus:shadow-[0_0_0_3px_rgba(227,30,36,0.1)]"
             />
             <button
               type="submit"
               disabled={status === "loading"}
-              className="rounded-full px-8 py-4 text-sm font-semibold text-[var(--bg)] transition-all duration-300 hover:scale-105 hover:shadow-[0_0_30px_rgba(245,158,11,0.35)] disabled:opacity-60"
-              style={{ background: "var(--gradient-support)" }}
+              className="rounded-full px-8 py-4 text-sm font-semibold text-white transition-all duration-300 hover:scale-105 hover:shadow-[0_0_30px_rgba(59,130,246,0.35)] disabled:opacity-60 border border-[var(--signal-support)]/30 bg-[var(--signal-support)]/80"
             >
               {status === "loading" ? "Sending…" : "Send"}
             </button>
@@ -96,7 +95,7 @@ export default function Contact() {
           </p>
         )}
 
-        <div className="mt-12 flex flex-col sm:flex-row items-center justify-center gap-6 text-sm text-[var(--ink-muted)]">
+        <div className="mt-14 flex flex-col sm:flex-row items-center justify-center gap-6 text-sm text-[var(--ink-muted)]">
           <a href={`mailto:${contact.email}`} className="flex items-center gap-2 hover:text-white transition-colors">
             <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
               <path strokeLinecap="round" strokeLinejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />

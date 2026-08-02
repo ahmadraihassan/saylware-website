@@ -32,7 +32,7 @@ export default function ServiceTrack({
     <section id={id} className="relative py-24 sm:py-32">
       {/* Section accent glow */}
       <div
-        className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[300px] rounded-full blur-[150px] opacity-10 pointer-events-none"
+        className="absolute top-0 left-1/2 -translate-x-1/2 w-[700px] h-[350px] rounded-full blur-[180px] opacity-8 pointer-events-none"
         style={{ background: accent }}
       />
 
@@ -41,35 +41,35 @@ export default function ServiceTrack({
           <p className="eyebrow" style={{ color: accent }}>
             {eyebrow}
           </p>
-          <h2 className="font-display mt-4 text-4xl sm:text-5xl font-bold tracking-tight text-white">
+          <h2 className="font-display mt-5 text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight text-white">
             {headline}
           </h2>
-          <p className="mt-5 text-lg leading-relaxed text-[var(--ink-soft)]">
+          <p className="mt-6 text-lg leading-relaxed text-[var(--ink-soft)] max-w-xl">
             {description}
           </p>
         </div>
 
         {/* Service cards — 2x2 grid */}
-        <div className="mt-16 grid grid-cols-1 sm:grid-cols-2 gap-5">
+        <div className="mt-20 grid grid-cols-1 sm:grid-cols-2 gap-6">
           {services.map((service, i) => (
             <div
               key={service.title}
-              className="group relative rounded-2xl p-8 transition-all duration-500 hover:-translate-y-1 card-glow"
+              className="group relative rounded-2xl p-8 sm:p-10 transition-all duration-500 hover:-translate-y-1.5 card-glow"
               style={{
                 background: "var(--bg-card)",
                 border: "1px solid var(--border)",
-                borderTop: `2px solid ${accent}`,
+                borderTop: `3px solid ${accent}`,
               }}
             >
               <div
-                className="absolute top-0 left-8 right-8 h-px opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+                className="absolute top-0 left-10 right-10 h-px opacity-0 group-hover:opacity-100 transition-opacity duration-500"
                 style={{
                   background: `linear-gradient(90deg, transparent, ${accent}, transparent)`,
                 }}
               />
-              <div className="flex items-start gap-4">
+              <div className="flex items-start gap-5">
                 <div
-                  className="flex-shrink-0 w-10 h-10 rounded-xl flex items-center justify-center text-sm font-bold font-display"
+                  className="flex-shrink-0 w-12 h-12 rounded-xl flex items-center justify-center text-base font-bold font-display"
                   style={{ background: accentDim, color: accent }}
                 >
                   0{i + 1}
@@ -78,7 +78,7 @@ export default function ServiceTrack({
                   <h3 className="font-display text-xl font-semibold text-white group-hover:text-[var(--ink)] transition-colors">
                     {service.title}
                   </h3>
-                  <p className="mt-2 text-sm leading-relaxed text-[var(--ink-soft)]">
+                  <p className="mt-3 text-sm leading-relaxed text-[var(--ink-soft)]">
                     {service.description}
                   </p>
                 </div>
@@ -88,7 +88,7 @@ export default function ServiceTrack({
         </div>
 
         {/* Lead Form */}
-        <div className="mt-16">
+        <div className="mt-20">
           <LeadForm
             id={leadForm.id}
             formspreeId={leadForm.formspreeId}

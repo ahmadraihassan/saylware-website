@@ -1,28 +1,28 @@
 @import "tailwindcss";
 
 :root {
-  /* Base — Dark Command Center */
-  --bg: #05080f;
-  --bg-elevated: #0a101d;
-  --bg-card: rgba(13, 19, 33, 0.7);
-  --bg-card-hover: rgba(22, 31, 50, 0.85);
-  --ink: #f0f4f8;
-  --ink-soft: #8896ab;
-  --ink-muted: #4a5568;
-  --border: rgba(255, 255, 255, 0.08);
-  --border-strong: rgba(255, 255, 255, 0.18);
+  /* Ebryx-inspired Dark Command Center */
+  --bg: #050505;
+  --bg-elevated: #0a0a0a;
+  --bg-card: rgba(255, 255, 255, 0.03);
+  --bg-card-hover: rgba(255, 255, 255, 0.06);
+  --ink: #ffffff;
+  --ink-soft: #a0a0a0;
+  --ink-muted: #666666;
+  --border: rgba(255, 255, 255, 0.06);
+  --border-strong: rgba(255, 255, 255, 0.12);
 
-  /* Signal colors — electric neon */
-  --signal-security: #00d4aa;
-  --signal-security-dim: rgba(0, 212, 170, 0.12);
-  --signal-support: #f59e0b;
-  --signal-support-dim: rgba(245, 158, 11, 0.12);
+  /* Signal colors — Ebryx Red + Electric Blue */
+  --signal-security: #e31e24;
+  --signal-security-dim: rgba(227, 30, 36, 0.12);
+  --signal-support: #3b82f6;
+  --signal-support-dim: rgba(59, 130, 246, 0.12);
 
   /* Gradients */
-  --gradient-security: linear-gradient(135deg, #00d4aa 0%, #008f72 100%);
-  --gradient-support: linear-gradient(135deg, #f59e0b 0%, #b45309 100%);
-  --gradient-mesh: radial-gradient(ellipse at 20% 20%, rgba(0, 212, 170, 0.07) 0%, transparent 50%),
-                   radial-gradient(ellipse at 80% 80%, rgba(245, 158, 11, 0.05) 0%, transparent 50%);
+  --gradient-security: linear-gradient(135deg, #e31e24 0%, #b91c1c 100%);
+  --gradient-support: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
+  --gradient-mesh: radial-gradient(ellipse at 20% 20%, rgba(227, 30, 36, 0.07) 0%, transparent 50%),
+                   radial-gradient(ellipse at 80% 80%, rgba(59, 130, 246, 0.05) 0%, transparent 50%);
 
   --font-display: var(--font-space-grotesk);
   --font-body: var(--font-inter);
@@ -53,7 +53,7 @@
 
 html {
   scrollbar-width: thin;
-  scrollbar-color: rgba(0, 212, 170, 0.2) var(--bg);
+  scrollbar-color: rgba(227, 30, 36, 0.2) var(--bg);
 }
 
 body {
@@ -67,7 +67,7 @@ body {
 
 /* Selection */
 ::selection {
-  background: rgba(0, 212, 170, 0.25);
+  background: rgba(227, 30, 36, 0.25);
   color: #fff;
 }
 
@@ -75,12 +75,12 @@ body {
 .eyebrow {
   font-family: var(--font-mono);
   font-size: 0.75rem;
-  letter-spacing: 0.2em;
+  letter-spacing: 0.25em;
   text-transform: uppercase;
   font-weight: 600;
   color: var(--ink-muted);
   display: inline-flex;
-  items-center: center;
+  align-items: center;
   gap: 0.5rem;
 }
 
@@ -92,21 +92,21 @@ body {
 
 /* Gradient Text Utilities */
 .gradient-text {
-  background: linear-gradient(135deg, #ffffff 0%, #8896ab 100%);
+  background: linear-gradient(135deg, #ffffff 0%, #a0a0a0 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
 
 .gradient-text-security {
-  background: linear-gradient(135deg, #00d4aa 0%, #80ffea 100%);
+  background: linear-gradient(135deg, #e31e24 0%, #ff6b6b 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
 
 .gradient-text-support {
-  background: linear-gradient(135deg, #f59e0b 0%, #fde68a 100%);
+  background: linear-gradient(135deg, #3b82f6 0%, #60a5fa 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -115,30 +115,31 @@ body {
 /* Tech Grid & Mesh Backgrounds */
 .grid-pattern {
   background-image: 
-    linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
-  background-size: 50px 50px;
+    linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+  background-size: 60px 60px;
 }
 
 .dots-pattern {
-  background-image: radial-gradient(rgba(255, 255, 255, 0.1) 1px, transparent 1px);
-  background-size: 24px 24px;
+  background-image: radial-gradient(rgba(255, 255, 255, 0.08) 1px, transparent 1px);
+  background-size: 28px 28px;
 }
 
-/* Sharp Corner Accents (Inspired by Technical UI Frameworks) */
+/* Sharp Corner Accents */
 .tech-box {
   position: relative;
   background: var(--bg-card);
   backdrop-filter: blur(16px);
   border: 1px solid var(--border);
+  border-radius: 1rem;
 }
 
 .tech-box::before,
 .tech-box::after {
   content: "";
   position: absolute;
-  width: 6px;
-  height: 6px;
+  width: 8px;
+  height: 8px;
   border-color: var(--signal-security);
   pointer-events: none;
   transition: all 0.3s ease;
@@ -149,6 +150,7 @@ body {
   left: -1px;
   border-top: 2px solid;
   border-left: 2px solid;
+  border-top-left-radius: 1rem;
 }
 
 .tech-box::after {
@@ -156,30 +158,31 @@ body {
   right: -1px;
   border-bottom: 2px solid;
   border-right: 2px solid;
+  border-bottom-right-radius: 1rem;
 }
 
 .tech-box:hover::before,
 .tech-box:hover::after {
-  width: 12px;
-  height: 12px;
+  width: 14px;
+  height: 14px;
 }
 
 /* Card Glow Effects */
 .card-glow {
   position: relative;
-  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s ease, box-shadow 0.3s ease;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 .card-glow:hover {
-  transform: translateY(-4px);
+  transform: translateY(-6px);
   border-color: var(--border-strong);
-  box-shadow: 0 12px 30px -10px rgba(0, 0, 0, 0.6), 0 0 20px -5px rgba(0, 212, 170, 0.15);
+  box-shadow: 0 20px 40px -12px rgba(0, 0, 0, 0.7), 0 0 30px -5px rgba(227, 30, 36, 0.1);
 }
 
 /* Animated Pulse/Float Keyframes */
 @keyframes float {
   0%, 100% { transform: translateY(0px) rotate(0deg); }
-  50% { transform: translateY(-10px) rotate(1deg); }
+  50% { transform: translateY(-12px) rotate(1deg); }
 }
 
 .animate-float {
@@ -187,12 +190,12 @@ body {
 }
 
 @keyframes pulseGlow {
-  0%, 100% { opacity: 0.2; transform: scale(1); }
-  50% { opacity: 0.35; transform: scale(1.05); }
+  0%, 100% { opacity: 0.15; transform: scale(1); }
+  50% { opacity: 0.3; transform: scale(1.08); }
 }
 
 .animate-pulse-glow {
-  animation: pulseGlow 4s ease-in-out infinite;
+  animation: pulseGlow 5s ease-in-out infinite;
 }
 
 @keyframes scanline {
@@ -205,8 +208,8 @@ body {
   position: absolute;
   inset: 0;
   height: 2px;
-  background: linear-gradient(90deg, transparent, rgba(0, 212, 170, 0.2), transparent);
-  animation: scanline 8s linear infinite;
+  background: linear-gradient(90deg, transparent, rgba(227, 30, 36, 0.15), transparent);
+  animation: scanline 10s linear infinite;
   pointer-events: none;
 }
 
@@ -216,9 +219,9 @@ input, textarea {
 }
 
 input:focus, textarea:focus {
-  background-color: rgba(13, 19, 33, 0.95) !important;
+  background-color: rgba(255, 255, 255, 0.05) !important;
   border-color: var(--signal-security) !important;
-  box-shadow: 0 0 15px rgba(0, 212, 170, 0.2) !important;
+  box-shadow: 0 0 20px rgba(227, 30, 36, 0.15) !important;
 }
 
 /* Focus styles */
@@ -228,4 +231,13 @@ input:focus-visible,
 textarea:focus-visible {
   outline: 2px solid var(--signal-security);
   outline-offset: 2px;
+}
+
+/* Red glow utility */
+.glow-red {
+  box-shadow: 0 0 40px -10px rgba(227, 30, 36, 0.3);
+}
+
+.glow-blue {
+  box-shadow: 0 0 40px -10px rgba(59, 130, 246, 0.3);
 }

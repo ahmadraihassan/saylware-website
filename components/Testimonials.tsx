@@ -6,21 +6,21 @@ export default function Testimonials() {
   return (
     <section id="testimonials" className="relative py-24 sm:py-32 overflow-hidden">
       {/* Background glow */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[400px] rounded-full blur-[180px] opacity-5 pointer-events-none bg-white" />
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[900px] h-[450px] rounded-full blur-[200px] opacity-5 pointer-events-none bg-white" />
 
       <div className="relative mx-auto max-w-7xl px-6">
         <div className="max-w-2xl mx-auto text-center">
           <p className="eyebrow">{testimonials.eyebrow}</p>
-          <h2 className="font-display mt-4 text-4xl sm:text-5xl font-bold tracking-tight text-white">
+          <h2 className="font-display mt-5 text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight text-white">
             {testimonials.headline}
           </h2>
         </div>
 
-        <div className="mt-16 grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div className="mt-20 grid grid-cols-1 md:grid-cols-3 gap-6">
           {testimonials.items.map((t, i) => (
             <figure
               key={t.name}
-              className="group relative rounded-2xl p-8 transition-all duration-500 hover:-translate-y-1 card-glow"
+              className="group relative rounded-2xl p-8 sm:p-10 transition-all duration-500 hover:-translate-y-1.5 card-glow"
               style={{
                 background: "var(--bg-card)",
                 border: "1px solid var(--border)",
@@ -28,7 +28,7 @@ export default function Testimonials() {
             >
               {/* Quote icon */}
               <div
-                className="text-4xl font-display font-bold leading-none mb-4 opacity-20"
+                className="text-5xl font-display font-bold leading-none mb-6 opacity-15"
                 style={{ color: i % 2 === 0 ? "var(--signal-security)" : "var(--signal-support)" }}
               >
                 &ldquo;
@@ -38,9 +38,9 @@ export default function Testimonials() {
                 {t.quote}
               </blockquote>
 
-              <figcaption className="mt-8 flex items-center gap-3">
+              <figcaption className="mt-8 flex items-center gap-4">
                 <div
-                  className="w-10 h-10 rounded-full flex items-center justify-center text-sm font-bold text-[var(--bg)]"
+                  className="w-11 h-11 rounded-full flex items-center justify-center text-sm font-bold text-white"
                   style={{
                     background: i % 2 === 0 ? "var(--gradient-security)" : "var(--gradient-support)",
                   }}
@@ -55,7 +55,7 @@ export default function Testimonials() {
 
               {/* Bottom accent line on hover */}
               <div
-                className="absolute bottom-0 left-8 right-8 h-[2px] rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+                className="absolute bottom-0 left-10 right-10 h-[2px] rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-500"
                 style={{
                   background: i % 2 === 0
                     ? "linear-gradient(90deg, transparent, var(--signal-security), transparent)"

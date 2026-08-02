@@ -10,7 +10,7 @@ import { cybersecurity, customerService } from "@/lib/content";
 
 export default function Home() {
   return (
-    <main className="relative overflow-hidden bg-[#05080f]">
+    <main className="relative overflow-hidden bg-[#050505]">
       {/* Navigation Bar */}
       <Header />
 
@@ -32,7 +32,7 @@ export default function Home() {
       />
 
       {/* Interactive Laser/Signal Section Divider */}
-      <div className="my-8">
+      <div className="my-4">
         <SignalDivider />
       </div>
 

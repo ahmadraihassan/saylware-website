@@ -17,11 +17,11 @@ export default function Header() {
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
         scrolled
-          ? "bg-[#060a12]/80 backdrop-blur-xl border-b border-white/[0.06]"
+          ? "bg-[#050505]/90 backdrop-blur-xl border-b border-white/[0.06]"
           : "bg-transparent"
       }`}
     >
-      <div className="mx-auto max-w-7xl px-6 h-16 flex items-center justify-between">
+      <div className="mx-auto max-w-7xl px-6 h-18 flex items-center justify-between">
         <a
           href="#"
           className="font-display text-xl font-bold tracking-tight text-white hover:opacity-80 transition-opacity"
@@ -39,15 +39,14 @@ export default function Header() {
               className="relative px-4 py-2 text-sm font-medium text-[var(--ink-soft)] hover:text-white transition-colors group"
             >
               {link.label}
-              <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-0 h-[2px] bg-[var(--signal-security)] rounded-full transition-all duration-300 group-hover:w-4" />
+              <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-0 h-[2px] bg-[var(--signal-security)] rounded-full transition-all duration-300 group-hover:w-5" />
             </a>
           ))}
         </nav>
 
         <a
           href="#contact"
-          className="hidden md:inline-flex items-center rounded-full px-5 py-2.5 text-sm font-semibold text-[var(--bg)] transition-all duration-300 hover:scale-105 hover:shadow-[0_0_20px_rgba(0,212,170,0.3)]"
-          style={{ background: "var(--gradient-security)" }}
+          className="hidden md:inline-flex items-center rounded-full px-6 py-2.5 text-sm font-semibold text-white transition-all duration-300 hover:scale-105 hover:shadow-[0_0_25px_rgba(227,30,36,0.35)] border border-[var(--signal-security)]/30 bg-[var(--signal-security)]/10 hover:bg-[var(--signal-security)]/20"
         >
           Get in touch
         </a>
@@ -72,7 +71,7 @@ export default function Header() {
           mobileOpen ? "max-h-80 opacity-100" : "max-h-0 opacity-0"
         }`}
       >
-        <div className="px-6 pb-6 pt-2 space-y-1 bg-[#060a12]/95 backdrop-blur-xl border-b border-white/[0.06]">
+        <div className="px-6 pb-6 pt-2 space-y-1 bg-[#050505]/98 backdrop-blur-xl border-b border-white/[0.06]">
           {nav.links.map((link) => (
             <a
               key={link.href}
@@ -86,8 +85,7 @@ export default function Header() {
           <a
             href="#contact"
             onClick={() => setMobileOpen(false)}
-            className="block mt-3 text-center rounded-full px-5 py-2.5 text-sm font-semibold text-[var(--bg)]"
-            style={{ background: "var(--gradient-security)" }}
+            className="block mt-3 text-center rounded-full px-5 py-2.5 text-sm font-semibold text-white border border-[var(--signal-security)]/30 bg-[var(--signal-security)]/10"
           >
             Get in touch
           </a>
