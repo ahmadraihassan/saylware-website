@@ -63,18 +63,21 @@ export const pillars = {
       summary: "Detection that respects your team's attention.",
       description:
         "Continuous detection across endpoints, network, and cloud, with humans who know which alerts matter. We filter noise before it hits your inbox and escalate only what needs a decision.",
+      icon: "shield" as const,
     },
     {
       title: "Customers first",
       summary: "Support that sounds like your brand.",
       description:
         "Support desks that hit your SLAs and turn feedback into clearer product signal. Agents train on your voice, your policies, and your escalation paths so customers never feel outsourced.",
+      icon: "nodes" as const,
     },
     {
       title: "Clear accountability",
       summary: "Reporting leadership can actually use.",
       description:
         "Timelines, reporting, and escalation paths you can hand to leadership without translating jargon. Named owners, measurable outcomes, and no black box between you and the work.",
+      icon: "chart" as const,
     },
   ],
 };
@@ -340,30 +343,39 @@ export const testimonials = {
         "They cut our alert queue down to what actually mattered. First vendor that felt like an extension of our team, not another dashboard.",
       name: "Jane Doe",
       role: "Head of IT, Example Co.",
+      company: "Example Co.",
       rating: "5.0",
       tags: ["Security", "MDR", "Noise down"],
       type: "Business Types",
-      avatar: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=120&h=120&fit=crop&crop=face",
+      avatar: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=200&h=200&fit=crop&crop=face",
+      logo: "EC",
+      logoColor: "#8b7cff",
     },
     {
       quote:
         "Our support tickets stopped piling up and our CSAT went up in the first month. Reporting is genuinely useful, not just a vanity chart.",
       name: "John Smith",
       role: "COO, Example Retail",
+      company: "Example Retail",
       rating: "5.0",
       tags: ["Support", "CSAT", "Desk"],
       type: "Business Types",
-      avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=120&h=120&fit=crop&crop=face",
+      avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200&h=200&fit=crop&crop=face",
+      logo: "ER",
+      logoColor: "#c6f24a",
     },
     {
       quote:
         "Straightforward, responsive, and they explain things in plain language instead of jargon. Exactly what a growing company needs.",
       name: "Amina Raza",
       role: "Founder, Example Startup",
+      company: "Example Startup",
       rating: "5.0",
       tags: ["Advisory", "Clarity", "Growth"],
       type: "Business Types",
-      avatar: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=120&h=120&fit=crop&crop=face",
+      avatar: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=200&h=200&fit=crop&crop=face",
+      logo: "ES",
+      logoColor: "#f59e0b",
     },
   ],
 };
@@ -382,11 +394,46 @@ export const careers = {
   headline: "Work with us",
   filters: ["All Roles", "Remote", "On-site"],
   roles: [
-    { title: "Security Analyst", type: "Full Time", location: "Remote / Hybrid", department: "Security" },
-    { title: "Support Lead", type: "Full Time", location: "On-site / Hybrid", department: "Customer Care" },
-    { title: "CX Specialist", type: "Full Time", location: "Remote", department: "Customer Care" },
-    { title: "Threat Hunter", type: "Full Time", location: "Remote", department: "Security" },
-    { title: "Operations Coordinator", type: "Full Time", location: "Hybrid", department: "Ops" },
+    {
+      title: "Security Analyst",
+      type: "Full Time",
+      location: "Remote / Hybrid",
+      department: "Security",
+      description:
+        "Triage alerts, investigate incidents, and write clear findings for customer teams. You will work alongside senior hunters and own cases end to end.",
+    },
+    {
+      title: "Support Lead",
+      type: "Full Time",
+      location: "On-site / Hybrid",
+      department: "Customer Care",
+      description:
+        "Lead a pod of agents, coach quality, and keep SLAs honest. You bridge customers, product, and engineering when tickets need elevation.",
+    },
+    {
+      title: "CX Specialist",
+      type: "Full Time",
+      location: "Remote",
+      department: "Customer Care",
+      description:
+        "Handle chat, email, and voice under client brands. You turn messy tickets into calm resolutions and feed insights back to the account team.",
+    },
+    {
+      title: "Threat Hunter",
+      type: "Full Time",
+      location: "Remote",
+      department: "Security",
+      description:
+        "Proactively hunt across customer environments, build detections, and partner with IR when something real shows up.",
+    },
+    {
+      title: "Operations Coordinator",
+      type: "Full Time",
+      location: "Hybrid",
+      department: "Ops",
+      description:
+        "Keep schedules, handoffs, and reporting tight across security and support. You are the glue that makes multi client ops feel simple.",
+    },
   ],
   perks: [
     {
@@ -435,6 +482,14 @@ export const footer = {
         .filter((s) => s.facet === "support")
         .slice(0, 3)
         .map((s) => ({ label: s.title, href: `/services/${s.slug}` })),
+    },
+    {
+      heading: "Company",
+      links: [
+        { label: "Work with us", href: "/careers" },
+        { label: "Get started", href: "/#get-started" },
+        { label: "Success stories", href: "/#testimonials" },
+      ],
     },
   ],
   socials: [

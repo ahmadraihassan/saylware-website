@@ -26,7 +26,7 @@ export default async function ServicePage({
     <main className="relative bg-[var(--bg)] min-h-screen flex flex-col">
       <Header />
       <div className="flex-1 pt-28 pb-16 px-4 sm:px-6 lg:px-8">
-        <div className="mx-auto max-w-7xl w-full">
+        <div className="mx-auto max-w-[82rem] w-full">
           <Reveal>
             <Link href="/#services" className="text-sm text-[var(--ink-muted)] hover:text-[var(--ink)]">
               ← Back to services

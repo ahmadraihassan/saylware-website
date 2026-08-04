@@ -6,7 +6,7 @@ export default function Partners() {
 
   return (
     <section id="partners" className="relative py-8 sm:py-12 px-4 sm:px-6 lg:px-8">
-      <div className="mx-auto max-w-7xl w-full">
+      <div className="mx-auto max-w-[82rem] w-full">
         <Reveal>
           <p className="text-center text-[11px] font-semibold uppercase tracking-[0.2em] text-[var(--ink-muted)] mb-5">
             {partners.label}

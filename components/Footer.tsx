@@ -3,7 +3,7 @@ import { contact, footer, nav } from "@/lib/content";
 export default function Footer() {
   return (
     <footer className="relative mt-auto border-t border-[var(--border)]">
-      <div className="mx-auto max-w-7xl w-full px-4 sm:px-6 lg:px-8 py-12 sm:py-14">
+      <div className="mx-auto max-w-[82rem] w-full px-4 sm:px-6 lg:px-8 py-12 sm:py-14">
         <div className="soft-shell p-5 sm:p-6 mb-10 flex flex-col sm:flex-row gap-4 sm:items-center sm:justify-between">
           <div>
             <p className="font-display text-lg font-semibold">Stay in the loop</p>
@@ -22,7 +22,7 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 sm:gap-10">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-8 sm:gap-10">
           <div className="sm:col-span-2">
             <a href="/" className="flex items-center gap-2.5">
               <span className="w-8 h-8 rounded-xl bg-[var(--ink)] text-[var(--bg)] flex items-center justify-center font-display font-bold text-sm">
@@ -31,6 +31,9 @@ export default function Footer() {
               <span className="font-display text-lg font-bold">{nav.logoText}</span>
             </a>
             <p className="mt-4 text-sm max-w-sm leading-relaxed text-[var(--ink-soft)]">{footer.companyDescription}</p>
+            <a href="/careers" className="inline-flex mt-4 text-sm font-semibold text-[var(--accent)] hover:underline">
+              Work with us →
+            </a>
           </div>
           {footer.columns.map((col) => (
             <div key={col.heading}>

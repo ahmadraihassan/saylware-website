@@ -19,7 +19,7 @@ export default function FormWizard() {
 
   return (
     <section id="get-started" className="relative py-14 sm:py-20 px-4 sm:px-6 lg:px-8 scroll-mt-24">
-      <div className="mx-auto max-w-7xl w-full">
+      <div className="mx-auto max-w-[82rem] w-full">
         <Reveal>
           <div className="text-center mb-8 sm:mb-10 max-w-2xl mx-auto">
             <p className="font-mono text-[11px] tracking-[0.2em] uppercase text-[var(--accent)] mb-3">Get started</p>

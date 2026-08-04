@@ -19,7 +19,7 @@ export default function Testimonials() {
 
   return (
     <section id="testimonials" className="relative py-14 sm:py-20 px-4 sm:px-6 lg:px-8 scroll-mt-24">
-      <div className="mx-auto max-w-7xl w-full">
+      <div className="mx-auto max-w-[82rem] w-full">
         <Reveal>
           <div className="text-center max-w-2xl mx-auto mb-8 sm:mb-10">
             <span className="inline-flex rounded-full glass px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.18em] text-[var(--ink-muted)]">
@@ -32,46 +32,64 @@ export default function Testimonials() {
           </div>
         </Reveal>
 
-        {/* Avatar rail */}
-        <div className="flex items-end justify-center gap-3 sm:gap-4 mb-8">
+        <div className="flex items-end justify-center gap-4 sm:gap-5 mb-8 sm:mb-10">
           {items.map((item, i) => {
             const dist = Math.min(Math.abs(i - active), Math.abs(i - active + n), Math.abs(i - active - n));
-            const scale = dist === 0 ? 1.15 : dist === 1 ? 0.9 : 0.75;
-            const opacity = dist === 0 ? 1 : dist === 1 ? 0.55 : 0.3;
+            const size = dist === 0 ? 88 : dist === 1 ? 72 : 60;
+            const opacity = dist === 0 ? 1 : dist === 1 ? 0.65 : 0.4;
             return (
               <button
                 key={item.name}
                 type="button"
                 onClick={() => setActive(i)}
-                className="rounded-full overflow-hidden border-2 transition-all duration-300"
-                style={{
-                  width: `${48 * scale}px`,
-                  height: `${48 * scale}px`,
-                  opacity,
-                  borderColor: dist === 0 ? "var(--accent)" : "transparent",
-                }}
+                className="relative transition-all duration-300"
+                style={{ width: size, height: size, opacity }}
                 aria-label={`Show ${item.name}`}
               >
-                <img src={item.avatar} alt="" className="w-full h-full object-cover" />
+                <span
+                  className={`block w-full h-full rounded-2xl overflow-hidden border-2 ${
+                    dist === 0 ? "border-[var(--accent)]" : "border-white/10"
+                  }`}
+                >
+                  <img src={item.avatar} alt="" className="w-full h-full object-cover" />
+                </span>
+                <span
+                  className="absolute -bottom-1.5 -right-1.5 w-7 h-7 rounded-lg border border-white/15 text-[10px] font-bold flex items-center justify-center text-[var(--bg)] shadow-lg"
+                  style={{ background: item.logoColor }}
+                  title={item.company}
+                >
+                  {item.logo}
+                </span>
               </button>
             );
           })}
         </div>
 
-        {/* Cards */}
-        <div className="relative flex items-center justify-center min-h-[280px] sm:min-h-[300px]">
+        <div className="relative flex items-center justify-center min-h-[300px] sm:min-h-[320px]">
           {items.map((item, i) => {
-            const offset = ((i - active + n) % n);
-            const pos = offset === 0 ? 0 : offset === 1 || (offset === n - 1 && n === 2) ? (offset === 1 ? 1 : -1) : offset === n - 1 ? -1 : offset > n / 2 ? -2 : 2;
+            const offset = (i - active + n) % n;
+            const pos =
+              offset === 0
+                ? 0
+                : offset === 1
+                  ? 1
+                  : offset === n - 1
+                    ? -1
+                    : offset > n / 2
+                      ? -2
+                      : 2;
             const isCenter = i === active;
             return (
               <article
                 key={item.name}
-                className={`absolute w-[min(92vw,520px)] soft-shell p-5 sm:p-7 transition-all duration-500 ${
-                  isCenter ? "z-20 opacity-100 scale-100" : "z-10 opacity-40 scale-90 pointer-events-none"
+                className={`absolute w-[min(94vw,560px)] rounded-2xl border p-5 sm:p-7 transition-all duration-500 ${
+                  isCenter ? "z-20 opacity-100" : "z-10 opacity-35 pointer-events-none"
                 }`}
                 style={{
-                  transform: `translateX(${pos * 28}%) scale(${isCenter ? 1 : 0.9})`,
+                  transform: `translateX(${pos * 26}%) scale(${isCenter ? 1 : 0.92})`,
+                  background: "#171920",
+                  borderColor: isCenter ? "rgba(245,158,11,0.35)" : "rgba(255,255,255,0.08)",
+                  boxShadow: isCenter ? "0 24px 60px -28px rgba(0,0,0,0.7)" : "none",
                 }}
               >
                 <div className="flex items-start justify-between gap-3">
@@ -79,8 +97,16 @@ export default function Testimonials() {
                     <Icon name="asterisk" className="w-4 h-4 text-[var(--accent)]" />
                     {item.type}
                   </div>
-                  <div className="flex items-center gap-2">
-                    <img src={item.avatar} alt="" className="w-9 h-9 rounded-full object-cover" />
+                  <div className="flex items-center gap-2.5">
+                    <div className="relative">
+                      <img src={item.avatar} alt="" className="w-11 h-11 rounded-xl object-cover" />
+                      <span
+                        className="absolute -bottom-1 -right-1 w-5 h-5 rounded-md text-[8px] font-bold flex items-center justify-center text-[var(--bg)]"
+                        style={{ background: item.logoColor }}
+                      >
+                        {item.logo}
+                      </span>
+                    </div>
                     <div className="text-right">
                       <p className="text-sm font-semibold leading-tight">{item.name}</p>
                       <p className="text-[11px] text-[var(--ink-muted)]">{item.role}</p>
@@ -101,7 +127,7 @@ export default function Testimonials() {
 
                 <div className="mt-5 flex flex-wrap gap-2">
                   {item.tags.map((t) => (
-                    <span key={t} className="rounded-full glass-strong px-2.5 py-1 text-[10px] text-[var(--ink-muted)]">
+                    <span key={t} className="rounded-full bg-white/5 border border-white/10 px-2.5 py-1 text-[10px] text-[var(--ink-muted)]">
                       {t}
                     </span>
                   ))}

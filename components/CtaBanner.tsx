@@ -4,7 +4,7 @@ import Reveal from "./Reveal";
 export default function CtaBanner() {
   return (
     <section className="relative py-10 sm:py-16 px-4 sm:px-6 lg:px-8">
-      <div className="mx-auto max-w-7xl w-full">
+      <div className="mx-auto max-w-[82rem] w-full">
         <Reveal variant="scale">
           <div className="relative overflow-hidden rounded-[1.75rem] border border-[var(--border)] px-6 py-14 sm:py-16 text-center min-h-[280px] flex items-center justify-center">
             <div className="absolute inset-0 bg-[var(--bg-elevated)]" />

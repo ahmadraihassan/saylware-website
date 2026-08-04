@@ -24,7 +24,7 @@ export default function Hero() {
 
   return (
     <section className="relative pt-24 sm:pt-28 pb-8 sm:pb-12 px-4 sm:px-6 lg:px-8">
-      <div className="mx-auto max-w-7xl w-full">
+      <div className="mx-auto max-w-[82rem] w-full">
         <div className="soft-shell overflow-hidden relative">
           <div className="relative grid lg:grid-cols-2 gap-6 lg:gap-8 p-5 sm:p-8 lg:p-10">
             <div className="flex flex-col justify-center min-w-0">
