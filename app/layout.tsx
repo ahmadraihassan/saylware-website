@@ -34,14 +34,13 @@ export default function RootLayout({
   return (
     <html lang="en" className="scroll-smooth">
       <body
-        className={`${syne.variable} ${outfit.variable} ${ibmPlexMono.variable} antialiased bg-[var(--bg)] text-[var(--ink)] selection:bg-[var(--lime)]/40 min-h-screen flex flex-col relative`}
+        className={`${syne.variable} ${outfit.variable} ${ibmPlexMono.variable} antialiased bg-[var(--bg)] text-[var(--ink)] min-h-screen flex flex-col relative`}
       >
         <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden">
-          <div className="absolute -top-24 -left-16 w-[420px] h-[420px] rounded-full bg-[var(--lime)]/25 blur-[100px] animate-blob" />
-          <div className="absolute top-1/3 -right-20 w-[460px] h-[460px] rounded-full bg-[var(--purple)]/15 blur-[110px] animate-blob" style={{ animationDelay: "2s" }} />
-          <div className="absolute bottom-0 left-1/3 w-[380px] h-[380px] rounded-full bg-[#7dd3fc]/20 blur-[100px] animate-blob" style={{ animationDelay: "4s" }} />
+          <div className="absolute -top-32 left-1/4 w-[480px] h-[480px] rounded-full bg-[var(--accent)]/10 blur-[120px]" />
+          <div className="absolute bottom-0 right-0 w-[420px] h-[420px] rounded-full bg-[var(--purple)]/12 blur-[120px]" />
         </div>
-        <div className="relative z-10 flex-1 flex flex-col">{children}</div>
+        <div className="relative z-10 flex-1 flex flex-col w-full">{children}</div>
       </body>
     </html>
   );

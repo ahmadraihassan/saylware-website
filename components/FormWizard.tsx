@@ -3,161 +3,111 @@
 import { useState } from "react";
 import LeadForm from "./LeadForm";
 import Reveal from "./Reveal";
-import {
-  contact,
-  customerService,
-  cybersecurity,
-  formFlow,
-} from "@/lib/content";
+import { contact, customerService, cybersecurity, formFlow } from "@/lib/content";
 
-const stepMeta = [
-  {
-    key: "support" as const,
-    accent: "bg-[var(--mint)]",
-    label: "Customer Care",
-  },
-  {
-    key: "security" as const,
-    accent: "bg-[var(--lavender)]",
-    label: "Cybersecurity",
-  },
-  {
-    key: "general" as const,
-    accent: "bg-[var(--peach)]",
-    label: "General",
-  },
-];
+const labels = ["Customer Care", "Cybersecurity", "General"];
 
 export default function FormWizard() {
   const [step, setStep] = useState(0);
   const [animKey, setAnimKey] = useState(0);
+  const current = formFlow.steps[step];
 
   function goTo(index: number) {
     setStep(index);
     setAnimKey((k) => k + 1);
   }
 
-  const current = formFlow.steps[step];
-
   return (
-    <section id="get-started" className="relative py-16 sm:py-24 px-4 sm:px-6 scroll-mt-24">
-      <div className="mx-auto max-w-3xl">
+    <section id="get-started" className="relative py-14 sm:py-20 px-4 sm:px-6 lg:px-8 scroll-mt-24">
+      <div className="mx-auto max-w-7xl w-full">
         <Reveal>
-          <div className="text-center mb-8 sm:mb-10">
-            <p className="font-mono text-[11px] tracking-[0.2em] uppercase text-[var(--purple)] mb-3">
-              Get started
-            </p>
-            <h2 className="font-display text-3xl sm:text-4xl font-bold tracking-tight text-[var(--ink)]">
+          <div className="text-center mb-8 sm:mb-10 max-w-2xl mx-auto">
+            <p className="font-mono text-[11px] tracking-[0.2em] uppercase text-[var(--accent)] mb-3">Get started</p>
+            <h2 className="font-display text-[clamp(1.75rem,3.5vw,3rem)] font-bold tracking-tight">
               Tell us what you need
             </h2>
-            <p className="mt-3 text-[var(--ink-soft)]">
-              One form at a time. Switch anytime if you want a different service.
-            </p>
           </div>
         </Reveal>
 
-        <Reveal delay={80}>
-          <div className="soft-shell p-6 sm:p-9 relative overflow-hidden">
-            {/* Step pills */}
-            <div className="flex flex-wrap gap-2 mb-8">
-              {stepMeta.map((s, i) => (
-                <button
-                  key={s.key}
-                  type="button"
-                  onClick={() => goTo(i)}
-                  className={`rounded-full px-3.5 py-1.5 text-xs font-semibold transition-all ${
-                    i === step
-                      ? `${s.accent} text-[var(--ink)] shadow-sm`
-                      : "bg-[var(--bg-soft)] text-[var(--ink-muted)] hover:text-[var(--ink)]"
-                  }`}
-                >
-                  {i + 1}. {s.label}
-                </button>
-              ))}
-            </div>
+        <Reveal delay={60}>
+          <div className="relative grid lg:grid-cols-[1fr_auto] gap-4 lg:gap-5 items-stretch">
+            <div className="soft-shell p-5 sm:p-8 min-w-0">
+              <div className="flex flex-wrap gap-2 mb-6">
+                {labels.map((label, i) => (
+                  <button
+                    key={label}
+                    type="button"
+                    onClick={() => goTo(i)}
+                    className={`rounded-full px-3.5 py-1.5 text-xs font-semibold transition-all ${
+                      i === step
+                        ? "bg-[var(--accent)] text-[var(--bg)]"
+                        : "glass text-[var(--ink-muted)] hover:text-[var(--ink)]"
+                    }`}
+                  >
+                    {i + 1}. {label}
+                  </button>
+                ))}
+              </div>
 
-            <div key={animKey} className="form-slide-enter">
-              {current.key === "support" && (
-                <LeadForm
-                  compact
-                  formspreeId={customerService.leadForm.formspreeId}
-                  heading={customerService.leadForm.heading}
-                  subheading={customerService.leadForm.subheading}
-                  submitLabel={customerService.leadForm.submitLabel}
-                  track="support"
-                />
-              )}
-              {current.key === "security" && (
-                <LeadForm
-                  compact
-                  formspreeId={cybersecurity.leadForm.formspreeId}
-                  heading={cybersecurity.leadForm.heading}
-                  subheading={cybersecurity.leadForm.subheading}
-                  submitLabel={cybersecurity.leadForm.submitLabel}
-                  track="security"
-                />
-              )}
-              {current.key === "general" && (
-                <LeadForm
-                  compact
-                  formspreeId={contact.formspreeId}
-                  heading={contact.headline}
-                  subheading={contact.description}
-                  submitLabel="Send Message"
-                  track="general"
-                />
-              )}
-            </div>
+              <div key={animKey} className="form-slide-enter">
+                {current.key === "support" && (
+                  <LeadForm
+                    formspreeId={customerService.leadForm.formspreeId}
+                    heading={customerService.leadForm.heading}
+                    subheading={customerService.leadForm.subheading}
+                    submitLabel={customerService.leadForm.submitLabel}
+                    track="support"
+                  />
+                )}
+                {current.key === "security" && (
+                  <LeadForm
+                    formspreeId={cybersecurity.leadForm.formspreeId}
+                    heading={cybersecurity.leadForm.heading}
+                    subheading={cybersecurity.leadForm.subheading}
+                    submitLabel={cybersecurity.leadForm.submitLabel}
+                    track="security"
+                  />
+                )}
+                {current.key === "general" && (
+                  <LeadForm
+                    formspreeId={contact.formspreeId}
+                    heading={contact.headline}
+                    subheading={contact.description}
+                    submitLabel="Contact Us"
+                    track="general"
+                  />
+                )}
+              </div>
 
-            {/* Next step CTA */}
-            {current.nextLabel && (
-              <div className="mt-8 pt-6 border-t border-[var(--border)] flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-4">
+              {step > 0 && (
                 <button
                   type="button"
-                  onClick={() => goTo(Math.max(0, step - 1))}
-                  className={`text-sm font-medium text-[var(--ink-muted)] hover:text-[var(--ink)] transition-colors ${
-                    step === 0 ? "invisible pointer-events-none" : ""
-                  }`}
+                  onClick={() => goTo(step - 1)}
+                  className="mt-6 text-sm text-[var(--ink-muted)] hover:text-[var(--ink)]"
                 >
                   ← Back
                 </button>
+              )}
+            </div>
+
+            {/* Side next CTA */}
+            {current.nextLabel && (
+              <div className="flex lg:flex-col items-center justify-center gap-3 lg:w-[220px]">
                 <button
                   type="button"
                   onClick={() => goTo(step + 1)}
-                  className="group inline-flex items-center justify-center gap-3 rounded-full bg-[var(--ink)] text-white pl-5 pr-2 py-2 text-sm font-semibold hover:bg-[var(--purple)] transition-colors"
+                  className="group w-full lg:w-full soft-shell p-5 sm:p-6 text-left hover:ring-1 hover:ring-[var(--accent)]/40 transition-all"
                 >
-                  <span className="text-left">
-                    <span className="block">{current.nextLabel}</span>
-                    {current.nextHint && (
-                      <span className="block text-[11px] font-normal text-white/60 mt-0.5">
-                        {current.nextHint}
-                      </span>
-                    )}
-                  </span>
-                  <span className="w-10 h-10 rounded-full bg-[var(--lime)] text-[var(--ink)] flex items-center justify-center group-hover:scale-105 transition-transform">
+                  <span className="w-11 h-11 rounded-full bg-[var(--accent)] text-[var(--bg)] flex items-center justify-center mb-4 group-hover:scale-105 transition-transform">
                     <svg className="w-4 h-4" viewBox="0 0 16 16" fill="none">
                       <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                     </svg>
                   </span>
+                  <span className="block font-display text-base font-semibold leading-snug">{current.nextLabel}</span>
+                  {current.nextHint && (
+                    <span className="block text-xs text-[var(--ink-muted)] mt-2">{current.nextHint}</span>
+                  )}
                 </button>
-              </div>
-            )}
-
-            {current.key === "general" && (
-              <div className="mt-8 pt-6 border-t border-[var(--border)] flex justify-between items-center gap-4">
-                <button
-                  type="button"
-                  onClick={() => goTo(step - 1)}
-                  className="text-sm font-medium text-[var(--ink-muted)] hover:text-[var(--ink)] transition-colors"
-                >
-                  ← Back
-                </button>
-                <div className="text-xs text-[var(--ink-muted)] text-right">
-                  Or email{" "}
-                  <a href={`mailto:${contact.email}`} className="text-[var(--purple)] font-medium">
-                    {contact.email}
-                  </a>
-                </div>
               </div>
             )}
           </div>

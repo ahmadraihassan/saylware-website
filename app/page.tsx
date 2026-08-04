@@ -2,7 +2,7 @@ import Header from "@/components/Header";
 import Hero from "@/components/Hero";
 import Partners from "@/components/Partners";
 import Pillars from "@/components/Pillars";
-import SignatureTracks from "@/components/SignatureTracks";
+import ServicesFacets from "@/components/ServicesFacets";
 import Values from "@/components/Values";
 import Journey from "@/components/Journey";
 import CtaBanner from "@/components/CtaBanner";
@@ -12,12 +12,12 @@ import Footer from "@/components/Footer";
 
 export default function Home() {
   return (
-    <main className="relative overflow-hidden bg-[var(--bg)]">
+    <main className="relative overflow-x-hidden bg-[var(--bg)] w-full">
       <Header />
       <Hero />
       <Partners />
       <Pillars />
-      <SignatureTracks />
+      <ServicesFacets />
       <Values />
       <Journey />
       <CtaBanner />

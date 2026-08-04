@@ -1,66 +1,59 @@
+"use client";
+
+import { useState } from "react";
 import { pillars } from "@/lib/content";
 import Reveal from "./Reveal";
 
-const toneBg: Record<(typeof pillars.items)[number]["tone"], string> = {
-  lavender: "bg-[var(--lavender)]",
-  mint: "bg-[var(--mint)]",
-  peach: "bg-[var(--peach)]",
-};
-
-function IconGrid() {
-  return (
-    <svg className="w-7 h-7 text-[var(--ink)]" viewBox="0 0 28 28" fill="none" aria-hidden>
-      <circle cx="6" cy="6" r="2.2" fill="currentColor" />
-      <circle cx="14" cy="6" r="2.2" fill="currentColor" />
-      <circle cx="22" cy="6" r="2.2" fill="currentColor" />
-      <circle cx="6" cy="14" r="2.2" fill="currentColor" />
-      <circle cx="14" cy="14" r="2.2" fill="currentColor" />
-      <circle cx="22" cy="14" r="2.2" fill="currentColor" />
-      <circle cx="6" cy="22" r="2.2" fill="currentColor" />
-      <circle cx="14" cy="22" r="2.2" fill="currentColor" />
-      <circle cx="22" cy="22" r="2.2" fill="currentColor" />
-    </svg>
-  );
-}
-
 export default function Pillars() {
+  const [open, setOpen] = useState<number | null>(null);
+
   return (
-    <section id="about" className="relative py-16 sm:py-24 px-4 sm:px-6">
-      <div className="mx-auto max-w-7xl">
-        <div className="grid lg:grid-cols-[0.9fr_1.1fr] gap-8 lg:gap-14 mb-10 sm:mb-12">
+    <section id="about" className="relative py-14 sm:py-20 px-4 sm:px-6 lg:px-8">
+      <div className="mx-auto max-w-7xl w-full">
+        <div className="grid lg:grid-cols-[0.9fr_1.1fr] gap-6 lg:gap-12 mb-8 sm:mb-10">
           <Reveal>
-            <p className="font-mono text-[11px] tracking-[0.2em] uppercase text-[var(--purple)] mb-3">
-              {pillars.eyebrow}
-            </p>
-            <h2 className="font-display text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight leading-tight text-[var(--ink)]">
+            <p className="font-mono text-[11px] tracking-[0.2em] uppercase text-[var(--accent)] mb-3">{pillars.eyebrow}</p>
+            <h2 className="font-display text-[clamp(1.75rem,3.5vw,3rem)] font-bold tracking-tight leading-tight">
               {pillars.headline}
             </h2>
           </Reveal>
-          <Reveal delay={100} variant="right">
-            <p className="text-[var(--ink-soft)] text-base sm:text-lg leading-relaxed max-w-xl lg:pt-8">
-              {pillars.description}
-            </p>
+          <Reveal delay={80} variant="right">
+            <p className="text-[var(--ink-soft)] text-base sm:text-lg leading-relaxed max-w-xl lg:pt-8">{pillars.description}</p>
           </Reveal>
         </div>
 
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5">
-          {pillars.items.map((item, i) => (
-            <Reveal key={item.title} delay={i * 90}>
-              <article
-                className={`group h-full rounded-[1.75rem] p-7 sm:p-8 transition-transform duration-500 hover:-translate-y-1.5 hover:shadow-xl hover:shadow-black/5 ${toneBg[item.tone]}`}
-              >
-                <div className="mb-10 opacity-80">
-                  <IconGrid />
-                </div>
-                <h3 className="font-display text-xl font-semibold tracking-tight text-[var(--ink)]">
-                  {item.title}
-                </h3>
-                <p className="mt-3 text-sm leading-relaxed text-[var(--ink-soft)]">
-                  {item.description}
-                </p>
-              </article>
-            </Reveal>
-          ))}
+        <div className="grid md:grid-cols-3 gap-3 sm:gap-4">
+          {pillars.items.map((item, i) => {
+            const isOpen = open === i;
+            return (
+              <Reveal key={item.title} delay={i * 70}>
+                <article
+                  className={`soft-shell p-5 sm:p-6 transition-all duration-400 cursor-default ${
+                    isOpen ? "ring-1 ring-[var(--accent)]/40" : "hover:border-[var(--border-strong)]"
+                  }`}
+                  onMouseEnter={() => setOpen(i)}
+                  onMouseLeave={() => setOpen(null)}
+                  onFocus={() => setOpen(i)}
+                  onBlur={() => setOpen(null)}
+                  tabIndex={0}
+                >
+                  <h3 className="font-display text-lg sm:text-xl font-semibold tracking-tight">{item.title}</h3>
+                  <p className="mt-2 text-sm text-[var(--ink-soft)]">{item.summary}</p>
+                  <div
+                    className={`grid transition-all duration-400 ease-out ${
+                      isOpen ? "grid-rows-[1fr] opacity-100 mt-4" : "grid-rows-[0fr] opacity-0 mt-0"
+                    }`}
+                  >
+                    <div className="overflow-hidden">
+                      <p className="text-sm leading-relaxed text-[var(--ink-muted)] border-t border-[var(--border)] pt-4">
+                        {item.description}
+                      </p>
+                    </div>
+                  </div>
+                </article>
+              </Reveal>
+            );
+          })}
         </div>
       </div>
     </section>

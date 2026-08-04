@@ -2,9 +2,6 @@
  * ============================================================
  *  SAYLWARE · SITE CONTENT
  * ============================================================
- *  Everyday edits live here: headlines, services, testimonials,
- *  contact info, and Formspree IDs. Save and redeploy after changes.
- * ============================================================
  */
 
 export const site = {
@@ -16,23 +13,21 @@ export const site = {
 export const nav = {
   logoText: "Saylware",
   links: [
-    { label: "Home", href: "#" },
-    { label: "About", href: "#about" },
-    { label: "Services", href: "#services" },
-    { label: "Process", href: "#journey" },
-    { label: "Clients", href: "#partners" },
+    { label: "Home", href: "/" },
+    { label: "Services", href: "/#services" },
+    { label: "Process", href: "/#journey" },
+    { label: "Stories", href: "/#testimonials" },
+    { label: "Work with us", href: "/careers" },
   ],
-  actions: [
-    { label: "Book a call", href: "#get-started" },
-  ],
+  actions: [{ label: "Book a call", href: "/#get-started" }],
 };
 
 export const hero = {
   headline: "Your operations stay sharp with Saylware.",
   subheadline:
     "Advanced cybersecurity and customer support with a calm, capable touch. Book a conversation today.",
-  primaryCta: { label: "Explore services", href: "#services" },
-  bookCta: { label: "Book a call", href: "#get-started" },
+  primaryCta: { label: "Explore services", href: "/#services" },
+  bookCta: { label: "Book a call", href: "/#get-started" },
   hours: {
     label: "Working hours",
     weekdays: "Mon to Fri, 9:00 AM to 6:00 PM",
@@ -65,60 +60,182 @@ export const pillars = {
   items: [
     {
       title: "Always on watch",
+      summary: "Detection that respects your team's attention.",
       description:
-        "Continuous detection across endpoints, network, and cloud, with humans who know which alerts matter.",
-      tone: "lavender" as const,
+        "Continuous detection across endpoints, network, and cloud, with humans who know which alerts matter. We filter noise before it hits your inbox and escalate only what needs a decision.",
     },
     {
       title: "Customers first",
+      summary: "Support that sounds like your brand.",
       description:
-        "Support desks that sound like your brand, hit your SLAs, and turn feedback into clearer product signal.",
-      tone: "mint" as const,
+        "Support desks that hit your SLAs and turn feedback into clearer product signal. Agents train on your voice, your policies, and your escalation paths so customers never feel outsourced.",
     },
     {
       title: "Clear accountability",
+      summary: "Reporting leadership can actually use.",
       description:
-        "Timelines, reporting, and escalation paths you can hand to leadership without translating jargon.",
-      tone: "peach" as const,
+        "Timelines, reporting, and escalation paths you can hand to leadership without translating jargon. Named owners, measurable outcomes, and no black box between you and the work.",
     },
   ],
 };
 
-export const signature = {
+export type ServiceFacet = "security" | "support";
+
+export type ServiceItem = {
+  slug: string;
+  facet: ServiceFacet;
+  title: string;
+  short: string;
+  tags: string[];
+  image: string;
+  overview: string;
+  highlights: { title: string; body: string }[];
+  outcomes: string[];
+};
+
+export const serviceCatalog: ServiceItem[] = [
+  {
+    slug: "managed-detection-response",
+    facet: "security",
+    title: "Managed Detection and Response",
+    short: "24/7 monitoring with human led triage on every real alert.",
+    tags: ["SOC", "Endpoints", "Cloud"],
+    image: "https://images.unsplash.com/photo-1563986768609-322da13575f3?w=900&h=600&fit=crop",
+    overview:
+      "We watch your environment around the clock, investigate what matters, and hand you clear next steps instead of another noisy dashboard.",
+    highlights: [
+      { title: "Coverage", body: "Endpoints, network, identity, and cloud signals in one operating rhythm." },
+      { title: "Human triage", body: "Analysts validate alerts before anything lands on your team." },
+      { title: "Reporting", body: "Weekly summaries and incident narratives leadership can read." },
+    ],
+    outcomes: ["Fewer false positives", "Faster mean time to respond", "Clear audit trail"],
+  },
+  {
+    slug: "incident-response",
+    facet: "security",
+    title: "Incident Response",
+    short: "Rapid containment with a clear timeline of what happened.",
+    tags: ["IR", "Containment", "Forensics"],
+    image: "https://images.unsplash.com/photo-1555949963-aa79dcee981c?w=900&h=600&fit=crop",
+    overview:
+      "When something goes wrong, we triage, contain, and document so you recover with confidence and learn what to harden next.",
+    highlights: [
+      { title: "Playbooks", body: "Pre agreed escalation paths for ransomware, account takeover, and data exposure." },
+      { title: "Containment", body: "Isolate impacted assets while preserving evidence for review." },
+      { title: "After action", body: "A plain language report with fixes ranked by risk." },
+    ],
+    outcomes: ["Shorter outages", "Documented timeline", "Hardening backlog"],
+  },
+  {
+    slug: "vulnerability-management",
+    facet: "security",
+    title: "Vulnerability Management",
+    short: "Scan, prioritize, and patch what attackers would use first.",
+    tags: ["Scanning", "Prioritization", "Patch"],
+    image: "https://images.unsplash.com/photo-1544197150-b99a580bb7a8?w=900&h=600&fit=crop",
+    overview:
+      "Ongoing scanning paired with prioritization that respects business impact, not just CVSS scores.",
+    highlights: [
+      { title: "Discovery", body: "Continuous inventory of internet facing and internal assets." },
+      { title: "Prioritization", body: "Exploitability and exposure drive the queue, not raw severity alone." },
+      { title: "Cadence", body: "Sprint friendly remediation plans your engineers can actually ship." },
+    ],
+    outcomes: ["Reduced attack surface", "Trackable remediation", "Fewer critical reopenings"],
+  },
+  {
+    slug: "security-advisory",
+    facet: "security",
+    title: "Security Advisory",
+    short: "Practical guidance on hardening, tooling, and readiness.",
+    tags: ["Advisory", "Hardening", "Compliance"],
+    image: "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=900&h=600&fit=crop",
+    overview:
+      "Straight advice on stack choices, hardening priorities, and compliance readiness without the upsell theater.",
+    highlights: [
+      { title: "Architecture reviews", body: "Spot weak trust boundaries before they become incidents." },
+      { title: "Tooling", body: "Recommend what fits your stage, not the biggest license." },
+      { title: "Readiness", body: "Map controls to the frameworks your customers ask about." },
+    ],
+    outcomes: ["Clear roadmap", "Fewer tool overlaps", "Buyer ready answers"],
+  },
+  {
+    slug: "managed-support-desk",
+    facet: "support",
+    title: "Managed Support Desk",
+    short: "Agents under your brand with SLAs you set.",
+    tags: ["Tickets", "Chat", "Voice"],
+    image: "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=900&h=600&fit=crop",
+    overview:
+      "Trained agents handle tickets, chat, and calls as an extension of your team, measured against response targets you define.",
+    highlights: [
+      { title: "Brand voice", body: "Macros, tone guides, and QA calibrated to how you sound." },
+      { title: "Channels", body: "Email, chat, and voice with a single queue view." },
+      { title: "SLAs", body: "Targets you set, reported weekly without vanity metrics." },
+    ],
+    outcomes: ["Faster first response", "Stable CSAT", "Less founder firefighting"],
+  },
+  {
+    slug: "cx-process-design",
+    facet: "support",
+    title: "CX Process Design",
+    short: "Map workflows and remove friction before it becomes churn.",
+    tags: ["Workflows", "Journey", "Design"],
+    image: "https://images.unsplash.com/photo-1531538606174-0f90ff5dce83?w=900&h=600&fit=crop",
+    overview:
+      "We map how support actually flows today, find the pain points, and redesign the path customers take when they need help.",
+    highlights: [
+      { title: "Discovery", body: "Shadow tickets and calls to see where handoffs break." },
+      { title: "Blueprints", body: "Clear workflows for intake, escalation, and closure." },
+      { title: "Enablement", body: "Train the team and leave playbooks they will use." },
+    ],
+    outcomes: ["Fewer loops", "Clearer ownership", "Smoother escalations"],
+  },
+  {
+    slug: "escalation-qa",
+    facet: "support",
+    title: "Escalation and QA",
+    short: "Structured escalation with quality review on every shift.",
+    tags: ["QA", "Escalation", "Coaching"],
+    image: "https://images.unsplash.com/photo-1553877522-43269d4ea984?w=900&h=600&fit=crop",
+    overview:
+      "A structured escalation path plus quality review so nothing important slips and agents keep improving.",
+    highlights: [
+      { title: "Escalation matrix", body: "Who owns what, and when engineering gets involved." },
+      { title: "QA sampling", body: "Scorecards tied to your brand and policy standards." },
+      { title: "Coaching", body: "Feedback loops that improve the next conversation." },
+    ],
+    outcomes: ["Fewer missed tickets", "Consistent quality", "Stronger agent growth"],
+  },
+  {
+    slug: "support-analytics",
+    facet: "support",
+    title: "Support Analytics",
+    short: "Volume, resolution, and satisfaction made visible.",
+    tags: ["Reporting", "CSAT", "Trends"],
+    image: "https://images.unsplash.com/photo-1521737711867-5f2f08c10d7e?w=900&h=600&fit=crop",
+    overview:
+      "Clear reporting on volume, resolution time, and satisfaction so support becomes a visible asset, not a cost center.",
+    highlights: [
+      { title: "Dashboards", body: "Live views for ops leads and monthly packs for leadership." },
+      { title: "Drivers", body: "See which themes drive contacts and churn risk." },
+      { title: "Action", body: "Recommendations tied to the numbers, not just charts." },
+    ],
+    outcomes: ["Visible ROI", "Product feedback loops", "Capacity planning"],
+  },
+];
+
+export const facets = {
   headline: "Our services",
-  intro:
-    "Pick the service that fits today. Expand later. Both run with the same clarity and ownership.",
+  intro: "Two facets. Hover a column to browse. Pause on a card to expand and open the full brief.",
   security: {
     id: "cybersecurity",
     title: "Cybersecurity",
-    tags: "Detection / Response / Advisory",
-    image:
-      "https://images.unsplash.com/photo-1563986768609-322da13575f3?w=900&h=1100&fit=crop",
-    badge: "Security",
-    cert: "SOC ready",
-    cardTitle: "Managed Detection",
-    cardMeta: "Endpoints · Network · Cloud · IR",
-    highlight: "Coverage 24/7 with human triage",
-    metaLabel: "Target response",
-    metaValue: "< 15 min",
-    statusLabel: "Status",
-    statusValue: "Accepting clients",
+    subtitle: "Detection, response, and advisory",
   },
   support: {
     id: "customer-service",
     title: "Customer Care",
-    tags: "Support / CX / Analytics",
-    image:
-      "https://images.unsplash.com/photo-1556761175-5973dc0f32e7?w=900&h=1100&fit=crop",
-    badge: "Support",
-    cert: "Brand aligned",
-    cardTitle: "Managed Support",
-    cardMeta: "Tickets · Chat · Voice · QA",
-    highlight: "SLA backed desk under your brand",
-    metaLabel: "Typical ramp",
-    metaValue: "2 to 4 weeks",
-    statusLabel: "Status",
-    statusValue: "Accepting clients",
+    subtitle: "Desk, process, QA, and analytics",
   },
 };
 
@@ -127,27 +244,23 @@ export const values = {
   items: [
     {
       title: "Resilient systems",
-      description:
-        "Hardening, detection, and response designed so incidents stay small and recoverable.",
-      tone: "lavender" as const,
+      description: "Hardening, detection, and response designed so incidents stay small and recoverable.",
+      icon: "shield" as const,
     },
     {
       title: "Smart operations",
-      description:
-        "Playbooks and tooling that cut noise so your team spends time on real decisions.",
-      tone: "mint" as const,
+      description: "Playbooks and tooling that cut noise so your team spends time on real decisions.",
+      icon: "bolt" as const,
     },
     {
       title: "Connected teams",
-      description:
-        "Security and support handoffs that keep context intact from alert to customer reply.",
-      tone: "peach" as const,
+      description: "Security and support handoffs that keep context intact from alert to customer reply.",
+      icon: "nodes" as const,
     },
     {
       title: "Premium delivery",
-      description:
-        "Clear reporting, named owners, and no black box vendors between you and the work.",
-      tone: "lime" as const,
+      description: "Clear reporting, named owners, and no black box vendors between you and the work.",
+      icon: "spark" as const,
     },
   ],
 };
@@ -159,59 +272,36 @@ export const journey = {
       title: "Discovery",
       description:
         "We map your stack, risks, and support volume so the engagement starts with clarity, not assumptions.",
+      icon: "search" as const,
     },
     {
       title: "Design",
       description:
         "Playbooks, SLAs, tooling choices, and escalation paths tailored to how your business actually runs.",
+      icon: "grid" as const,
     },
     {
       title: "Activate",
       description:
         "We stand up monitoring or your desk, train agents, and prove the first week of live operations.",
+      icon: "rocket" as const,
     },
     {
       title: "Operate and improve",
       description:
         "Ongoing reporting, QA, and tuning so coverage and CSAT keep getting sharper over time.",
+      icon: "chart" as const,
     },
   ],
 };
 
 export const ctaBanner = {
   headline: "Ready for ops that feel modern?",
-  primary: { label: "Book a call", href: "#get-started" },
-  secondary: { label: "See services", href: "#services" },
+  primary: { label: "Book a call", href: "/#get-started" },
+  secondary: { label: "See services", href: "/#services" },
 };
 
 export const cybersecurity = {
-  id: "cybersecurity",
-  eyebrow: "Cybersecurity",
-  headline: "Detection and response without the noise.",
-  description:
-    "We monitor, investigate, and respond to threats across your environment so your team is not buried in alerts. Clear reporting, real remediation, no black box.",
-  services: [
-    {
-      title: "Managed Detection and Response",
-      description:
-        "Continuous monitoring across endpoints, network, and cloud, with human led investigation on every real alert.",
-    },
-    {
-      title: "Incident Response",
-      description:
-        "Rapid triage and containment when something goes wrong, with a clear timeline of what happened and what to fix.",
-    },
-    {
-      title: "Vulnerability Management",
-      description:
-        "Ongoing scanning and prioritization so you patch what attackers would actually use first.",
-    },
-    {
-      title: "Security Advisory",
-      description:
-        "Practical guidance on hardening your stack, tooling choices, and compliance readiness. No upsell, just advice.",
-    },
-  ],
   leadForm: {
     id: "security-lead",
     heading: "Talk to a security specialist",
@@ -222,33 +312,6 @@ export const cybersecurity = {
 };
 
 export const customerService = {
-  id: "customer-service",
-  eyebrow: "Customer Care",
-  headline: "Support that feels like an extension of your team.",
-  description:
-    "We design and run customer support operations that protect your reputation the same way we protect your network: proactively, with clear accountability.",
-  services: [
-    {
-      title: "Managed Support Desk",
-      description:
-        "Trained agents handling tickets, chat, and calls under your brand, with response time targets you set.",
-    },
-    {
-      title: "CX Process Design",
-      description:
-        "We map your support workflows and fix the friction points before they become churn.",
-    },
-    {
-      title: "Escalation and QA",
-      description:
-        "A structured escalation path and quality review process, so nothing important slips through.",
-    },
-    {
-      title: "Support Analytics",
-      description:
-        "Clear reporting on volume, resolution time, and satisfaction so support becomes a visible asset, not a cost center.",
-    },
-  ],
   leadForm: {
     id: "support-lead",
     heading: "Talk to a customer care specialist",
@@ -260,45 +323,47 @@ export const customerService = {
 
 export const formFlow = {
   steps: [
-    {
-      key: "support" as const,
-      nextLabel: "Want to secure your business?",
-      nextHint: "Jump to cybersecurity",
-    },
-    {
-      key: "security" as const,
-      nextLabel: "Still unsure?",
-      nextHint: "Send a general note",
-    },
-    {
-      key: "general" as const,
-      nextLabel: null,
-      nextHint: null,
-    },
+    { key: "support" as const, nextLabel: "Want to secure your business?", nextHint: "Jump to cybersecurity" },
+    { key: "security" as const, nextLabel: "Still unsure?", nextHint: "Send a general note" },
+    { key: "general" as const, nextLabel: null, nextHint: null },
   ],
 };
 
 export const testimonials = {
-  eyebrow: "What clients say",
-  headline: "Trusted by operators and founders",
+  eyebrow: "Our customers",
+  headline: "Our success stories.",
+  subheadline:
+    "Operators and founders share how Saylware cut noise, steadied support, and made ops feel under control again.",
   items: [
     {
       quote:
         "They cut our alert queue down to what actually mattered. First vendor that felt like an extension of our team, not another dashboard.",
       name: "Jane Doe",
       role: "Head of IT, Example Co.",
+      rating: "5.0",
+      tags: ["Security", "MDR", "Noise down"],
+      type: "Business Types",
+      avatar: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=120&h=120&fit=crop&crop=face",
     },
     {
       quote:
         "Our support tickets stopped piling up and our CSAT went up in the first month. Reporting is genuinely useful, not just a vanity chart.",
       name: "John Smith",
       role: "COO, Example Retail",
+      rating: "5.0",
+      tags: ["Support", "CSAT", "Desk"],
+      type: "Business Types",
+      avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=120&h=120&fit=crop&crop=face",
     },
     {
       quote:
         "Straightforward, responsive, and they explain things in plain language instead of jargon. Exactly what a growing company needs.",
       name: "Amina Raza",
       role: "Founder, Example Startup",
+      rating: "5.0",
+      tags: ["Advisory", "Clarity", "Growth"],
+      type: "Business Types",
+      avatar: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=120&h=120&fit=crop&crop=face",
     },
   ],
 };
@@ -312,25 +377,64 @@ export const contact = {
   formspreeId: "xeeybvzn",
 };
 
+export const careers = {
+  eyebrow: "Career",
+  headline: "Work with us",
+  filters: ["All Roles", "Remote", "On-site"],
+  roles: [
+    { title: "Security Analyst", type: "Full Time", location: "Remote / Hybrid", department: "Security" },
+    { title: "Support Lead", type: "Full Time", location: "On-site / Hybrid", department: "Customer Care" },
+    { title: "CX Specialist", type: "Full Time", location: "Remote", department: "Customer Care" },
+    { title: "Threat Hunter", type: "Full Time", location: "Remote", department: "Security" },
+    { title: "Operations Coordinator", type: "Full Time", location: "Hybrid", department: "Ops" },
+  ],
+  perks: [
+    {
+      title: "Flexible hours",
+      description: "Shift patterns that respect deep work and life outside the queue.",
+      icon: "clock" as const,
+    },
+    {
+      title: "Learning budget",
+      description: "Certs, courses, and conference slots so you keep leveling up.",
+      icon: "book" as const,
+    },
+    {
+      title: "Health coverage",
+      description: "Solid medical support for you and your household where we operate.",
+      icon: "heart" as const,
+    },
+    {
+      title: "Clear growth",
+      description: "Named ladders for analysts, agents, and leads. No mystery promotions.",
+      icon: "trend" as const,
+    },
+  ],
+  values: [
+    { num: "01", title: "We are principled", body: "Say the hard thing early. Protect the customer and the truth." },
+    { num: "02", title: "We are bold", body: "Ship improvements, own mistakes, and keep raising the bar." },
+    { num: "03", title: "We stay calm", body: "Incidents and angry tickets need composure, not chaos." },
+    { num: "04", title: "We teach", body: "Document, coach, and leave the next person better set up." },
+  ],
+};
+
 export const footer = {
   companyDescription:
     "Saylware provides managed cybersecurity and customer care operations for growing businesses.",
   columns: [
     {
       heading: "Cybersecurity",
-      links: [
-        { label: "Managed Detection and Response", href: "#cybersecurity" },
-        { label: "Incident Response", href: "#cybersecurity" },
-        { label: "Vulnerability Management", href: "#cybersecurity" },
-      ],
+      links: serviceCatalog
+        .filter((s) => s.facet === "security")
+        .slice(0, 3)
+        .map((s) => ({ label: s.title, href: `/services/${s.slug}` })),
     },
     {
       heading: "Customer Care",
-      links: [
-        { label: "Managed Support Desk", href: "#customer-service" },
-        { label: "CX Process Design", href: "#customer-service" },
-        { label: "Support Analytics", href: "#customer-service" },
-      ],
+      links: serviceCatalog
+        .filter((s) => s.facet === "support")
+        .slice(0, 3)
+        .map((s) => ({ label: s.title, href: `/services/${s.slug}` })),
     },
   ],
   socials: [
@@ -339,3 +443,7 @@ export const footer = {
   ],
   copyright: `© ${new Date().getFullYear()} Saylware. All rights reserved.`,
 };
+
+export function getServiceBySlug(slug: string) {
+  return serviceCatalog.find((s) => s.slug === slug);
+}

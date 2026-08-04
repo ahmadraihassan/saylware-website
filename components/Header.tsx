@@ -8,55 +8,45 @@ export default function Header() {
   const [open, setOpen] = useState(false);
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 12);
+    const onScroll = () => setScrolled(window.scrollY > 10);
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
   return (
-    <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-400 ${
-        scrolled ? "px-3 sm:px-5 pt-3" : "px-0 pt-0"
-      }`}
-    >
+    <header className={`fixed top-0 inset-x-0 z-50 transition-all duration-300 ${scrolled ? "px-3 sm:px-4 pt-3" : ""}`}>
       <div
-        className={`mx-auto max-w-7xl transition-all duration-400 ${
+        className={`mx-auto max-w-7xl w-full flex items-center justify-between gap-4 transition-all duration-300 ${
           scrolled
-            ? "bg-white/90 backdrop-blur-xl border border-[var(--border)] shadow-lg shadow-black/5 rounded-full px-5 sm:px-7 h-14"
-            : "bg-transparent px-5 sm:px-8 h-18 sm:h-20"
-        } flex items-center justify-between`}
+            ? "glass-strong rounded-full h-14 px-4 sm:px-6 shadow-lg shadow-black/30"
+            : "h-16 sm:h-20 px-4 sm:px-6 lg:px-8"
+        }`}
       >
-        <a href="#" className="flex items-center gap-2.5 shrink-0">
-          <span className="w-8 h-8 rounded-xl bg-[var(--ink)] text-[var(--lime)] flex items-center justify-center font-display font-bold text-sm">
+        <a href="/" className="flex items-center gap-2.5 shrink-0">
+          <span className="w-8 h-8 rounded-xl bg-[var(--ink)] text-[var(--bg)] flex items-center justify-center font-display font-bold text-sm">
             S
           </span>
-          <span className="font-display text-[15px] font-bold tracking-tight text-[var(--ink)]">
-            {nav.logoText}
-          </span>
+          <span className="font-display text-[15px] font-bold tracking-tight">{nav.logoText}</span>
         </a>
 
-        <nav className="hidden lg:flex items-center gap-7">
+        <nav className="hidden lg:flex items-center gap-6 xl:gap-7">
           {nav.links.map((link) => (
-            <a
-              key={link.label}
-              href={link.href}
-              className="nav-link text-[13px] font-medium text-[var(--ink-soft)] hover:text-[var(--ink)] transition-colors"
-            >
+            <a key={link.label} href={link.href} className="nav-link text-[13px] font-medium text-[var(--ink-soft)] hover:text-[var(--ink)]">
               {link.label}
             </a>
           ))}
         </nav>
 
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-2 sm:gap-3">
           <a
             href={nav.actions[0].href}
-            className="hidden sm:inline-flex rounded-full bg-[var(--ink)] text-white text-[13px] font-semibold px-5 py-2.5 hover:bg-[var(--purple)] transition-colors duration-300"
+            className="hidden sm:inline-flex rounded-full bg-[var(--ink)] text-[var(--bg)] text-[13px] font-semibold px-4 sm:px-5 py-2.5 hover:bg-[var(--accent)] hover:text-[var(--bg)] transition-colors"
           >
             {nav.actions[0].label}
           </a>
           <button
             type="button"
-            className="lg:hidden w-10 h-10 rounded-full border border-[var(--border)] bg-white flex items-center justify-center"
+            className="lg:hidden w-10 h-10 rounded-full glass flex items-center justify-center"
             aria-label="Open menu"
             onClick={() => setOpen((v) => !v)}
           >
@@ -72,20 +62,11 @@ export default function Header() {
       {open && (
         <div className="lg:hidden mx-3 mt-2 soft-shell p-5 space-y-3">
           {nav.links.map((link) => (
-            <a
-              key={link.label}
-              href={link.href}
-              className="block text-sm text-[var(--ink-soft)]"
-              onClick={() => setOpen(false)}
-            >
+            <a key={link.label} href={link.href} className="block text-sm text-[var(--ink-soft)]" onClick={() => setOpen(false)}>
               {link.label}
             </a>
           ))}
-          <a
-            href={nav.actions[0].href}
-            className="inline-flex rounded-full bg-[var(--ink)] text-white text-sm font-semibold px-5 py-2.5"
-            onClick={() => setOpen(false)}
-          >
+          <a href={nav.actions[0].href} className="inline-flex rounded-full bg-[var(--ink)] text-[var(--bg)] text-sm font-semibold px-5 py-2.5" onClick={() => setOpen(false)}>
             {nav.actions[0].label}
           </a>
         </div>
