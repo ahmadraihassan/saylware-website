@@ -2,7 +2,7 @@
 
 import { useState, FormEvent } from "react";
 
-type Track = "security" | "support";
+type Track = "security" | "support" | "general";
 
 export default function LeadForm({
   id,
@@ -11,19 +11,21 @@ export default function LeadForm({
   subheading,
   submitLabel,
   track,
+  compact = false,
 }: {
-  id: string;
+  id?: string;
   formspreeId: string;
   heading: string;
   subheading: string;
   submitLabel: string;
   track: Track;
+  compact?: boolean;
 }) {
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
-  const accent = track === "security" ? "var(--signal-security)" : "var(--signal-support)";
-  const accentDim = track === "security" ? "var(--signal-security-dim)" : "var(--signal-support-dim)";
-  const gradient = track === "security" ? "var(--gradient-security)" : "var(--gradient-support)";
   const notConfigured = formspreeId.startsWith("REPLACE_WITH");
+
+  const funnel =
+    track === "security" ? "Cybersecurity" : track === "support" ? "Customer Service" : "General";
 
   async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -34,7 +36,7 @@ export default function LeadForm({
     setStatus("loading");
     const form = e.currentTarget;
     const data = new FormData(form);
-    data.append("funnel", track === "security" ? "Cybersecurity" : "Customer Service");
+    data.append("funnel", funnel);
 
     try {
       const res = await fetch(`https://formspree.io/f/${formspreeId}`, {
@@ -54,94 +56,99 @@ export default function LeadForm({
   }
 
   return (
-    <div
-      id={id}
-      className="relative rounded-[1.75rem] p-7 sm:p-10 overflow-hidden bg-[var(--bg-card)] border border-white/[0.06] scroll-mt-28"
-    >
-      <div className="absolute top-0 left-0 right-0 h-[2px]" style={{ background: gradient }} />
-
+    <div id={id} className={compact ? "" : "scroll-mt-28"}>
       <h3 className="font-display text-2xl sm:text-3xl font-bold text-[var(--ink)]">{heading}</h3>
-      <p className="mt-3 text-sm text-[var(--ink-soft)]">{subheading}</p>
+      <p className="mt-2 text-sm text-[var(--ink-soft)]">{subheading}</p>
 
       {status === "success" ? (
-        <div
-          className="mt-8 rounded-2xl px-6 py-5 text-sm font-medium border"
-          style={{ background: accentDim, borderColor: accent, color: accent }}
-        >
-          Thanks — your message is in. We&apos;ll be in touch within one business day.
+        <div className="mt-8 rounded-2xl px-6 py-5 text-sm font-medium bg-[var(--mint)] text-[var(--ink)] border border-[var(--border)]">
+          Thanks. Your message is in. We will be in touch within one business day.
         </div>
       ) : (
-        <form onSubmit={handleSubmit} className="mt-8 grid grid-cols-1 sm:grid-cols-2 gap-5">
-          <div>
-            <label className="block text-[11px] font-medium mb-2 text-[var(--ink-muted)] uppercase tracking-wider">
-              Full name
-            </label>
-            <input
-              name="name"
-              type="text"
-              required
-              className="w-full rounded-2xl border border-white/10 px-4 py-3.5 text-sm bg-[var(--bg-elevated)] text-[var(--ink)] placeholder:text-[var(--ink-muted)] outline-none"
-              placeholder="John Doe"
-            />
+        <form onSubmit={handleSubmit} className="mt-7 space-y-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div>
+              <label className="block text-[11px] font-medium mb-1.5 text-[var(--ink-muted)] uppercase tracking-wider">
+                Full name
+              </label>
+              <input
+                name="name"
+                type="text"
+                required
+                className="w-full rounded-2xl border border-[var(--border)] px-4 py-3 text-sm bg-[var(--bg-soft)] text-[var(--ink)] placeholder:text-[var(--ink-muted)] outline-none"
+                placeholder="John Doe"
+              />
+            </div>
+            <div>
+              <label className="block text-[11px] font-medium mb-1.5 text-[var(--ink-muted)] uppercase tracking-wider">
+                Work email
+              </label>
+              <input
+                name="email"
+                type="email"
+                required
+                className="w-full rounded-2xl border border-[var(--border)] px-4 py-3 text-sm bg-[var(--bg-soft)] text-[var(--ink)] placeholder:text-[var(--ink-muted)] outline-none"
+                placeholder="john@company.com"
+              />
+            </div>
           </div>
+
+          {track !== "general" && (
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div>
+                <label className="block text-[11px] font-medium mb-1.5 text-[var(--ink-muted)] uppercase tracking-wider">
+                  Company
+                </label>
+                <input
+                  name="company"
+                  type="text"
+                  className="w-full rounded-2xl border border-[var(--border)] px-4 py-3 text-sm bg-[var(--bg-soft)] text-[var(--ink)] placeholder:text-[var(--ink-muted)] outline-none"
+                  placeholder="Acme Inc."
+                />
+              </div>
+              <div>
+                <label className="block text-[11px] font-medium mb-1.5 text-[var(--ink-muted)] uppercase tracking-wider">
+                  Phone (optional)
+                </label>
+                <input
+                  name="phone"
+                  type="tel"
+                  className="w-full rounded-2xl border border-[var(--border)] px-4 py-3 text-sm bg-[var(--bg-soft)] text-[var(--ink)] placeholder:text-[var(--ink-muted)] outline-none"
+                  placeholder="+1 (555) 000-0000"
+                />
+              </div>
+            </div>
+          )}
+
           <div>
-            <label className="block text-[11px] font-medium mb-2 text-[var(--ink-muted)] uppercase tracking-wider">
-              Work email
-            </label>
-            <input
-              name="email"
-              type="email"
-              required
-              className="w-full rounded-2xl border border-white/10 px-4 py-3.5 text-sm bg-[var(--bg-elevated)] text-[var(--ink)] placeholder:text-[var(--ink-muted)] outline-none"
-              placeholder="john@company.com"
-            />
-          </div>
-          <div>
-            <label className="block text-[11px] font-medium mb-2 text-[var(--ink-muted)] uppercase tracking-wider">
-              Company
-            </label>
-            <input
-              name="company"
-              type="text"
-              className="w-full rounded-2xl border border-white/10 px-4 py-3.5 text-sm bg-[var(--bg-elevated)] text-[var(--ink)] placeholder:text-[var(--ink-muted)] outline-none"
-              placeholder="Acme Inc."
-            />
-          </div>
-          <div>
-            <label className="block text-[11px] font-medium mb-2 text-[var(--ink-muted)] uppercase tracking-wider">
-              Phone (optional)
-            </label>
-            <input
-              name="phone"
-              type="tel"
-              className="w-full rounded-2xl border border-white/10 px-4 py-3.5 text-sm bg-[var(--bg-elevated)] text-[var(--ink)] placeholder:text-[var(--ink-muted)] outline-none"
-              placeholder="+1 (555) 000-0000"
-            />
-          </div>
-          <div className="sm:col-span-2">
-            <label className="block text-[11px] font-medium mb-2 text-[var(--ink-muted)] uppercase tracking-wider">
-              What do you need help with?
+            <label className="block text-[11px] font-medium mb-1.5 text-[var(--ink-muted)] uppercase tracking-wider">
+              {track === "general" ? "Message" : "What do you need help with?"}
             </label>
             <textarea
               name="message"
-              rows={4}
-              className="w-full rounded-2xl border border-white/10 px-4 py-3.5 text-sm bg-[var(--bg-elevated)] text-[var(--ink)] placeholder:text-[var(--ink-muted)] outline-none resize-none"
-              placeholder="Tell us about your environment..."
+              rows={track === "general" ? 4 : 3}
+              required={track === "general"}
+              className="w-full rounded-2xl border border-[var(--border)] px-4 py-3 text-sm bg-[var(--bg-soft)] text-[var(--ink)] placeholder:text-[var(--ink-muted)] outline-none resize-none"
+              placeholder={
+                track === "general"
+                  ? "How can we help you?"
+                  : "Tell us about your environment or support needs..."
+              }
             />
           </div>
-          <div className="sm:col-span-2 flex items-center justify-between gap-4 flex-wrap">
+
+          <div className="flex items-center justify-between gap-4 flex-wrap pt-1">
             <button
               type="submit"
               disabled={status === "loading"}
-              className="rounded-full px-7 py-3.5 text-sm font-semibold text-[var(--bg)] transition-all duration-300 hover:scale-[1.02] disabled:opacity-60"
-              style={{ background: gradient }}
+              className="rounded-full px-7 py-3.5 text-sm font-bold text-[var(--ink)] transition-all duration-300 hover:scale-[1.02] disabled:opacity-60 bg-[var(--lime)] shadow-lg shadow-[var(--lime)]/25"
             >
               {status === "loading" ? "Sending…" : submitLabel}
             </button>
             {status === "error" && (
-              <p className="text-xs text-red-400">
+              <p className="text-xs text-red-500">
                 {notConfigured
-                  ? "Form isn't connected yet — add your Formspree ID in lib/content.ts."
+                  ? "Form is not connected yet. Add your Formspree ID in lib/content.ts."
                   : "Something went wrong. Please try again or email us directly."}
               </p>
             )}

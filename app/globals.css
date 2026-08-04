@@ -1,33 +1,44 @@
 @import "tailwindcss";
 
 :root {
-  --bg: #0a0a0b;
-  --bg-elevated: #111113;
-  --bg-card: #161618;
-  --bg-card-hover: #1c1c1f;
-  --ink: #f4f4f5;
-  --ink-soft: #a1a1aa;
-  --ink-muted: #71717a;
-  --border: rgba(255, 255, 255, 0.06);
-  --border-strong: rgba(255, 255, 255, 0.12);
+  --bg: #f4f5f7;
+  --bg-elevated: #ffffff;
+  --bg-card: #ffffff;
+  --bg-soft: #eef0f4;
+  --ink: #111118;
+  --ink-soft: #5c5c6a;
+  --ink-muted: #9a9aa8;
+  --border: rgba(17, 17, 24, 0.08);
+  --border-strong: rgba(17, 17, 24, 0.14);
 
-  --accent: #ff6b2c;
-  --accent-dim: rgba(255, 107, 44, 0.14);
-  --signal-security: #2dd4a8;
-  --signal-security-dim: rgba(45, 212, 168, 0.12);
-  --signal-support: #5b9fff;
-  --signal-support-dim: rgba(91, 159, 255, 0.12);
+  --lime: #c6f24a;
+  --lime-deep: #9fd412;
+  --lime-dim: rgba(198, 242, 74, 0.28);
+  --purple: #7b5cff;
+  --purple-soft: #a78bfa;
+  --purple-dim: rgba(123, 92, 255, 0.14);
+  --mint: #d7f5ef;
+  --peach: #ffe8d6;
+  --lavender: #ebe4ff;
 
-  --gradient-security: linear-gradient(135deg, #2dd4a8 0%, #0d9488 100%);
-  --gradient-support: linear-gradient(135deg, #5b9fff 0%, #3b82f6 100%);
-  --gradient-accent: linear-gradient(135deg, #ff6b2c 0%, #ea580c 100%);
+  --accent: var(--lime);
+  --accent-ink: #111118;
+  --accent-dim: var(--lime-dim);
+  --signal-security: var(--purple);
+  --signal-security-dim: var(--purple-dim);
+  --signal-support: #3ecf8e;
+  --signal-support-dim: rgba(62, 207, 142, 0.14);
+
+  --gradient-security: linear-gradient(135deg, #7b5cff 0%, #5b3fd4 100%);
+  --gradient-support: linear-gradient(135deg, #c6f24a 0%, #9fd412 100%);
+  --gradient-accent: linear-gradient(135deg, #c6f24a 0%, #b4e834 100%);
 
   --font-display: var(--font-syne);
   --font-body: var(--font-outfit);
   --font-mono: var(--font-ibm-plex-mono);
 
   --radius-xl: 1.75rem;
-  --radius-2xl: 2.25rem;
+  --radius-2xl: 2.5rem;
 }
 
 @theme inline {
@@ -38,8 +49,8 @@
   --color-ink-soft: var(--ink-soft);
   --color-ink-muted: var(--ink-muted);
   --color-border: var(--border);
-  --color-border-strong: var(--border-strong);
-  --color-accent: var(--accent);
+  --color-lime: var(--lime);
+  --color-purple: var(--purple);
   --color-security: var(--signal-security);
   --color-support: var(--signal-support);
   --font-display: var(--font-display);
@@ -53,7 +64,7 @@
 
 html {
   scrollbar-width: thin;
-  scrollbar-color: rgba(255, 107, 44, 0.35) var(--bg);
+  scrollbar-color: rgba(123, 92, 255, 0.35) var(--bg);
 }
 
 body {
@@ -66,8 +77,8 @@ body {
 }
 
 ::selection {
-  background: rgba(255, 107, 44, 0.28);
-  color: #fff;
+  background: rgba(198, 242, 74, 0.45);
+  color: var(--ink);
 }
 
 .font-display {
@@ -78,13 +89,19 @@ body {
   font-family: var(--font-mono);
 }
 
-/* —— Scroll reveal —— */
+/* Soft shell like Lume */
+.soft-shell {
+  background: var(--bg-elevated);
+  border-radius: var(--radius-2xl);
+  box-shadow: 0 20px 60px -28px rgba(17, 17, 24, 0.18);
+}
+
 .reveal {
   opacity: 0;
-  transform: translateY(28px);
+  transform: translateY(24px);
   transition:
-    opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
-    transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.75s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .reveal.is-visible {
@@ -94,10 +111,10 @@ body {
 
 .reveal-left {
   opacity: 0;
-  transform: translateX(-32px);
+  transform: translateX(-28px);
   transition:
-    opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
-    transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.75s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .reveal-left.is-visible {
@@ -107,10 +124,10 @@ body {
 
 .reveal-right {
   opacity: 0;
-  transform: translateX(32px);
+  transform: translateX(28px);
   transition:
-    opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
-    transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.75s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .reveal-right.is-visible {
@@ -122,87 +139,13 @@ body {
   opacity: 0;
   transform: scale(0.96);
   transition:
-    opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1),
-    transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+    opacity 0.85s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.85s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .reveal-scale.is-visible {
   opacity: 1;
   transform: scale(1);
-}
-
-/* —— Notched media frame —— */
-.notch-frame {
-  position: relative;
-  border-radius: var(--radius-2xl);
-  overflow: hidden;
-  isolation: isolate;
-}
-
-.notch-frame::before,
-.notch-frame::after {
-  content: "";
-  position: absolute;
-  z-index: 2;
-  background: var(--bg);
-  pointer-events: none;
-}
-
-.notch-frame::before {
-  top: -1px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 88px;
-  height: 28px;
-  border-radius: 0 0 18px 18px;
-}
-
-.notch-frame::after {
-  bottom: -1px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 88px;
-  height: 28px;
-  border-radius: 18px 18px 0 0;
-}
-
-.notch-side-left,
-.notch-side-right {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 28px;
-  height: 88px;
-  background: var(--bg);
-  z-index: 2;
-  pointer-events: none;
-}
-
-.notch-side-left {
-  left: -1px;
-  border-radius: 0 18px 18px 0;
-}
-
-.notch-side-right {
-  right: -1px;
-  border-radius: 18px 0 0 18px;
-}
-
-/* —— Hotspot pulse —— */
-@keyframes hotspot-pulse {
-  0% {
-    box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.55);
-  }
-  70% {
-    box-shadow: 0 0 0 18px rgba(255, 255, 255, 0);
-  }
-  100% {
-    box-shadow: 0 0 0 0 rgba(255, 255, 255, 0);
-  }
-}
-
-.hotspot-dot {
-  animation: hotspot-pulse 2.2s ease-out infinite;
 }
 
 @keyframes float-y {
@@ -211,7 +154,7 @@ body {
     transform: translateY(0);
   }
   50% {
-    transform: translateY(-10px);
+    transform: translateY(-12px);
   }
 }
 
@@ -219,7 +162,58 @@ body {
   animation: float-y 5.5s ease-in-out infinite;
 }
 
-/* —— Nav underline —— */
+@keyframes float-rotate {
+  0%,
+  100% {
+    transform: translateY(0) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-14px) rotate(6deg);
+  }
+}
+
+.animate-float-rotate {
+  animation: float-rotate 7s ease-in-out infinite;
+}
+
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-marquee {
+  animation: marquee 28s linear infinite;
+}
+
+@keyframes blob-pulse {
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 0.55;
+  }
+  50% {
+    transform: scale(1.08);
+    opacity: 0.8;
+  }
+}
+
+.animate-blob {
+  animation: blob-pulse 8s ease-in-out infinite;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: 0% 50%;
+  }
+  100% {
+    background-position: 100% 50%;
+  }
+}
+
 .nav-link {
   position: relative;
 }
@@ -228,10 +222,11 @@ body {
   content: "";
   position: absolute;
   left: 0;
-  bottom: -4px;
+  bottom: -3px;
   width: 100%;
-  height: 1px;
-  background: var(--ink);
+  height: 2px;
+  background: var(--lime);
+  border-radius: 999px;
   transform: scaleX(0);
   transform-origin: right;
   transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
@@ -242,7 +237,11 @@ body {
   transform-origin: left;
 }
 
-/* —— Forms —— */
+.dot-field {
+  background-image: radial-gradient(rgba(17, 17, 24, 0.08) 1.2px, transparent 1.2px);
+  background-size: 22px 22px;
+}
+
 input,
 textarea,
 select {
@@ -255,16 +254,16 @@ select {
 input:focus,
 textarea:focus,
 select:focus {
-  background-color: var(--bg-elevated) !important;
-  border-color: var(--accent) !important;
-  box-shadow: 0 0 0 3px var(--accent-dim) !important;
+  background-color: #fff !important;
+  border-color: var(--purple) !important;
+  box-shadow: 0 0 0 3px var(--purple-dim) !important;
 }
 
 a:focus-visible,
 button:focus-visible,
 input:focus-visible,
 textarea:focus-visible {
-  outline: 2px solid var(--accent);
+  outline: 2px solid var(--purple);
   outline-offset: 2px;
 }
 
@@ -276,13 +275,31 @@ textarea:focus-visible {
   scrollbar-width: none;
 }
 
+.form-slide-enter {
+  animation: form-in 0.45s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@keyframes form-in {
+  from {
+    opacity: 0;
+    transform: translateX(36px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .reveal,
   .reveal-left,
   .reveal-right,
   .reveal-scale,
-  .hotspot-dot,
-  .animate-float-y {
+  .animate-float-y,
+  .animate-float-rotate,
+  .animate-marquee,
+  .animate-blob,
+  .form-slide-enter {
     animation: none !important;
     transition: none !important;
     opacity: 1 !important;

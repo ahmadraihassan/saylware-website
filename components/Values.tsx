@@ -2,10 +2,10 @@ import { values } from "@/lib/content";
 import Reveal from "./Reveal";
 
 const toneBg: Record<(typeof values.items)[number]["tone"], string> = {
-  amber: "bg-[#2a2418] hover:bg-[#322b1c]",
-  sky: "bg-[#15202b] hover:bg-[#1a2836]",
-  peach: "bg-[#2a1f1c] hover:bg-[#332521]",
-  rose: "bg-[#261820] hover:bg-[#2f1e28]",
+  lavender: "bg-[var(--lavender)]",
+  mint: "bg-[var(--mint)]",
+  peach: "bg-[var(--peach)]",
+  lime: "bg-[var(--lime)]/70",
 };
 
 function IconRays() {
@@ -30,10 +30,10 @@ function IconRays() {
 
 export default function Values() {
   return (
-    <section className="relative py-20 sm:py-28 px-5 sm:px-8">
+    <section className="relative py-16 sm:py-24 px-4 sm:px-6">
       <div className="mx-auto max-w-7xl">
         <Reveal>
-          <h2 className="font-display text-3xl sm:text-4xl md:text-5xl font-light tracking-tight text-center text-[var(--ink)] mb-12 sm:mb-16">
+          <h2 className="font-display text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-center text-[var(--ink)] mb-10 sm:mb-14">
             {values.headline}
           </h2>
         </Reveal>
@@ -42,7 +42,7 @@ export default function Values() {
           {values.items.map((item, i) => (
             <Reveal key={item.title} delay={i * 80}>
               <article
-                className={`h-full rounded-[1.75rem] p-6 sm:p-7 transition-all duration-400 hover:-translate-y-1 ${toneBg[item.tone]}`}
+                className={`h-full rounded-[1.75rem] p-6 sm:p-7 transition-all duration-400 hover:-translate-y-1.5 hover:shadow-xl hover:shadow-black/5 ${toneBg[item.tone]}`}
               >
                 <IconRays />
                 <h3 className="mt-10 font-display text-lg font-semibold tracking-tight text-[var(--ink)]">

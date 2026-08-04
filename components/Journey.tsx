@@ -15,8 +15,8 @@ export default function Journey() {
   }
 
   return (
-    <section id="journey" className="relative py-20 sm:py-28 overflow-hidden">
-      <div className="px-5 sm:px-8 mx-auto max-w-7xl mb-10 sm:mb-14">
+    <section id="journey" className="relative py-16 sm:py-24 overflow-hidden">
+      <div className="px-4 sm:px-6 mx-auto max-w-7xl mb-10 sm:mb-12">
         <Reveal>
           <h2 className="font-display text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-center text-[var(--ink)]">
             {journey.headline}
@@ -27,7 +27,7 @@ export default function Journey() {
       <Reveal variant="scale">
         <div
           ref={scroller}
-          className="flex gap-5 overflow-x-auto no-scrollbar snap-x snap-mandatory px-[max(1.25rem,calc((100vw-72rem)/2+1.25rem))] pb-4"
+          className="flex gap-4 overflow-x-auto no-scrollbar snap-x snap-mandatory px-[max(1rem,calc((100vw-72rem)/2+1rem))] pb-4"
           onScroll={() => {
             const root = scroller.current;
             if (!root) return;
@@ -50,31 +50,30 @@ export default function Journey() {
             <article
               key={step.title}
               onClick={() => goTo(i)}
-              className={`snap-center shrink-0 w-[min(86vw,420px)] rounded-[1.75rem] border p-7 sm:p-8 cursor-pointer transition-all duration-500 ${
+              className={`snap-center shrink-0 w-[min(86vw,400px)] rounded-[1.75rem] p-7 sm:p-8 cursor-pointer transition-all duration-500 border ${
                 active === i
-                  ? "bg-[var(--bg-card)] border-white/15 scale-100 shadow-2xl shadow-black/40"
-                  : "bg-[var(--bg-elevated)] border-white/[0.05] scale-[0.96] opacity-70"
+                  ? "bg-white border-[var(--border)] shadow-xl shadow-black/8 scale-100"
+                  : "bg-white/60 border-transparent scale-[0.96] opacity-75"
               }`}
             >
-              <p className="font-mono text-[11px] tracking-[0.2em] uppercase text-[var(--accent)]">
+              <p className="font-mono text-[11px] tracking-[0.2em] uppercase text-[var(--purple)]">
                 Step {String(i + 1).padStart(2, "0")}
               </p>
               <h3 className="mt-4 font-display text-2xl font-semibold tracking-tight text-[var(--ink)]">
                 {step.title}
               </h3>
-              <p className="mt-4 text-sm leading-relaxed text-[var(--ink-soft)]">
-                {step.description}
-              </p>
-              <div className="mt-10 h-36 rounded-2xl bg-gradient-to-br from-white/[0.06] to-transparent border border-white/[0.05] flex items-end p-4">
+              <p className="mt-4 text-sm leading-relaxed text-[var(--ink-soft)]">{step.description}</p>
+              <div className="mt-8 h-28 rounded-2xl overflow-hidden relative">
                 <div
-                  className="h-16 w-full rounded-xl opacity-80"
+                  className="absolute inset-0"
                   style={{
                     background:
                       i % 2 === 0
-                        ? "linear-gradient(135deg, rgba(255,107,44,0.35), transparent)"
-                        : "linear-gradient(135deg, rgba(45,212,168,0.3), transparent)",
+                        ? "linear-gradient(135deg, rgba(198,242,74,0.7), rgba(123,92,255,0.25))"
+                        : "linear-gradient(135deg, rgba(123,92,255,0.35), rgba(199,238,248,0.8))",
                   }}
                 />
+                <div className="absolute inset-0 dot-field opacity-40" />
               </div>
             </article>
           ))}
@@ -89,7 +88,7 @@ export default function Journey() {
             aria-label={`Go to step ${i + 1}`}
             onClick={() => goTo(i)}
             className={`h-1.5 rounded-full transition-all duration-300 ${
-              active === i ? "w-8 bg-[var(--accent)]" : "w-1.5 bg-white/20"
+              active === i ? "w-8 bg-[var(--purple)]" : "w-1.5 bg-[var(--ink)]/15"
             }`}
           />
         ))}

@@ -3,7 +3,7 @@ import Reveal from "./Reveal";
 
 function Stars() {
   return (
-    <div className="flex gap-1 text-[var(--accent)]" aria-label="5 star rating">
+    <div className="flex gap-1 text-[var(--purple)]" aria-label="5 star rating">
       {Array.from({ length: 5 }).map((_, i) => (
         <svg key={i} className="w-4 h-4" viewBox="0 0 16 16" fill="currentColor">
           <path d="M8 1.5l1.9 3.85 4.25.62-3.07 2.99.72 4.22L8 11.27 4.2 13.18l.72-4.22L1.85 5.97l4.25-.62L8 1.5z" />
@@ -20,7 +20,7 @@ function Avatar({ name }: { name: string }) {
     .join("")
     .slice(0, 2);
   return (
-    <div className="w-10 h-10 rounded-full bg-gradient-to-br from-[var(--accent)] to-[var(--signal-support)] flex items-center justify-center text-xs font-bold text-white">
+    <div className="w-10 h-10 rounded-full bg-gradient-to-br from-[var(--lime)] to-[var(--purple)] flex items-center justify-center text-xs font-bold text-[var(--ink)]">
       {initials}
     </div>
   );
@@ -28,10 +28,13 @@ function Avatar({ name }: { name: string }) {
 
 export default function Testimonials() {
   return (
-    <section id="testimonials" className="relative py-20 sm:py-28 px-5 sm:px-8">
+    <section id="testimonials" className="relative py-16 sm:py-24 px-4 sm:px-6">
       <div className="mx-auto max-w-7xl">
         <Reveal>
-          <h2 className="font-display text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-center text-[var(--ink)] mb-12 sm:mb-16">
+          <p className="text-center font-mono text-[11px] tracking-[0.2em] uppercase text-[var(--purple)] mb-3">
+            {testimonials.eyebrow}
+          </p>
+          <h2 className="font-display text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-center text-[var(--ink)] mb-10 sm:mb-14">
             {testimonials.headline}
           </h2>
         </Reveal>
@@ -39,7 +42,7 @@ export default function Testimonials() {
         <div className="grid md:grid-cols-3 gap-4 sm:gap-5">
           {testimonials.items.map((item, i) => (
             <Reveal key={item.name} delay={i * 100}>
-              <article className="h-full rounded-[1.75rem] bg-[var(--bg-card)] border border-white/[0.06] p-6 sm:p-7 flex flex-col transition-all duration-400 hover:-translate-y-1 hover:border-white/15">
+              <article className="h-full rounded-[1.75rem] bg-white border border-[var(--border)] p-6 sm:p-7 flex flex-col transition-all duration-400 hover:-translate-y-1.5 hover:shadow-xl hover:shadow-black/5">
                 <Stars />
                 <p className="mt-5 text-sm leading-relaxed text-[var(--ink-soft)] flex-1">
                   “{item.quote}”
