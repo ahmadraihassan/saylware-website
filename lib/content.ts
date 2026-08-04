@@ -2,40 +2,172 @@
  * ============================================================
  *  SAYLWARE — SITE CONTENT
  * ============================================================
- *  This is the ONLY file you should need to change for everyday
- *  updates: logo text, headlines, descriptions, testimonials,
- *  contact info, and form endpoints.
- *
- *  Edit the text between the quotes " " — don't touch anything
- *  else (commas, brackets, colons) or the site will break.
- *
- *  After editing, save the file and redeploy (see README.md).
+ *  Everyday edits live here: headlines, services, testimonials,
+ *  contact info, and Formspree IDs. Save and redeploy after changes.
  * ============================================================
  */
 
 export const site = {
   name: "Saylware",
   tagline: "Security operations and customer experience, run right.",
-  domain: "saylware.com", // update if different
+  domain: "saylware.com",
 };
 
 export const nav = {
   logoText: "Saylware",
   links: [
-    { label: "Cybersecurity", href: "#cybersecurity" },
-    { label: "Customer Service", href: "#customer-service" },
-    { label: "Testimonials", href: "#testimonials" },
-    { label: "Contact", href: "#contact" },
+    { label: "Home", href: "#" },
+    { label: "About", href: "#pillars" },
+    { label: "Services", href: "#services" },
+    { label: "Process", href: "#journey" },
+  ],
+  actions: [
+    { label: "Book a call", href: "#contact" },
+    { label: "Get started", href: "#security-lead" },
   ],
 };
 
 export const hero = {
-  eyebrow: "Two disciplines. One standard of care.",
-  headline: "We keep your business protected — and your customers heard.",
+  headlineLeft: "We protect what",
+  headlineRight: "growth depends on.",
   subheadline:
-    "Saylware runs the two functions every growing company underestimates: security operations and customer support. Pick one track below, or both.",
-  primaryCta: { label: "Talk to Security", href: "#security-lead" },
-  secondaryCta: { label: "Talk to Support", href: "#support-lead" },
+    "Saylware runs security operations and customer support with the same standard of care — so your systems stay safe and your customers stay heard.",
+  hotspot: {
+    title: "Active defense",
+    description: "24/7 monitoring with human-led investigation on every real alert.",
+    cta: "View more",
+    href: "#cybersecurity",
+  },
+  image:
+    "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=1600&h=1000&fit=crop",
+  imageAlt: "Secure operations center",
+};
+
+export const pillars = {
+  eyebrow: "What we stand for",
+  headline: "Reimagining operations with purpose",
+  description:
+    "Two specialist tracks. One operating standard. Built for teams that can't afford noise, downtime, or forgotten tickets.",
+  items: [
+    {
+      title: "Always on watch",
+      description:
+        "Continuous detection across endpoints, network, and cloud — with humans who know which alerts matter.",
+      tone: "amber" as const,
+    },
+    {
+      title: "Customers first",
+      description:
+        "Support desks that sound like your brand, hit your SLAs, and turn feedback into clearer product signal.",
+      tone: "sky" as const,
+    },
+    {
+      title: "Clear accountability",
+      description:
+        "Timelines, reporting, and escalation paths you can hand to leadership without translating jargon.",
+      tone: "peach" as const,
+    },
+  ],
+};
+
+export const signature = {
+  headline: "Our signature tracks",
+  security: {
+    id: "cybersecurity",
+    title: "CYBER DEFENSE",
+    tags: "Detection / Response / Advisory",
+    image:
+      "https://images.unsplash.com/photo-1563986768609-322da13575f3?w=900&h=1100&fit=crop",
+    badge: "SECURITY OPS",
+    cert: "SOC-ready",
+    cardTitle: "Managed Detection",
+    cardMeta: "Endpoints · Network · Cloud · IR",
+    highlight: "Coverage 24/7 — human triage",
+    metaLabel: "Target response",
+    metaValue: "< 15 min",
+    statusLabel: "Status",
+    statusValue: "Accepting clients",
+  },
+  support: {
+    id: "customer-service",
+    title: "CUSTOMER DESK",
+    tags: "Support / CX / Analytics",
+    image:
+      "https://images.unsplash.com/photo-1556761175-5973dc0f32e7?w=900&h=1100&fit=crop",
+    badge: "CX OPS",
+    cert: "Brand-aligned",
+    cardTitle: "Managed Support",
+    cardMeta: "Tickets · Chat · Voice · QA",
+    highlight: "SLA-backed desk under your brand",
+    metaLabel: "Typical ramp",
+    metaValue: "2–4 weeks",
+    statusLabel: "Status",
+    statusValue: "Accepting clients",
+  },
+};
+
+export const values = {
+  headline: "Where quality meets opportunity",
+  items: [
+    {
+      title: "Resilient systems",
+      description:
+        "Hardening, detection, and response designed so incidents stay small and recoverable.",
+      tone: "amber" as const,
+    },
+    {
+      title: "Smart operations",
+      description:
+        "Playbooks and tooling that cut noise so your team spends time on real decisions.",
+      tone: "sky" as const,
+    },
+    {
+      title: "Connected teams",
+      description:
+        "Security and support handoffs that keep context intact from alert to customer reply.",
+      tone: "peach" as const,
+    },
+    {
+      title: "Premium delivery",
+      description:
+        "Clear reporting, named owners, and no black-box vendors between you and the work.",
+      tone: "rose" as const,
+    },
+  ],
+};
+
+export const journey = {
+  headline: "The journey of partnership",
+  steps: [
+    {
+      title: "Discovery",
+      description:
+        "We map your stack, risks, and support volume so the engagement starts with clarity — not assumptions.",
+    },
+    {
+      title: "Design",
+      description:
+        "Playbooks, SLAs, tooling choices, and escalation paths tailored to how your business actually runs.",
+    },
+    {
+      title: "Activate",
+      description:
+        "We stand up monitoring or your desk, train agents, and prove the first week of live operations.",
+    },
+    {
+      title: "Operate & improve",
+      description:
+        "Ongoing reporting, QA, and tuning — so coverage and CSAT keep getting sharper over time.",
+    },
+  ],
+};
+
+export const ctaBanner = {
+  headline: "Invest in defenses that matter",
+  primary: { label: "Book a call", href: "#contact" },
+  secondary: { label: "Talk to security", href: "#security-lead" },
+  image:
+    "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=1600&h=900&fit=crop",
 };
 
 export const trustBar = {
@@ -47,9 +179,6 @@ export const trustBar = {
   ],
 };
 
-/* ------------------------------------------------------------ */
-/*  CYBERSECURITY TRACK                                          */
-/* ------------------------------------------------------------ */
 export const cybersecurity = {
   id: "cybersecurity",
   eyebrow: "Cybersecurity Services",
@@ -82,16 +211,11 @@ export const cybersecurity = {
     id: "security-lead",
     heading: "Talk to a security specialist",
     subheading: "Tell us about your environment. We'll follow up within one business day.",
-    // Replace with your Formspree form ID for the Cybersecurity funnel.
-    // Get this from https://formspree.io after creating a form.
     formspreeId: "xykrqlpb",
     submitLabel: "Request a security consult",
   },
 };
 
-/* ------------------------------------------------------------ */
-/*  CUSTOMER SERVICE TRACK                                       */
-/* ------------------------------------------------------------ */
 export const customerService = {
   id: "customer-service",
   eyebrow: "Customer Service Solutions",
@@ -124,18 +248,14 @@ export const customerService = {
     id: "support-lead",
     heading: "Talk to a customer experience specialist",
     subheading: "Tell us where your support operation needs help. We'll follow up within one business day.",
-    // Replace with your Formspree form ID for the Customer Service funnel.
     formspreeId: "xzdnlyvy",
     submitLabel: "Request a CX consult",
   },
 };
 
-/* ------------------------------------------------------------ */
-/*  TESTIMONIALS                                                 */
-/* ------------------------------------------------------------ */
 export const testimonials = {
-  eyebrow: "What clients say",
-  headline: "Trusted by teams who can't afford to guess.",
+  eyebrow: "Social proof",
+  headline: "Trusted by operators and founders",
   items: [
     {
       quote:
@@ -158,9 +278,6 @@ export const testimonials = {
   ],
 };
 
-/* ------------------------------------------------------------ */
-/*  CONTACT / FOOTER                                             */
-/* ------------------------------------------------------------ */
 export const contact = {
   eyebrow: "Get in touch",
   headline: "Not sure which track you need?",

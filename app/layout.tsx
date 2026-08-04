@@ -1,18 +1,18 @@
 import type { Metadata } from "next";
-import { Space_Grotesk, Inter, IBM_Plex_Mono } from "next/font/google";
+import { Syne, Outfit, IBM_Plex_Mono } from "next/font/google";
 import "./globals.css";
 import { site } from "@/lib/content";
 
-const spaceGrotesk = Space_Grotesk({
-  variable: "--font-space-grotesk",
+const syne = Syne({
+  variable: "--font-syne",
   subsets: ["latin"],
-  weight: ["500", "600", "700"],
+  weight: ["500", "600", "700", "800"],
 });
 
-const inter = Inter({
-  variable: "--font-inter",
+const outfit = Outfit({
+  variable: "--font-outfit",
   subsets: ["latin"],
-  weight: ["400", "500", "600"],
+  weight: ["300", "400", "500", "600", "700"],
 });
 
 const ibmPlexMono = IBM_Plex_Mono({
@@ -34,16 +34,14 @@ export default function RootLayout({
   return (
     <html lang="en" className="scroll-smooth">
       <body
-        className={`${spaceGrotesk.variable} ${inter.variable} ${ibmPlexMono.variable} antialiased bg-[#faf6f0] text-[#1c1917] selection:bg-[var(--signal-security)]/20 selection:text-[#1c1917] min-h-screen flex flex-col relative`}
+        className={`${syne.variable} ${outfit.variable} ${ibmPlexMono.variable} antialiased bg-[var(--bg)] text-[var(--ink)] selection:bg-[var(--accent)]/30 min-h-screen flex flex-col relative`}
       >
-        {/* Warm ambient gradient mesh */}
-        <div className="fixed inset-0 pointer-events-none z-0">
-          <div className="absolute top-0 left-1/4 w-[600px] h-[600px] rounded-full bg-[var(--signal-security)]/[0.04] blur-[160px]" />
-          <div className="absolute bottom-0 right-1/4 w-[500px] h-[500px] rounded-full bg-[var(--signal-support)]/[0.04] blur-[160px]" />
+        <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden">
+          <div className="absolute -top-32 left-1/4 w-[520px] h-[520px] rounded-full bg-[var(--accent)]/[0.07] blur-[140px]" />
+          <div className="absolute bottom-0 right-0 w-[480px] h-[480px] rounded-full bg-[var(--signal-support)]/[0.06] blur-[140px]" />
+          <div className="absolute top-1/2 left-0 w-[360px] h-[360px] rounded-full bg-[var(--signal-security)]/[0.05] blur-[120px]" />
         </div>
-
-        {/* Main Content */}
-        <div className="relative z-10 flex-1">{children}</div>
+        <div className="relative z-10 flex-1 flex flex-col">{children}</div>
       </body>
     </html>
   );

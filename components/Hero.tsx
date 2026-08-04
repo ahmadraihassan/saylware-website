@@ -1,62 +1,80 @@
 "use client";
 
+import { useState } from "react";
 import { hero } from "@/lib/content";
+import Reveal from "./Reveal";
 
 export default function Hero() {
+  const [hotspotOpen, setHotspotOpen] = useState(true);
+
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20" style={{ background: "var(--gradient-hero)" }}>
-      {/* Subtle dot pattern */}
-      <div className="absolute inset-0 dots-pattern opacity-50" />
-
-      {/* Floating decorative circles */}
-      <div className="absolute top-32 left-[8%] w-16 h-16 rounded-full bg-[var(--signal-security)]/10 animate-float" />
-      <div className="absolute top-48 right-[12%] w-24 h-24 rounded-full bg-[var(--signal-support)]/10 animate-float" style={{ animationDelay: "2s" }} />
-      <div className="absolute bottom-32 left-[15%] w-12 h-12 rounded-full bg-[#1c1917]/5 animate-float" style={{ animationDelay: "4s" }} />
-
-      <div className="relative mx-auto max-w-6xl px-6 text-center z-10">
-        <p className="eyebrow mb-8">{hero.eyebrow}</p>
-
-        <h1 className="font-display text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold tracking-tight leading-[1.05] text-[#1c1917]">
-          <span className="block">Secure What</span>
-          <span className="inline-flex items-center gap-4 justify-center flex-wrap">
-            <span>Matters</span>
-            {/* Ellipse image in headline */}
-            <span className="relative inline-block w-32 h-16 sm:w-48 sm:h-20 md:w-56 md:h-24 rounded-full overflow-hidden shadow-xl ring-4 ring-white/50">
-              <img
-                src="https://images.unsplash.com/photo-1563986768609-322da13575f3?w=400&h=200&fit=crop"
-                alt="Security"
-                className="w-full h-full object-cover"
-              />
-            </span>
-            <span>Most</span>
-          </span>
-        </h1>
-
-        <p className="mt-8 text-lg sm:text-xl leading-relaxed max-w-2xl mx-auto text-[#78716c]">
-          {hero.subheadline}
-        </p>
-
-        <div className="mt-12 flex flex-col sm:flex-row items-center justify-center gap-4">
-          <a
-            href="#services-security"
-            className="w-full sm:w-auto rounded-full px-10 py-4 text-sm font-bold text-white transition-all duration-300 hover:scale-105 hover:shadow-xl hover:shadow-[var(--signal-security)]/30"
-            style={{ background: "var(--gradient-security)" }}
-          >
-            Cybersecurity
-          </a>
-          <a
-            href="#services-support"
-            className="w-full sm:w-auto rounded-full px-10 py-4 text-sm font-bold text-[#1c1917] transition-all duration-300 hover:scale-105 border-2 border-[#1c1917]/10 hover:border-[var(--signal-support)] bg-white hover:bg-[var(--signal-support)]/5"
-          >
-            Customer Support
-          </a>
+    <section className="relative pt-28 sm:pt-32 pb-16 sm:pb-24 px-5 sm:px-8">
+      <div className="mx-auto max-w-7xl">
+        <div className="grid lg:grid-cols-[1.15fr_0.85fr] gap-8 lg:gap-16 items-end mb-10 sm:mb-14">
+          <Reveal>
+            <h1 className="font-display text-4xl sm:text-5xl md:text-6xl lg:text-[4.25rem] font-bold tracking-tight leading-[1.05] uppercase text-[var(--ink)]">
+              {hero.headlineLeft}
+              <br />
+              <span className="text-[var(--ink-soft)]">{hero.headlineRight}</span>
+            </h1>
+          </Reveal>
+          <Reveal delay={120} variant="right">
+            <p className="text-base sm:text-lg leading-relaxed text-[var(--ink-soft)] max-w-md lg:ml-auto lg:pb-2">
+              {hero.subheadline}
+            </p>
+          </Reveal>
         </div>
 
-        {/* Scroll indicator */}
-        <div className="mt-20 flex flex-col items-center gap-2 opacity-40">
-          <span className="text-[10px] font-mono uppercase tracking-widest text-[#a8a29e]">Scroll</span>
-          <div className="w-px h-8 bg-gradient-to-b from-[#a8a29e] to-transparent" />
-        </div>
+        <Reveal variant="scale" delay={80}>
+          <div className="notch-frame group relative aspect-[16/10] sm:aspect-[21/10] bg-[var(--bg-card)]">
+            <span className="notch-side-left" />
+            <span className="notch-side-right" />
+            <img
+              src={hero.image}
+              alt={hero.imageAlt}
+              className="absolute inset-0 w-full h-full object-cover transition-transform duration-[1.4s] cubic-bezier(0.16,1,0.3,1) group-hover:scale-[1.03]"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-black/20" />
+
+            {/* Hotspot */}
+            <div className="absolute left-[42%] top-[48%] z-10">
+              <button
+                type="button"
+                aria-label="Show highlight"
+                onClick={() => setHotspotOpen((v) => !v)}
+                className="relative w-4 h-4 rounded-full bg-white hotspot-dot cursor-pointer"
+              >
+                <span className="absolute inset-0 rounded-full bg-white/40 scale-150" />
+              </button>
+
+              <div
+                className={`absolute left-8 top-1/2 -translate-y-1/2 w-56 sm:w-64 transition-all duration-500 ${
+                  hotspotOpen
+                    ? "opacity-100 translate-x-0"
+                    : "opacity-0 -translate-x-3 pointer-events-none"
+                }`}
+              >
+                <div className="rounded-2xl bg-white/10 backdrop-blur-xl border border-white/15 p-4 shadow-2xl shadow-black/40">
+                  <p className="font-display text-sm font-semibold text-white">
+                    {hero.hotspot.title}
+                  </p>
+                  <p className="mt-1.5 text-xs leading-relaxed text-white/70">
+                    {hero.hotspot.description}
+                  </p>
+                  <a
+                    href={hero.hotspot.href}
+                    className="mt-3 inline-flex items-center gap-2 rounded-full bg-white text-[var(--bg)] text-xs font-semibold px-3.5 py-1.5 hover:bg-[var(--accent)] hover:text-white transition-colors"
+                  >
+                    {hero.hotspot.cta}
+                    <svg className="w-3 h-3" viewBox="0 0 12 12" fill="none">
+                      <path d="M2 6h8M7 3l3 3-3 3" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                    </svg>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </Reveal>
       </div>
     </section>
   );
