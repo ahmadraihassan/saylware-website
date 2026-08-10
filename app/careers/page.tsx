@@ -78,7 +78,7 @@ export default function CareersPage() {
                             {role.department}
                           </span>
                           <a
-                            href={`mailto:hello@saylware.com?subject=Application: ${encodeURIComponent(role.title)}`}
+                            href={`/careers/${role.slug}/apply`}
                             className="inline-flex rounded-full bg-[var(--accent)] text-[var(--bg)] px-5 py-2.5 text-sm font-bold hover:scale-[1.02] transition-transform"
                           >
                             Apply now
@@ -132,7 +132,7 @@ export default function CareersPage() {
                 ))}
               </div>
               <a
-                href="mailto:hello@saylware.com?subject=General application"
+                href="/careers/apply"
                 className="inline-flex self-start lg:self-end rounded-full bg-[var(--ink)] text-[var(--bg)] px-6 py-3 text-sm font-bold hover:bg-[var(--accent)] transition-colors"
               >
                 Apply Now!

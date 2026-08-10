@@ -24,6 +24,22 @@ const ibmPlexMono = IBM_Plex_Mono({
 export const metadata: Metadata = {
   title: `${site.name} · ${site.tagline}`,
   description: site.tagline,
+  icons: {
+    icon: [
+      { url: "/icon.png", sizes: "32x32", type: "image/png" },
+      { url: "/saylware-icon-192.png", sizes: "192x192", type: "image/png" },
+      { url: "/saylware-icon-512.png", sizes: "512x512", type: "image/png" },
+    ],
+    apple: [{ url: "/apple-icon.png", sizes: "180x180", type: "image/png" }],
+  },
+  openGraph: {
+    title: `${site.name} · ${site.tagline}`,
+    description: site.tagline,
+    url: `https://${site.domain}`,
+    siteName: site.name,
+    images: [{ url: "/saylware-mark.png", width: 512, height: 512, alt: site.name }],
+    type: "website",
+  },
 };
 
 export default function RootLayout({

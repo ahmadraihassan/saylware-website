@@ -413,8 +413,65 @@ export const careers = {
   eyebrow: "Career",
   headline: "Work with us",
   filters: ["All Roles", "Remote", "On-site"],
+  formspreeId: "xeeybvzn",
+  apply: {
+    title: "Apply now",
+    steps: [
+      {
+        id: "personal",
+        label: "Personal information",
+        description: "Share the basics so we can reach you.",
+      },
+      {
+        id: "preferences",
+        label: "Role preferences",
+        description: "Tell us how you want to work with us.",
+      },
+      {
+        id: "experience",
+        label: "Experience",
+        description: "Show us what you bring to the table.",
+      },
+    ],
+    workplaceOptions: [
+      {
+        value: "On-Site",
+        title: "On-Site",
+        description: "You work from our office or a client site.",
+      },
+      {
+        value: "Hybrid",
+        title: "Hybrid",
+        description: "Split time between office and remote.",
+      },
+      {
+        value: "Remote",
+        title: "Remote",
+        description: "Fully remote with clear overlap hours.",
+      },
+    ],
+    employmentOptions: [
+      {
+        value: "Full Time",
+        title: "Full Time",
+        description: "Standard full-time role with benefits.",
+      },
+      {
+        value: "Part Time",
+        title: "Part Time",
+        description: "Fewer hours, same bar for quality.",
+      },
+      {
+        value: "Contract",
+        title: "Contract",
+        description: "Fixed-scope or project-based engagement.",
+      },
+    ],
+    countries: ["Pakistan", "United States", "United Kingdom", "UAE", "Saudi Arabia", "Canada", "Other"],
+  },
   roles: [
     {
+      slug: "security-analyst",
       title: "Security Analyst",
       type: "Full Time",
       location: "Remote / Hybrid",
@@ -423,6 +480,7 @@ export const careers = {
         "Triage alerts, investigate incidents, and write clear findings for customer teams. You will work alongside senior hunters and own cases end to end.",
     },
     {
+      slug: "support-lead",
       title: "Support Lead",
       type: "Full Time",
       location: "On-site / Hybrid",
@@ -431,6 +489,7 @@ export const careers = {
         "Lead a pod of agents, coach quality, and keep SLAs honest. You bridge customers, product, and engineering when tickets need elevation.",
     },
     {
+      slug: "cx-specialist",
       title: "CX Specialist",
       type: "Full Time",
       location: "Remote",
@@ -439,6 +498,7 @@ export const careers = {
         "Handle chat, email, and voice under client brands. You turn messy tickets into calm resolutions and feed insights back to the account team.",
     },
     {
+      slug: "threat-hunter",
       title: "Threat Hunter",
       type: "Full Time",
       location: "Remote",
@@ -447,6 +507,7 @@ export const careers = {
         "Proactively hunt across customer environments, build detections, and partner with IR when something real shows up.",
     },
     {
+      slug: "operations-coordinator",
       title: "Operations Coordinator",
       type: "Full Time",
       location: "Hybrid",
@@ -522,3 +583,10 @@ export const footer = {
 export function getServiceBySlug(slug: string) {
   return serviceCatalog.find((s) => s.slug === slug);
 }
+
+export function getRoleBySlug(slug: string) {
+  return careers.roles.find((r) => r.slug === slug);
+}
+
+export type CareerRole = (typeof careers.roles)[number];
+
