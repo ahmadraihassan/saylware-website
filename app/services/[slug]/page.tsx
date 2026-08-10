@@ -3,6 +3,7 @@ import Link from "next/link";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import Reveal from "@/components/Reveal";
+import ServiceWidget from "@/components/ServiceWidget";
 import { getServiceBySlug, serviceCatalog } from "@/lib/content";
 
 export function generateStaticParams() {
@@ -46,11 +47,14 @@ export default async function ServicePage({
             </p>
           </Reveal>
 
-          <div className="mt-8 sm:mt-10 grid lg:grid-cols-[1.2fr_0.8fr] gap-4 sm:gap-5">
+          <div className="mt-8 sm:mt-10 grid lg:grid-cols-[1.15fr_0.85fr] gap-4 sm:gap-5">
             <Reveal variant="left">
-              <div className="relative rounded-2xl overflow-hidden min-h-[260px] sm:min-h-[360px] soft-shell">
-                <img src={service.image} alt="" className="absolute inset-0 w-full h-full object-cover" />
-                <div className="absolute inset-0 bg-gradient-to-t from-[var(--bg)]/70 to-transparent" />
+              <div className="relative rounded-2xl overflow-hidden min-h-[280px] sm:min-h-[360px] soft-shell">
+                <img src={service.image} alt="" className="absolute inset-0 w-full h-full object-cover opacity-50" />
+                <div className="absolute inset-0 bg-gradient-to-t from-[var(--bg)] via-[var(--bg)]/70 to-transparent" />
+                <div className="absolute inset-4 sm:inset-6 rounded-2xl border border-white/10 bg-[#14161c]/90 backdrop-blur-md overflow-hidden">
+                  <ServiceWidget slug={service.slug} />
+                </div>
               </div>
             </Reveal>
             <Reveal variant="right" delay={80}>
@@ -90,9 +94,13 @@ export default async function ServicePage({
               <h2 className="font-display text-2xl font-bold tracking-tight mb-5">Related services</h2>
               <div className="grid sm:grid-cols-3 gap-3 sm:gap-4">
                 {related.map((r) => (
-                  <Link key={r.slug} href={`/services/${r.slug}`} className="soft-shell overflow-hidden hover:ring-1 hover:ring-[var(--accent)]/30 transition-all">
-                    <div className="h-28 relative">
-                      <img src={r.image} alt="" className="absolute inset-0 w-full h-full object-cover" />
+                  <Link
+                    key={r.slug}
+                    href={`/services/${r.slug}`}
+                    className="soft-shell overflow-hidden hover:ring-1 hover:ring-[var(--accent)]/30 transition-all"
+                  >
+                    <div className="h-28 border-b border-white/8 bg-[#16181f]">
+                      <ServiceWidget slug={r.slug} compact />
                     </div>
                     <div className="p-4">
                       <h3 className="font-display text-sm font-semibold">{r.title}</h3>
