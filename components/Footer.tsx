@@ -15,6 +15,9 @@ export default function Footer() {
             <a href={`mailto:${contact.email}`} className="rounded-full glass px-5 py-3 text-sm text-center">
               {contact.email}
             </a>
+            <a href={`tel:${contact.phone.replace(/\s+/g, "")}`} className="rounded-full glass px-5 py-3 text-sm text-center">
+              {contact.phone}
+            </a>
             <a
               href="/#get-started"
               className="rounded-full bg-[var(--accent)] text-[var(--bg)] px-5 py-3 text-sm font-bold text-center"

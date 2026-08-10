@@ -404,8 +404,8 @@ export const contact = {
   eyebrow: "General inquiry",
   headline: "Still figuring out what you need?",
   description: "Send us a general note and we will point you to the right specialist.",
-  email: "hello@saylware.com",
-  phone: "+92 000 0000000",
+  email: "awaisu@saylware.com",
+  phone: "+1 9153402356",
   formspreeId: "xeeybvzn",
 };
 

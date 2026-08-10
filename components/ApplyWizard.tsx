@@ -279,7 +279,7 @@ export default function ApplyWizard({ role = null }: Props) {
                   </div>
                   <div>
                     <label className="block text-[11px] font-medium mb-1.5 text-[var(--ink-muted)]">Phone</label>
-                    <input name="phone" type="tel" required className={field} placeholder="+92 300 0000000" />
+                    <input name="phone" type="tel" required className={field} placeholder="+1 915 000 0000" />
                   </div>
                   <div>
                     <label className="block text-[11px] font-medium mb-1.5 text-[var(--ink-muted)]">City</label>
