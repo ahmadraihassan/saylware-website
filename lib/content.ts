@@ -25,13 +25,13 @@ export const nav = {
 export const hero = {
   headline: "Your operations stay sharp with Saylware.",
   subheadline:
-    "Advanced cybersecurity and customer support with a calm, capable touch. Reach us anytime — we are here when you need us.",
+    "Advanced cybersecurity and customer support with a calm, capable touch. When you are ready to talk, we are easy to reach.",
   primaryCta: { label: "Explore services", href: "/#services" },
-  bookCta: { label: "Reach us anytime", href: "/#get-started" },
+  bookCta: { label: "Get in touch", href: "/#get-started" },
   availability: {
-    label: "Always available",
-    headline: "Reach us anytime.",
-    body: "Security alerts and customer issues do not wait for business hours. Double down with a team that picks up when you need them.",
+    label: "Simple contact",
+    headline: "Talk when it suits you.",
+    body: "Share a question or an idea through our form, email, or phone. We reply during business hours and keep the conversation clear.",
   },
   images: {
     soc: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=800&h=1000&fit=crop",
