@@ -513,7 +513,7 @@ export const footer = {
     },
   ],
   socials: [
-    { label: "LinkedIn", href: "#" },
+    { label: "LinkedIn", href: "https://www.linkedin.com/company/saylware/" },
     { label: "X", href: "#" },
   ],
   copyright: `© ${new Date().getFullYear()} Saylware. All rights reserved.`,

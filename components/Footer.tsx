@@ -57,7 +57,13 @@ export default function Footer() {
           <span className="text-xs text-[var(--ink-muted)]">{footer.copyright}</span>
           <div className="flex gap-5">
             {footer.socials.map((s) => (
-              <a key={s.label} href={s.href} className="text-xs text-[var(--ink-muted)] hover:text-[var(--ink)] uppercase tracking-wider">
+              <a
+                key={s.label}
+                href={s.href}
+                target={s.href.startsWith("http") ? "_blank" : undefined}
+                rel={s.href.startsWith("http") ? "noopener noreferrer" : undefined}
+                className="text-xs text-[var(--ink-muted)] hover:text-[var(--ink)] uppercase tracking-wider"
+              >
                 {s.label}
               </a>
             ))}
