@@ -1,6 +1,6 @@
 "use client";
 
-import { FormEvent, useMemo, useState } from "react";
+import { FormEvent, useMemo, useState, type ReactNode } from "react";
 import Link from "next/link";
 import { careers, type CareerRole } from "@/lib/content";
 
@@ -10,6 +10,21 @@ type Props = {
 
 const field =
   "w-full rounded-xl border border-[var(--border)] px-3.5 py-3 text-sm bg-white/[0.03] text-[var(--ink)] placeholder:text-[var(--ink-muted)] outline-none";
+
+function FieldLabel({
+  children,
+  required = false,
+}: {
+  children: ReactNode;
+  required?: boolean;
+}) {
+  return (
+    <label className="block text-[11px] font-medium mb-1.5 text-[var(--ink-muted)]">
+      {children}
+      {required && <span className="text-[var(--accent)] ml-0.5" aria-hidden>*</span>}
+    </label>
+  );
+}
 
 function ChoiceCards({
   name,
@@ -266,27 +281,27 @@ export default function ApplyWizard({ role = null }: Props) {
                 </div>
                 <div className="grid sm:grid-cols-2 gap-4">
                   <div>
-                    <label className="block text-[11px] font-medium mb-1.5 text-[var(--ink-muted)]">First name</label>
+                    <FieldLabel required>First name</FieldLabel>
                     <input name="firstName" required className={field} placeholder="Enter first name" />
                   </div>
                   <div>
-                    <label className="block text-[11px] font-medium mb-1.5 text-[var(--ink-muted)]">Last name</label>
+                    <FieldLabel required>Last name</FieldLabel>
                     <input name="lastName" required className={field} placeholder="Enter last name" />
                   </div>
                   <div>
-                    <label className="block text-[11px] font-medium mb-1.5 text-[var(--ink-muted)]">Email</label>
+                    <FieldLabel required>Email</FieldLabel>
                     <input name="email" type="email" required className={field} placeholder="you@email.com" />
                   </div>
                   <div>
-                    <label className="block text-[11px] font-medium mb-1.5 text-[var(--ink-muted)]">Phone</label>
+                    <FieldLabel required>Phone</FieldLabel>
                     <input name="phone" type="tel" required className={field} placeholder="+1 915 000 0000" />
                   </div>
                   <div>
-                    <label className="block text-[11px] font-medium mb-1.5 text-[var(--ink-muted)]">City</label>
+                    <FieldLabel required>City</FieldLabel>
                     <input name="city" required className={field} placeholder="Enter city" />
                   </div>
                   <div>
-                    <label className="block text-[11px] font-medium mb-1.5 text-[var(--ink-muted)]">Country</label>
+                    <FieldLabel required>Country</FieldLabel>
                     <select name="country" required className={field} defaultValue="">
                       <option value="" disabled>
                         Select country
@@ -311,9 +326,7 @@ export default function ApplyWizard({ role = null }: Props) {
 
                 <div className="grid sm:grid-cols-2 gap-4">
                   <div className="sm:col-span-2">
-                    <label className="block text-[11px] font-medium mb-1.5 text-[var(--ink-muted)]">
-                      Position applying for
-                    </label>
+                    <FieldLabel required>Position applying for</FieldLabel>
                     <select
                       name="positionSelect"
                       required
@@ -335,21 +348,20 @@ export default function ApplyWizard({ role = null }: Props) {
                     </select>
                   </div>
                   <div>
-                    <label className="block text-[11px] font-medium mb-1.5 text-[var(--ink-muted)]">
-                      Available from
-                    </label>
+                    <FieldLabel required>Available from</FieldLabel>
                     <input name="availableFrom" type="date" required className={field} />
                   </div>
                   <div>
-                    <label className="block text-[11px] font-medium mb-1.5 text-[var(--ink-muted)]">
-                      Notice period
-                    </label>
+                    <FieldLabel>Notice period</FieldLabel>
                     <input name="noticePeriod" className={field} placeholder="e.g. 2 weeks / Immediate" />
                   </div>
                 </div>
 
                 <div>
-                  <h3 className="text-sm font-semibold mb-3">Workplace type</h3>
+                  <h3 className="text-sm font-semibold mb-3">
+                    Workplace type
+                    <span className="text-[var(--accent)] ml-0.5" aria-hidden>*</span>
+                  </h3>
                   <ChoiceCards
                     name="workplace"
                     options={careers.apply.workplaceOptions}
@@ -359,7 +371,10 @@ export default function ApplyWizard({ role = null }: Props) {
                 </div>
 
                 <div>
-                  <h3 className="text-sm font-semibold mb-3">Employment type</h3>
+                  <h3 className="text-sm font-semibold mb-3">
+                    Employment type
+                    <span className="text-[var(--accent)] ml-0.5" aria-hidden>*</span>
+                  </h3>
                   <ChoiceCards
                     name="employment"
                     options={careers.apply.employmentOptions}
@@ -379,21 +394,15 @@ export default function ApplyWizard({ role = null }: Props) {
 
                 <div className="grid sm:grid-cols-2 gap-4">
                   <div>
-                    <label className="block text-[11px] font-medium mb-1.5 text-[var(--ink-muted)]">
-                      Years of experience
-                    </label>
+                    <FieldLabel required>Years of experience</FieldLabel>
                     <input name="yearsExperience" required className={field} placeholder="e.g. 3" />
                   </div>
                   <div>
-                    <label className="block text-[11px] font-medium mb-1.5 text-[var(--ink-muted)]">
-                      LinkedIn profile
-                    </label>
+                    <FieldLabel>LinkedIn profile</FieldLabel>
                     <input name="linkedin" type="url" className={field} placeholder="https://linkedin.com/in/…" />
                   </div>
                   <div className="sm:col-span-2">
-                    <label className="block text-[11px] font-medium mb-1.5 text-[var(--ink-muted)]">
-                      Resume or portfolio link
-                    </label>
+                    <FieldLabel required>Resume or portfolio link</FieldLabel>
                     <input
                       name="resumeUrl"
                       type="url"
@@ -420,21 +429,15 @@ export default function ApplyWizard({ role = null }: Props) {
                   {!hideSalary && (
                     <div className="grid sm:grid-cols-3 gap-4">
                       <div>
-                        <label className="block text-[11px] font-medium mb-1.5 text-[var(--ink-muted)]">
-                          Min salary
-                        </label>
+                        <FieldLabel>Min salary</FieldLabel>
                         <input name="minSalary" className={field} placeholder="Min" />
                       </div>
                       <div>
-                        <label className="block text-[11px] font-medium mb-1.5 text-[var(--ink-muted)]">
-                          Max salary
-                        </label>
+                        <FieldLabel>Max salary</FieldLabel>
                         <input name="maxSalary" className={field} placeholder="Max" />
                       </div>
                       <div>
-                        <label className="block text-[11px] font-medium mb-1.5 text-[var(--ink-muted)]">
-                          Currency
-                        </label>
+                        <FieldLabel>Currency</FieldLabel>
                         <select name="currency" className={field} defaultValue="PKR">
                           {["PKR", "USD", "GBP", "AED", "SAR", "CAD"].map((c) => (
                             <option key={c} value={c} className="bg-[var(--bg-elevated)]">
@@ -448,9 +451,7 @@ export default function ApplyWizard({ role = null }: Props) {
                 </div>
 
                 <div>
-                  <label className="block text-[11px] font-medium mb-1.5 text-[var(--ink-muted)]">
-                    Why Saylware?
-                  </label>
+                  <FieldLabel required>Why Saylware?</FieldLabel>
                   <textarea
                     name="message"
                     rows={5}

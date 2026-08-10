@@ -413,8 +413,7 @@ export const careers = {
   eyebrow: "Career",
   headline: "Work with us",
   filters: ["All Roles", "Remote", "On-site"],
-  formspreeId: "xeeybvzn",
-  apply: {
+  formspreeId: "mdeneqpn",
     title: "Apply now",
     steps: [
       {
