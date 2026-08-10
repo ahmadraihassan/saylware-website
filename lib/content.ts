@@ -25,17 +25,20 @@ export const nav = {
 export const hero = {
   headline: "Your operations stay sharp with Saylware.",
   subheadline:
-    "Advanced cybersecurity and customer support with a calm, capable touch. Book a conversation today.",
+    "Advanced cybersecurity and customer support with a calm, capable touch. Reach us anytime — we are here when you need us.",
   primaryCta: { label: "Explore services", href: "/#services" },
-  bookCta: { label: "Book a call", href: "/#get-started" },
-  hours: {
-    label: "Working hours",
-    weekdays: "Mon to Fri, 9:00 AM to 6:00 PM",
-    weekend: "Sat, 10:00 AM to 2:00 PM",
+  bookCta: { label: "Reach us anytime", href: "/#get-started" },
+  availability: {
+    label: "Always available",
+    headline: "Reach us anytime.",
+    body: "Security alerts and customer issues do not wait for business hours. Double down with a team that picks up when you need them.",
   },
-  image:
-    "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=900&h=1200&fit=crop",
-  imageAlt: "Saylware specialist ready to help",
+  images: {
+    soc: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=800&h=1000&fit=crop",
+    socAlt: "SOC analyst monitoring security systems",
+    care: "https://images.unsplash.com/photo-1525182008055-f88b95ffa665?w=800&h=1000&fit=crop",
+    careAlt: "Customer care representative on a support call",
+  },
 };
 
 export const partners = {

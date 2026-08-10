@@ -6,8 +6,10 @@ export default function Footer() {
       <div className="mx-auto max-w-[82rem] w-full px-4 sm:px-6 lg:px-8 py-12 sm:py-14">
         <div className="soft-shell p-5 sm:p-6 mb-10 flex flex-col sm:flex-row gap-4 sm:items-center sm:justify-between">
           <div>
-            <p className="font-display text-lg font-semibold">Stay in the loop</p>
-            <p className="mt-1 text-sm text-[var(--ink-muted)]">Questions? Reach us anytime.</p>
+            <p className="font-display text-lg font-semibold">Reach us anytime</p>
+            <p className="mt-1 text-sm text-[var(--ink-muted)]">
+              Questions, alerts, or escalations — we pick up when you need us. Double down and get in touch.
+            </p>
           </div>
           <div className="flex flex-col sm:flex-row gap-3">
             <a href={`mailto:${contact.email}`} className="rounded-full glass px-5 py-3 text-sm text-center">

@@ -4,7 +4,6 @@ import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { facets, serviceCatalog, type ServiceFacet, type ServiceItem } from "@/lib/content";
 import Reveal from "./Reveal";
-import ServiceWidget from "./ServiceWidget";
 
 function FacetRail({
   facet,
@@ -100,12 +99,13 @@ function ServiceMiniCard({
       className={`shrink-0 rounded-2xl border border-white/10 bg-[#16181f] overflow-hidden transition-all duration-400 flex flex-col ${
         expanded ? "w-[min(90vw,340px)] ring-1 ring-[var(--accent)]/50" : "w-[260px] sm:w-[280px]"
       }`}
-      style={{ height: expanded ? 420 : 360 }}
+      style={{ height: expanded ? 400 : 340 }}
       onMouseEnter={onEnter}
       onMouseLeave={onLeave}
     >
-      <div className="h-[150px] shrink-0 border-b border-white/8 bg-gradient-to-br from-white/[0.04] to-transparent">
-        <ServiceWidget slug={item.slug} />
+      <div className="relative h-[140px] shrink-0 overflow-hidden">
+        <img src={item.image} alt="" className="absolute inset-0 w-full h-full object-cover" />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#16181f] via-transparent to-transparent" />
       </div>
       <div className="p-4 flex flex-col flex-1 min-h-0">
         <h4 className="font-display text-sm sm:text-[15px] font-semibold leading-snug">{item.title}</h4>

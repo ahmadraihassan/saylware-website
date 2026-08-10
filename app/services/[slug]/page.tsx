@@ -99,8 +99,9 @@ export default async function ServicePage({
                     href={`/services/${r.slug}`}
                     className="soft-shell overflow-hidden hover:ring-1 hover:ring-[var(--accent)]/30 transition-all"
                   >
-                    <div className="h-28 border-b border-white/8 bg-[#16181f]">
-                      <ServiceWidget slug={r.slug} compact />
+                    <div className="relative h-28">
+                      <img src={r.image} alt="" className="absolute inset-0 w-full h-full object-cover" />
+                      <div className="absolute inset-0 bg-gradient-to-t from-[var(--bg)]/80 to-transparent" />
                     </div>
                     <div className="p-4">
                       <h3 className="font-display text-sm font-semibold">{r.title}</h3>
