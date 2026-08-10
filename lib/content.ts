@@ -19,7 +19,7 @@ export const nav = {
     { label: "Stories", href: "/#testimonials" },
     { label: "Work with us", href: "/careers" },
   ],
-  actions: [{ label: "Book a call", href: "/#get-started" }],
+  actions: [{ label: "Reach us anytime", href: "/#get-started" }],
 };
 
 export const hero = {
