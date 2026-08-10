@@ -36,7 +36,7 @@ export const hero = {
   images: {
     soc: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=800&h=1000&fit=crop",
     socAlt: "SOC analyst monitoring security systems",
-    care: "https://images.unsplash.com/photo-1525182008055-f88b95ffa665?w=800&h=1000&fit=crop",
+    care: "https://images.unsplash.com/photo-1556761175-b413da4baf72?w=800&h=1000&fit=crop",
     careAlt: "Customer care representative on a support call",
   },
 };
@@ -218,7 +218,7 @@ export const serviceCatalog: ServiceItem[] = [
     title: "Support Analytics",
     short: "Volume, resolution, and satisfaction made visible so support becomes a measurable asset, not a cost center.",
     tags: ["Reporting", "CSAT", "Trends"],
-    image: "https://images.unsplash.com/photo-1521737711867-5f2f08c10d7e?w=900&h=600&fit=crop",
+    image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=900&h=600&fit=crop",
     overview:
       "Clear reporting on volume, resolution time, and satisfaction so support becomes a visible asset, not a cost center.",
     highlights: [
@@ -353,6 +353,7 @@ export const testimonials = {
       avatar: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=200&h=200&fit=crop&crop=face",
       logo: "PS",
       logoColor: "#8b7cff",
+      logoId: "phoenix" as const,
     },
     {
       quote:
@@ -366,6 +367,7 @@ export const testimonials = {
       avatar: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=200&h=200&fit=crop&crop=face",
       logo: "AP",
       logoColor: "#c6f24a",
+      logoId: "allpest" as const,
     },
     {
       quote:
@@ -379,6 +381,7 @@ export const testimonials = {
       avatar: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=200&h=200&fit=crop&crop=face",
       logo: "QF",
       logoColor: "#f59e0b",
+      logoId: "quickfix" as const,
     },
     {
       quote:
@@ -392,6 +395,7 @@ export const testimonials = {
       avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200&h=200&fit=crop&crop=face",
       logo: "AZ",
       logoColor: "#38bdf8",
+      logoId: "azsecurity" as const,
     },
   ],
 };

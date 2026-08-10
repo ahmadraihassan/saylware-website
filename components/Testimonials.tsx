@@ -4,6 +4,7 @@ import { useState } from "react";
 import { testimonials } from "@/lib/content";
 import Reveal from "./Reveal";
 import Icon from "./Icon";
+import CompanyLogo from "./CompanyLogo";
 
 export default function Testimonials() {
   const [active, setActive] = useState(0);
@@ -54,18 +55,17 @@ export default function Testimonials() {
                   <img src={item.avatar} alt="" className="w-full h-full object-cover" />
                 </span>
                 <span
-                  className="absolute -bottom-1.5 -right-1.5 w-7 h-7 rounded-lg border border-white/15 text-[10px] font-bold flex items-center justify-center text-[var(--bg)] shadow-lg"
-                  style={{ background: item.logoColor }}
+                  className="absolute -bottom-1.5 -right-1.5 w-7 h-7 rounded-lg overflow-hidden border border-white/15 shadow-lg"
                   title={item.company}
                 >
-                  {item.logo}
+                  <CompanyLogo id={item.logoId} iconOnly className="[&_svg]:w-7 [&_svg]:h-7" />
                 </span>
               </button>
             );
           })}
         </div>
 
-        <div className="relative flex items-center justify-center min-h-[300px] sm:min-h-[320px]">
+        <div className="relative flex items-center justify-center min-h-[320px] sm:min-h-[340px]">
           {items.map((item, i) => {
             const offset = (i - active + n) % n;
             const pos =
@@ -92,21 +92,10 @@ export default function Testimonials() {
                   boxShadow: isCenter ? "0 24px 60px -28px rgba(0,0,0,0.7)" : "none",
                 }}
               >
-                <div className="flex items-start justify-between gap-3">
-                  <div className="flex items-center gap-2 text-xs text-[var(--ink-muted)]">
-                    <Icon name="asterisk" className="w-4 h-4 text-[var(--accent)]" />
-                    {item.type}
-                  </div>
+                <div className="flex items-start justify-between gap-3 flex-wrap">
+                  <CompanyLogo id={item.logoId} />
                   <div className="flex items-center gap-2.5">
-                    <div className="relative">
-                      <img src={item.avatar} alt="" className="w-11 h-11 rounded-xl object-cover" />
-                      <span
-                        className="absolute -bottom-1 -right-1 w-5 h-5 rounded-md text-[8px] font-bold flex items-center justify-center text-[var(--bg)]"
-                        style={{ background: item.logoColor }}
-                      >
-                        {item.logo}
-                      </span>
-                    </div>
+                    <img src={item.avatar} alt="" className="w-11 h-11 rounded-xl object-cover" />
                     <div className="text-right">
                       <p className="text-sm font-semibold leading-tight">{item.name}</p>
                       <p className="text-[11px] text-[var(--ink-muted)]">{item.role}</p>
