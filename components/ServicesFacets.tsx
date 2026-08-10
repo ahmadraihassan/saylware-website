@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { facets, serviceCatalog, type ServiceFacet, type ServiceItem } from "@/lib/content";
 import Reveal from "./Reveal";
+import ServiceWidget from "./ServiceWidget";
 
 function FacetRail({
   facet,
@@ -45,7 +46,7 @@ function FacetRail({
   return (
     <div
       id={id}
-      className={`soft-shell p-4 sm:p-5 min-w-0 h-full flex flex-col transition-all duration-500 ${
+      className={`soft-shell p-4 sm:p-6 min-w-0 h-full flex flex-col transition-all duration-500 ${
         active ? "ring-1 ring-[var(--accent)]/35" : "opacity-90"
       }`}
       onMouseEnter={() => {
@@ -58,7 +59,7 @@ function FacetRail({
         onActivate(false);
       }}
     >
-      <div className="flex items-end justify-between gap-3 mb-4 px-1">
+      <div className="flex items-end justify-between gap-3 mb-5 px-1">
         <div>
           <h3 className="font-display text-xl sm:text-2xl font-bold tracking-tight">{title}</h3>
           <p className="text-xs sm:text-sm text-[var(--ink-muted)] mt-1">{subtitle}</p>
@@ -68,7 +69,7 @@ function FacetRail({
         </span>
       </div>
 
-      <div ref={scroller} className="flex gap-3 overflow-x-auto no-scrollbar pb-1 flex-1 items-stretch">
+      <div ref={scroller} className="flex gap-3.5 overflow-x-auto no-scrollbar pb-1 flex-1 items-stretch">
         {items.map((item) => (
           <ServiceMiniCard
             key={item.slug}
@@ -96,26 +97,25 @@ function ServiceMiniCard({
 }) {
   return (
     <article
-      className={`shrink-0 rounded-2xl glass overflow-hidden transition-all duration-400 flex flex-col ${
-        expanded ? "w-[min(86vw,300px)] ring-1 ring-[var(--accent)]/50" : "w-[230px] sm:w-[248px]"
+      className={`shrink-0 rounded-2xl border border-white/10 bg-[#16181f] overflow-hidden transition-all duration-400 flex flex-col ${
+        expanded ? "w-[min(90vw,340px)] ring-1 ring-[var(--accent)]/50" : "w-[260px] sm:w-[280px]"
       }`}
-      style={{ height: expanded ? 340 : 280 }}
+      style={{ height: expanded ? 420 : 360 }}
       onMouseEnter={onEnter}
       onMouseLeave={onLeave}
     >
-      <div className="relative h-[100px] shrink-0 overflow-hidden">
-        <img src={item.image} alt="" className="absolute inset-0 w-full h-full object-cover" />
-        <div className="absolute inset-0 bg-gradient-to-t from-[var(--bg)]/80 to-transparent" />
+      <div className="h-[150px] shrink-0 border-b border-white/8 bg-gradient-to-br from-white/[0.04] to-transparent">
+        <ServiceWidget slug={item.slug} />
       </div>
-      <div className="p-3.5 sm:p-4 flex flex-col flex-1 min-h-0">
-        <h4 className="font-display text-sm font-semibold leading-snug line-clamp-2 min-h-[2.5rem]">{item.title}</h4>
-        <p className={`text-xs text-[var(--ink-soft)] mt-1.5 leading-relaxed ${expanded ? "line-clamp-4" : "line-clamp-2"}`}>
+      <div className="p-4 flex flex-col flex-1 min-h-0">
+        <h4 className="font-display text-sm sm:text-[15px] font-semibold leading-snug">{item.title}</h4>
+        <p className={`text-xs text-[var(--ink-soft)] mt-2 leading-relaxed ${expanded ? "line-clamp-5" : "line-clamp-3"}`}>
           {item.short}
         </p>
         <div className="mt-auto pt-3">
           <div className="flex flex-wrap gap-1.5 mb-3 min-h-[22px]">
             {(expanded ? item.tags : item.tags.slice(0, 2)).map((t) => (
-              <span key={t} className="rounded-full glass-strong px-2 py-0.5 text-[10px] text-[var(--ink-muted)]">
+              <span key={t} className="rounded-full bg-white/5 border border-white/10 px-2 py-0.5 text-[10px] text-[var(--ink-muted)]">
                 {t}
               </span>
             ))}
@@ -156,7 +156,7 @@ export default function ServicesFacets() {
           </div>
         </Reveal>
 
-        <div className="flex flex-col lg:flex-row gap-4 sm:gap-5 items-stretch">
+        <div className="flex flex-col lg:flex-row gap-4 sm:gap-5 items-stretch min-h-[420px]">
           <div
             className="transition-all duration-500 ease-out min-w-0"
             style={{ flex: focus === "support" ? "0.72 1 0%" : focus === "security" ? "1.45 1 0%" : "1 1 0%" }}

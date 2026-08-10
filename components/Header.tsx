@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Image from "next/image";
 import { nav } from "@/lib/content";
 
 export default function Header() {
@@ -23,9 +24,14 @@ export default function Header() {
         }`}
       >
         <a href="/" className="flex items-center gap-2.5 shrink-0">
-          <span className="w-8 h-8 rounded-xl bg-[var(--ink)] text-[var(--bg)] flex items-center justify-center font-display font-bold text-sm">
-            S
-          </span>
+          <Image
+            src="/saylware-mark.png"
+            alt="Saylware"
+            width={32}
+            height={32}
+            className="w-8 h-8 rounded-xl object-cover"
+            priority
+          />
           <span className="font-display text-[15px] font-bold tracking-tight">{nav.logoText}</span>
         </a>
 
@@ -46,8 +52,9 @@ export default function Header() {
           </a>
           <button
             type="button"
-            className="lg:hidden w-10 h-10 rounded-full glass flex items-center justify-center"
+            className="lg:hidden w-10 h-10 rounded-full bg-[#1c1e24] border border-white/15 flex items-center justify-center"
             aria-label="Open menu"
+            aria-expanded={open}
             onClick={() => setOpen((v) => !v)}
           >
             <div className="flex flex-col gap-1.5">
@@ -60,13 +67,22 @@ export default function Header() {
       </div>
 
       {open && (
-        <div className="lg:hidden mx-3 mt-2 soft-shell p-5 space-y-3">
+        <div className="lg:hidden mx-3 mt-2 rounded-2xl border border-white/12 bg-[#14161c] p-5 space-y-1 shadow-2xl shadow-black/50">
           {nav.links.map((link) => (
-            <a key={link.label} href={link.href} className="block text-sm text-[var(--ink-soft)]" onClick={() => setOpen(false)}>
+            <a
+              key={link.label}
+              href={link.href}
+              className="block rounded-xl px-3 py-3 text-sm font-medium text-[var(--ink)] hover:bg-white/5"
+              onClick={() => setOpen(false)}
+            >
               {link.label}
             </a>
           ))}
-          <a href={nav.actions[0].href} className="inline-flex rounded-full bg-[var(--ink)] text-[var(--bg)] text-sm font-semibold px-5 py-2.5" onClick={() => setOpen(false)}>
+          <a
+            href={nav.actions[0].href}
+            className="mt-2 inline-flex w-full justify-center rounded-full bg-[var(--accent)] text-[var(--bg)] text-sm font-semibold px-5 py-3"
+            onClick={() => setOpen(false)}
+          >
             {nav.actions[0].label}
           </a>
         </div>
