@@ -414,6 +414,7 @@ export const careers = {
   headline: "Work with us",
   filters: ["All Roles", "Remote", "On-site"],
   formspreeId: "mdeneqpn",
+  apply: {
     title: "Apply now",
     steps: [
       {
