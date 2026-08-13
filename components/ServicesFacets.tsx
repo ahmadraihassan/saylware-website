@@ -104,7 +104,7 @@ function ServiceMiniCard({
       onMouseLeave={onLeave}
     >
       <div className="relative h-[140px] shrink-0 overflow-hidden">
-        <img src={item.image} alt="" className="absolute inset-0 w-full h-full object-cover" />
+        <img src={item.image} alt={`${item.title} service`} className="absolute inset-0 w-full h-full object-cover" />
         <div className="absolute inset-0 bg-gradient-to-t from-[#16181f] via-transparent to-transparent" />
       </div>
       <div className="p-4 flex flex-col flex-1 min-h-0">
@@ -120,23 +120,15 @@ function ServiceMiniCard({
               </span>
             ))}
           </div>
-          <div
-            className={`grid transition-all duration-300 ${
-              expanded ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"
-            }`}
+          <Link
+            href={`/services/${item.slug}`}
+            className="inline-flex items-center gap-2 rounded-full bg-[var(--accent)] text-[var(--bg)] text-xs font-bold px-3.5 py-2 hover:scale-[1.03] transition-transform"
           >
-            <div className="overflow-hidden">
-              <Link
-                href={`/services/${item.slug}`}
-                className="inline-flex items-center gap-2 rounded-full bg-[var(--accent)] text-[var(--bg)] text-xs font-bold px-3.5 py-2 hover:scale-[1.03] transition-transform"
-              >
-                Open service
-                <svg className="w-3 h-3" viewBox="0 0 12 12" fill="none">
-                  <path d="M2 6h8M7 3l3 3-3 3" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-                </svg>
-              </Link>
-            </div>
-          </div>
+            Open service
+            <svg className="w-3 h-3" viewBox="0 0 12 12" fill="none">
+              <path d="M2 6h8M7 3l3 3-3 3" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
+          </Link>
         </div>
       </div>
     </article>
@@ -153,6 +145,9 @@ export default function ServicesFacets() {
           <div className="text-center max-w-2xl mx-auto mb-2">
             <h2 className="font-display text-[clamp(1.75rem,3.5vw,3rem)] font-bold tracking-tight">{facets.headline}</h2>
             <p className="mt-3 text-sm sm:text-base text-[var(--ink-soft)]">{facets.intro}</p>
+            <Link href="/services" className="inline-flex mt-3 text-sm font-semibold text-[var(--accent)] hover:underline">
+              Browse all services →
+            </Link>
           </div>
         </Reveal>
 

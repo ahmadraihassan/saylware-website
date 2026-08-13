@@ -1,13 +1,33 @@
 import { notFound } from "next/navigation";
+import type { Metadata } from "next";
 import Link from "next/link";
+import Image from "next/image";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import Reveal from "@/components/Reveal";
 import ServiceWidget from "@/components/ServiceWidget";
+import JsonLd from "@/components/JsonLd";
 import { getServiceBySlug, serviceCatalog } from "@/lib/content";
+import { breadcrumbJsonLd, pageMetadata, serviceJsonLd, serviceSeo } from "@/lib/seo";
 
 export function generateStaticParams() {
   return serviceCatalog.map((s) => ({ slug: s.slug }));
+}
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}): Promise<Metadata> {
+  const { slug } = await params;
+  const service = getServiceBySlug(slug);
+  if (!service) return { title: "Service" };
+  const seo = serviceSeo(service);
+  return pageMetadata({
+    title: seo.title,
+    description: seo.description,
+    path: `/services/${service.slug}`,
+  });
 }
 
 export default async function ServicePage({
@@ -19,18 +39,28 @@ export default async function ServicePage({
   const service = getServiceBySlug(slug);
   if (!service) notFound();
 
+  const seo = serviceSeo(service);
   const related = serviceCatalog
     .filter((s) => s.facet === service.facet && s.slug !== service.slug)
     .slice(0, 3);
+  const practice = service.facet === "security" ? "Cybersecurity" : "Customer support";
 
   return (
     <main className="relative bg-[var(--bg)] min-h-screen flex flex-col">
+      <JsonLd
+        data={breadcrumbJsonLd([
+          { name: "Home", path: "/" },
+          { name: "Services", path: "/services" },
+          { name: service.title, path: `/services/${service.slug}` },
+        ])}
+      />
+      <JsonLd data={serviceJsonLd(service)} />
       <Header />
       <div className="flex-1 pt-28 pb-16 px-4 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-[82rem] w-full">
           <Reveal>
-            <Link href="/#services" className="text-sm text-[var(--ink-muted)] hover:text-[var(--ink)]">
-              ← Back to services
+            <Link href="/services" className="text-sm text-[var(--ink-muted)] hover:text-[var(--ink)]">
+              ← All {practice.toLowerCase()} services
             </Link>
             <div className="mt-4 flex flex-wrap gap-2">
               {service.tags.map((t) => (
@@ -50,7 +80,13 @@ export default async function ServicePage({
           <div className="mt-8 sm:mt-10 grid lg:grid-cols-[1.15fr_0.85fr] gap-4 sm:gap-5">
             <Reveal variant="left">
               <div className="relative rounded-2xl overflow-hidden min-h-[280px] sm:min-h-[360px] soft-shell">
-                <img src={service.image} alt="" className="absolute inset-0 w-full h-full object-cover opacity-50" />
+                <Image
+                  src={service.image}
+                  alt={seo.imageAlt}
+                  fill
+                  className="object-cover opacity-50"
+                  sizes="(max-width: 1024px) 100vw, 55vw"
+                />
                 <div className="absolute inset-0 bg-gradient-to-t from-[var(--bg)] via-[var(--bg)]/70 to-transparent" />
                 <div className="absolute inset-4 sm:inset-6 rounded-2xl border border-white/10 bg-[#14161c]/90 backdrop-blur-md overflow-hidden">
                   <ServiceWidget slug={service.slug} />
@@ -91,7 +127,7 @@ export default async function ServicePage({
 
           {related.length > 0 && (
             <section className="mt-14 sm:mt-16">
-              <h2 className="font-display text-2xl font-bold tracking-tight mb-5">Related services</h2>
+              <h2 className="font-display text-2xl font-bold tracking-tight mb-5">Related {practice.toLowerCase()} services</h2>
               <div className="grid sm:grid-cols-3 gap-3 sm:gap-4">
                 {related.map((r) => (
                   <Link
@@ -100,7 +136,13 @@ export default async function ServicePage({
                     className="soft-shell overflow-hidden hover:ring-1 hover:ring-[var(--accent)]/30 transition-all"
                   >
                     <div className="relative h-28">
-                      <img src={r.image} alt="" className="absolute inset-0 w-full h-full object-cover" />
+                      <Image
+                        src={r.image}
+                        alt={serviceSeo(r).imageAlt}
+                        fill
+                        className="object-cover"
+                        sizes="(max-width: 640px) 100vw, 33vw"
+                      />
                       <div className="absolute inset-0 bg-gradient-to-t from-[var(--bg)]/80 to-transparent" />
                     </div>
                     <div className="p-4">

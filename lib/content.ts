@@ -8,13 +8,15 @@ export const site = {
   name: "Saylware",
   tagline: "Security operations and customer experience, run right.",
   domain: "saylware.com",
+  description:
+    "Saylware provides managed cybersecurity and customer support services for growing businesses — MDR, incident response, vulnerability management, and branded helpdesk operations.",
 };
 
 export const nav = {
   logoText: "Saylware",
   links: [
     { label: "Home", href: "/" },
-    { label: "Services", href: "/#services" },
+    { label: "Services", href: "/services" },
     { label: "Process", href: "/#journey" },
     { label: "Stories", href: "/#testimonials" },
     { label: "Work with us", href: "/careers" },
@@ -25,7 +27,7 @@ export const nav = {
 export const hero = {
   headline: "Your operations stay sharp with Saylware.",
   subheadline:
-    "Advanced cybersecurity and customer support with a calm, capable touch. When you are ready to talk, we are easy to reach.",
+    "Managed cybersecurity and customer support services with a calm, capable touch. SOC monitoring, incident response, and branded helpdesk — easy to reach when you are ready to talk.",
   primaryCta: { label: "Explore services", href: "/#services" },
   bookCta: { label: "Get in touch", href: "/#get-started" },
   availability: {
@@ -231,8 +233,9 @@ export const serviceCatalog: ServiceItem[] = [
 ];
 
 export const facets = {
-  headline: "Our services",
-  intro: "Two facets. Hover a column to browse. Pause on a card to expand and open the full brief.",
+  headline: "Cybersecurity and customer support services",
+  intro:
+    "Managed detection and response, incident response, and security advisory — plus branded customer support desks, CX process design, QA, and support analytics.",
   security: {
     id: "cybersecurity",
     title: "Cybersecurity",
@@ -304,7 +307,7 @@ export const journey = {
 export const ctaBanner = {
   headline: "Ready for ops that feel modern?",
   primary: { label: "Book a call", href: "/#get-started" },
-  secondary: { label: "See services", href: "/#services" },
+  secondary: { label: "See services", href: "/services" },
 };
 
 export const cybersecurity = {
@@ -410,8 +413,10 @@ export const contact = {
 };
 
 export const careers = {
-  eyebrow: "Career",
+  eyebrow: "Careers",
   headline: "Work with us",
+  subheadline:
+    "Hiring for cybersecurity and customer support. Apply to remote, hybrid, and on-site jobs — security analyst, threat hunter, support lead, CX specialist, and operations.",
   filters: ["All Roles", "Remote", "On-site"],
   formspreeId: "mdeneqpn",
   apply: {
@@ -476,6 +481,7 @@ export const careers = {
       type: "Full Time",
       location: "Remote / Hybrid",
       department: "Security",
+      postedAt: "2026-08-01",
       description:
         "Triage alerts, investigate incidents, and write clear findings for customer teams. You will work alongside senior hunters and own cases end to end.",
     },
@@ -485,6 +491,7 @@ export const careers = {
       type: "Full Time",
       location: "On-site / Hybrid",
       department: "Customer Care",
+      postedAt: "2026-08-01",
       description:
         "Lead a pod of agents, coach quality, and keep SLAs honest. You bridge customers, product, and engineering when tickets need elevation.",
     },
@@ -494,6 +501,7 @@ export const careers = {
       type: "Full Time",
       location: "Remote",
       department: "Customer Care",
+      postedAt: "2026-08-01",
       description:
         "Handle chat, email, and voice under client brands. You turn messy tickets into calm resolutions and feed insights back to the account team.",
     },
@@ -503,6 +511,7 @@ export const careers = {
       type: "Full Time",
       location: "Remote",
       department: "Security",
+      postedAt: "2026-08-01",
       description:
         "Proactively hunt across customer environments, build detections, and partner with IR when something real shows up.",
     },
@@ -512,6 +521,7 @@ export const careers = {
       type: "Full Time",
       location: "Hybrid",
       department: "Ops",
+      postedAt: "2026-08-01",
       description:
         "Keep schedules, handoffs, and reporting tight across security and support. You are the glue that makes multi client ops feel simple.",
     },
@@ -548,26 +558,31 @@ export const careers = {
 
 export const footer = {
   companyDescription:
-    "Saylware provides managed cybersecurity and customer care operations for growing businesses.",
+    "Saylware provides managed cybersecurity and customer care operations for growing businesses. We also hire security analysts, threat hunters, and customer support specialists.",
   columns: [
     {
       heading: "Cybersecurity",
-      links: serviceCatalog
-        .filter((s) => s.facet === "security")
-        .slice(0, 3)
-        .map((s) => ({ label: s.title, href: `/services/${s.slug}` })),
+      links: [
+        { label: "All cybersecurity services", href: "/services#cybersecurity" },
+        ...serviceCatalog
+          .filter((s) => s.facet === "security")
+          .map((s) => ({ label: s.title, href: `/services/${s.slug}` })),
+      ],
     },
     {
       heading: "Customer Care",
-      links: serviceCatalog
-        .filter((s) => s.facet === "support")
-        .slice(0, 3)
-        .map((s) => ({ label: s.title, href: `/services/${s.slug}` })),
+      links: [
+        { label: "All customer support services", href: "/services#customer-service" },
+        ...serviceCatalog
+          .filter((s) => s.facet === "support")
+          .map((s) => ({ label: s.title, href: `/services/${s.slug}` })),
+      ],
     },
     {
       heading: "Company",
       links: [
-        { label: "Work with us", href: "/careers" },
+        { label: "Open jobs", href: "/careers" },
+        { label: "Apply now", href: "/careers/apply" },
         { label: "Get started", href: "/#get-started" },
         { label: "Success stories", href: "/#testimonials" },
       ],
@@ -578,6 +593,69 @@ export const footer = {
     { label: "X", href: "#" },
   ],
   copyright: `© ${new Date().getFullYear()} Saylware. All rights reserved.`,
+};
+
+export const pages = {
+  home: {
+    title: "Managed Cybersecurity & Customer Support Services",
+    description:
+      "Saylware delivers managed cybersecurity and customer support services for growing teams. MDR, incident response, vulnerability management, and branded helpdesk operations — plus open jobs in security and CX.",
+  },
+  services: {
+    title: "Cybersecurity and Customer Support Services",
+    description:
+      "Explore Saylware cybersecurity services — managed detection and response, incident response, vulnerability management, and security advisory — plus customer support, CX process design, QA, and support analytics.",
+    headline: "Services built for security and customer care",
+    intro:
+      "Two specialist practices. One operating standard. Choose a cybersecurity or customer support service to see coverage, outcomes, and how we work.",
+  },
+  careers: {
+    title: "Jobs in Cybersecurity and Customer Support",
+    description:
+      "Apply for Saylware jobs in cybersecurity and customer support. Open roles include security analyst, threat hunter, support lead, CX specialist, and operations coordinator — remote, hybrid, and on-site.",
+  },
+  apply: {
+    title: "Apply for a Job at Saylware",
+    description:
+      "Apply to join Saylware. Open roles in cybersecurity, customer support, and operations. Remote, hybrid, and on-site jobs.",
+  },
+};
+
+export const faqs = {
+  services: [
+    {
+      question: "What cybersecurity services does Saylware offer?",
+      answer:
+        "We provide managed detection and response (MDR), incident response, vulnerability management, and security advisory. Analysts monitor endpoints, identity, network, and cloud, then escalate only what needs a decision.",
+    },
+    {
+      question: "Do you provide outsourced customer support?",
+      answer:
+        "Yes. Our managed support desk runs chat, email, and voice under your brand, with SLAs you set. We also design CX workflows, run escalation and QA, and report on volume, CSAT, and resolution time.",
+    },
+    {
+      question: "How do we get started?",
+      answer:
+        "Share a note through the contact form on saylware.com, or email awaisu@saylware.com. We follow up within one business day and route you to a security or customer care specialist.",
+    },
+  ],
+  careers: [
+    {
+      question: "How do I apply for a job at Saylware?",
+      answer:
+        "Open a role on the careers page and submit an application, or use the general apply form if you are not targeting a specific listing. We review every application during business hours.",
+    },
+    {
+      question: "Do you hire remotely?",
+      answer:
+        "Yes. Many cybersecurity and customer support roles are remote or hybrid. Each job listing shows whether the role is remote, hybrid, or on-site.",
+    },
+    {
+      question: "What kinds of roles are open?",
+      answer:
+        "We hire for security operations (analysts and threat hunters), customer care (CX specialists and support leads), and operations coordinators who keep both practices running.",
+    },
+  ],
 };
 
 export function getServiceBySlug(slug: string) {
