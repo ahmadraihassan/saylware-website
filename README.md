@@ -100,6 +100,38 @@ the edits and hand it back to you to paste in and push.
 
 ---
 
+## Saylware Desk (private outreach)
+
+A private workspace at `/desk` for approved, human-reviewed outreach. It is
+not linked from the public site and is blocked in `robots.txt`.
+
+It will not scrape Indeed or any job board. Hiring posts are a reason to
+write, not a source of harvested emails. You paste the job you found, look
+up a named person (Hunter, if connected), verify the inbox, then approve
+every send.
+
+**Set these in Vercel → Settings → Environment Variables:**
+
+1. `DESK_PASSWORD` and `DESK_SESSION_SECRET` (required to log in)
+2. `DESK_PUBLIC_URL=https://saylware.com`
+3. `DATABASE_URL` (Neon Postgres, recommended so data survives deploys)
+4. Gmail: `GOOGLE_CLIENT_ID` + `GOOGLE_CLIENT_SECRET` (send from your inbox)
+   or SMTP fields in Desk → Settings
+5. One verifier: `HUNTER_API_KEY` or `NEVERBOUNCE_API_KEY` or `ABSTRACT_API_KEY`
+6. Optional: `AI_GATEWAY_API_KEY` to tighten wording
+7. `CRON_SECRET` for the weekday send cron
+
+Gmail OAuth redirect: `https://YOUR-DOMAIN/api/desk/google/callback`
+Scopes: gmail.send, gmail.readonly, userinfo.email
+
+Cap is 50 messages a day, with a warmup, send window, unique subjects,
+unsubscribe footer, and a never-contact list. Open tracking is off by
+default. Meeting-link clicks are the stronger read on interest.
+
+See `.env.example` for the full list.
+
+---
+
 ## What's in this project
 
 ```
