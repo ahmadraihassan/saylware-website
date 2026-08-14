@@ -22,10 +22,14 @@ export function defaultSettings(): DeskSettings {
     followupDays: [3, 7],
     signature: "Awais\nSaylware",
     google: null,
+    googleClientId: "",
+    googleClientSecret: "",
+    hunterApiKey: "",
     smtpHost: "",
     smtpPort: 587,
     smtpUser: "",
     smtpPass: "",
+    autopilot: true,
   };
 }
 

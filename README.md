@@ -102,33 +102,59 @@ the edits and hand it back to you to paste in and push.
 
 ## Saylware Desk (private outreach)
 
-A private workspace at `/desk` for approved, human-reviewed outreach. It is
-not linked from the public site and is blocked in `robots.txt`.
+Private workspace at `/desk`. You approve and reply. The desk drafts, verifies,
+watches Gmail, and sends what you already signed off.
 
-It will not scrape Indeed or any job board. Hiring posts are a reason to
-write, not a source of harvested emails. You paste the job you found, look
-up a named person (Hunter, if connected), verify the inbox, then approve
-every send.
+It does not scrape Indeed. Paste a job you found; Hunter looks up a named person.
 
-**Set these in Vercel → Settings → Environment Variables:**
+### Step-by-step setup
 
-1. `DESK_PASSWORD` and `DESK_SESSION_SECRET` (required to log in)
-2. `DESK_PUBLIC_URL=https://saylware.com`
-3. `DATABASE_URL` (Neon Postgres, recommended so data survives deploys)
-4. Gmail: `GOOGLE_CLIENT_ID` + `GOOGLE_CLIENT_SECRET` (send from your inbox)
-   or SMTP fields in Desk → Settings
-5. One verifier: `HUNTER_API_KEY` or `NEVERBOUNCE_API_KEY` or `ABSTRACT_API_KEY`
-6. Optional: `AI_GATEWAY_API_KEY` to tighten wording
-7. `CRON_SECRET` for the weekday send cron
+**1. Desk login (Vercel env)**
 
-Gmail OAuth redirect: `https://YOUR-DOMAIN/api/desk/google/callback`
-Scopes: gmail.send, gmail.readonly, userinfo.email
+1. Open [Vercel](https://vercel.com/dashboard) → `saylware-website` → Settings → Environment Variables.
+2. Go to `https://saylware.com/desk/login`. If no password is set yet, the page shows values you can copy.
+3. Add at least:
+   - `DESK_PASSWORD`
+   - `DESK_SESSION_SECRET`
+   - `DESK_ALLOWED_EMAIL=awaisu@saylware.com`
+   - `DESK_PUBLIC_URL=https://saylware.com`
+   - `CRON_SECRET`
+4. Apply to Production, Preview, and Development. Redeploy.
+5. Log in at `/desk/login`.
 
-Cap is 50 messages a day, with a warmup, send window, unique subjects,
-unsubscribe footer, and a never-contact list. Open tracking is off by
-default. Meeting-link clicks are the stronger read on interest.
+**2. Database (Neon)**
 
-See `.env.example` for the full list.
+1. In the same Vercel project: Storage → Create Database → **Neon**.
+2. Connect it to this project (this sets `DATABASE_URL`).
+3. Redeploy. Setup → Status should show “Neon database” as Ready.
+4. If you created Neon on [console.neon.tech](https://console.neon.tech) instead, paste the connection string as `DATABASE_URL` in Vercel env vars.
+
+**3. Work mail (Google Workspace)**
+
+In Desk → **Setup** (the page walks through this with your redirect URI):
+
+1. [Enable Gmail API](https://console.cloud.google.com/apis/library/gmail.googleapis.com).
+2. OAuth consent screen → **Internal** (your Workspace).
+3. Create a Web OAuth client. Redirect URI: `https://saylware.com/api/desk/google/callback`
+4. Paste Client ID and secret into Setup. Save.
+5. Click **Connect work mail** and sign in as `awaisu@saylware.com`.
+6. Add a Cal.com / Meet link and your physical address. Save.
+
+After that you can also use **Continue with Google** on the login page.
+
+**4. Hunter**
+
+1. Create a key at [hunter.io/api-keys](https://hunter.io/api-keys).
+2. Paste it in Setup. Autopilot can then find a person at a company domain and verify the inbox.
+
+**5. Daily use**
+
+1. Drop a hiring signal or a lead.
+2. Home → **Run now** (or wait for the weekday cron).
+3. Open **Approve**. Read each note. Approve or send back.
+4. Reply in Gmail when someone writes back. Run now (or cron) marks the lead replied and stops follow-ups.
+
+Cap is 50/day with a warmup. Unique subjects, unsubscribe footer, never-contact list. Open tracking is off by default.
 
 ---
 

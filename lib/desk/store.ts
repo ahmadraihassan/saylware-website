@@ -1,6 +1,6 @@
 import { mkdir, readFile, writeFile } from "node:fs/promises";
 import path from "node:path";
-import { emptyState } from "./defaults";
+import { defaultSettings, emptyState } from "./defaults";
 import type { DeskState } from "./types";
 
 const FILE = path.join(process.cwd(), "data", "desk.json");
@@ -63,10 +63,15 @@ async function toNeon(state: DeskState) {
 
 export async function loadState(): Promise<DeskState> {
   const neon = await fromNeon();
-  if (neon?.version === 1) return neon;
+  if (neon?.version === 1) return hydrate(neon);
   const file = (await readJsonFile(FILE)) || (await readJsonFile(TMP));
-  if (file?.version === 1) return file;
+  if (file?.version === 1) return hydrate(file);
   return emptyState();
+}
+
+function hydrate(state: DeskState): DeskState {
+  state.settings = { ...defaultSettings(), ...state.settings };
+  return state;
 }
 
 export async function saveState(state: DeskState) {

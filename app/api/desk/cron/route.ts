@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { detectReplies, markMeetingReminders, processDueSends } from "@/lib/desk/process";
+import { runAutopilot } from "@/lib/desk/autopilot";
 import { mutateState } from "@/lib/desk/store";
 
 export async function GET(req: NextRequest) {
@@ -8,11 +8,6 @@ export async function GET(req: NextRequest) {
   const ok = secret ? auth === `Bearer ${secret}` : process.env.NODE_ENV !== "production";
   if (!ok) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   const origin = req.nextUrl.origin;
-  const result = await mutateState(async (state) => {
-    markMeetingReminders(state);
-    const sent = await processDueSends(state, origin);
-    const replies = await detectReplies(state).catch(() => 0);
-    return { ...sent, replies };
-  });
+  const result = await mutateState((state) => runAutopilot(state, origin));
   return NextResponse.json(result);
 }

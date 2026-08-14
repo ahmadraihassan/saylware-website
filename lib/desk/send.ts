@@ -53,7 +53,7 @@ export async function deliverMail(opts: {
   let settings = opts.settings;
 
   if (settings.google?.refreshToken) {
-    const fresh = await freshAccessToken(settings.google);
+    const fresh = await freshAccessToken(settings.google, settings);
     settings = { ...settings, google: fresh.tokens };
     await gmailSend(fresh.access, raw);
     return { settings };

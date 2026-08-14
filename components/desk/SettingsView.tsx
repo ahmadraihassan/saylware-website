@@ -99,7 +99,7 @@ export default function SettingsView({ snap }: { snap: DeskSnapshot }) {
           </div>
         ) : (
           <p className="text-sm text-[var(--ink-muted)] mb-6">
-            Add GOOGLE_CLIENT_ID and GOOGLE_CLIENT_SECRET to connect Gmail. SMTP below still works.
+            Finish Google Client ID and secret on the <a href="/desk/setup" className="underline">Setup</a> page, then connect your work mail.
           </p>
         )}
         <form action={onSave} className="grid sm:grid-cols-2 gap-4">

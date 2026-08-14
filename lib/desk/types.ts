@@ -176,10 +176,14 @@ export type DeskSettings = {
   followupDays: [number, number];
   signature: string;
   google: GoogleTokens | null;
+  googleClientId: string;
+  googleClientSecret: string;
+  hunterApiKey: string;
   smtpHost: string;
   smtpPort: number;
   smtpUser: string;
   smtpPass: string;
+  autopilot: boolean;
 };
 
 export type DeskState = {

@@ -7,11 +7,13 @@ import { domainFromCompanyUrl, domainFromEmail, firstNameFrom, normalizeEmail, n
 import { lintCopy, wordCount } from "./lint";
 import { detectReplies, processDueSends } from "./process";
 import { companyTaken, emailTaken, nextSendAt, scoreLead, stats, usedSubjects } from "./rules";
+import { googleAppFrom, setupChecklist, verifierKeysFrom } from "./credentials";
 import { encryptSecret } from "./secret";
 import { loadState, mutateState, persistenceHint } from "./store";
 import type { DeskSettings, Lead, LeadStatus, Meeting, Message, OutreachContext } from "./types";
 import { hunterFindPeople, verifyEmail } from "./verify";
 import { mailboxReady } from "./gmail";
+import { runAutopilot } from "./autopilot";
 
 function fail(message: string): never {
   throw new Error(message);
@@ -35,14 +37,33 @@ export async function logoutAction() {
 export async function getDeskSnapshot() {
   await requireDesk();
   const state = await loadState();
-  const { smtpPass, google, ...safeSettings } = state.settings;
+  const safeSettings = { ...state.settings };
+  delete (safeSettings as { smtpPass?: string }).smtpPass;
+  delete (safeSettings as { google?: unknown }).google;
+  delete (safeSettings as { googleClientSecret?: string }).googleClientSecret;
+  delete (safeSettings as { hunterApiKey?: string }).hunterApiKey;
+  const keys = verifierKeysFrom(state.settings);
+  const googleApp = Boolean(googleAppFrom(state.settings));
+  const hunter = Boolean(keys.hunter);
+  const checklist = setupChecklist({
+    passwordSet: deskPasswordConfigured(),
+    persistence: persistenceHint(),
+    googleApp,
+    googleConnected: Boolean(state.settings.google?.refreshToken),
+    meetUrl: state.settings.meetUrl,
+    hunter,
+    mailboxReady: mailboxReady(state.settings),
+  });
   return {
     settings: {
       ...safeSettings,
-      smtpPassSet: Boolean(smtpPass),
-      googleEmail: google?.email || "",
-      googleConnected: Boolean(google?.refreshToken),
+      smtpPassSet: Boolean(state.settings.smtpPass),
+      googleEmail: state.settings.google?.email || "",
+      googleConnected: Boolean(state.settings.google?.refreshToken),
       mailboxReady: mailboxReady(state.settings),
+      googleClientId: state.settings.googleClientId,
+      hunterSet: hunter,
+      googleSecretSet: Boolean(state.settings.googleClientSecret || process.env.GOOGLE_CLIENT_SECRET),
     },
     leads: state.leads,
     messages: state.messages,
@@ -52,11 +73,14 @@ export async function getDeskSnapshot() {
     events: state.events.slice(0, 40),
     stats: stats(state),
     persistence: persistenceHint(),
-    hunter: Boolean(process.env.HUNTER_API_KEY),
-    verifier: Boolean(process.env.HUNTER_API_KEY || process.env.NEVERBOUNCE_API_KEY || process.env.ABSTRACT_API_KEY),
-    googleApp: Boolean(process.env.GOOGLE_CLIENT_ID && process.env.GOOGLE_CLIENT_SECRET),
+    hunter,
+    verifier: Boolean(keys.hunter || keys.neverbounce || keys.abstract),
+    googleApp,
     passwordSet: deskPasswordConfigured(),
     now: nowIso(),
+    checklist,
+    publicUrl: process.env.DESK_PUBLIC_URL || "",
+    allowedEmail: process.env.DESK_ALLOWED_EMAIL || "awaisu@saylware.com",
   };
 }
 
@@ -73,6 +97,10 @@ export async function saveSettingsAction(input: Partial<DeskSettings> & { smtpPa
     next.dailyCap = Math.min(50, Math.max(1, Number(next.dailyCap) || 50));
     if (smtpPass) next.smtpPass = encryptSecret(smtpPass);
     next.google = state.settings.google;
+    if (input.googleClientSecret) next.googleClientSecret = encryptSecret(input.googleClientSecret);
+    else next.googleClientSecret = state.settings.googleClientSecret;
+    if (input.hunterApiKey) next.hunterApiKey = encryptSecret(input.hunterApiKey);
+    else next.hunterApiKey = state.settings.hunterApiKey;
     state.settings = next;
     state.events.unshift({
       id: uid("evt"),
@@ -83,6 +111,42 @@ export async function saveSettingsAction(input: Partial<DeskSettings> & { smtpPa
       detail: "Settings updated",
     });
   });
+}
+
+export async function saveSetupAction(input: {
+  googleClientId?: string;
+  googleClientSecret?: string;
+  hunterApiKey?: string;
+  meetUrl?: string;
+  physicalAddress?: string;
+  senderName?: string;
+  senderEmail?: string;
+  smtpHost?: string;
+  smtpPort?: number;
+  smtpUser?: string;
+  smtpPass?: string;
+  autopilot?: boolean;
+}) {
+  await requireDesk();
+  await mutateState((state) => {
+    if (input.googleClientId !== undefined) state.settings.googleClientId = input.googleClientId.trim();
+    if (input.googleClientSecret) state.settings.googleClientSecret = encryptSecret(input.googleClientSecret.trim());
+    if (input.hunterApiKey) state.settings.hunterApiKey = encryptSecret(input.hunterApiKey.trim());
+    if (input.meetUrl !== undefined) state.settings.meetUrl = input.meetUrl.trim();
+    if (input.physicalAddress !== undefined) state.settings.physicalAddress = input.physicalAddress.trim();
+    if (input.senderName !== undefined) state.settings.senderName = input.senderName.trim();
+    if (input.senderEmail !== undefined) state.settings.senderEmail = input.senderEmail.trim();
+    if (input.smtpHost !== undefined) state.settings.smtpHost = input.smtpHost.trim();
+    if (input.smtpPort !== undefined) state.settings.smtpPort = input.smtpPort;
+    if (input.smtpUser !== undefined) state.settings.smtpUser = input.smtpUser.trim();
+    if (input.smtpPass) state.settings.smtpPass = encryptSecret(input.smtpPass);
+    if (input.autopilot !== undefined) state.settings.autopilot = input.autopilot;
+  });
+}
+
+export async function runAutopilotAction() {
+  await requireDesk();
+  return mutateState((state) => runAutopilot(state));
 }
 
 export async function disconnectGoogleAction() {
@@ -178,7 +242,7 @@ export async function verifyLeadAction(leadId: string) {
     const lead = state.leads.find((l) => l.id === leadId);
     if (!lead) fail("Lead not found.");
     if (!lead.email) fail("Add an email first.");
-    const verification = await verifyEmail(lead.email);
+    const verification = await verifyEmail(lead.email, verifierKeysFrom(state.settings));
     lead.verification = verification;
     lead.emailVerified = verification.verdict === "deliverable";
     lead.score = scoreLead(lead);
@@ -193,7 +257,7 @@ export async function findPeopleAction(leadId: string) {
   const state = await loadState();
   const lead = state.leads.find((l) => l.id === leadId);
   if (!lead) fail("Lead not found.");
-  return hunterFindPeople(lead.domain);
+  return hunterFindPeople(lead.domain, verifierKeysFrom(state.settings).hunter);
 }
 
 export async function applyFoundPersonAction(leadId: string, person: { email: string; name: string; role: string }) {

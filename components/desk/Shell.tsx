@@ -3,6 +3,7 @@ import { logoutAction } from "@/lib/desk/actions";
 
 const NAV = [
   { href: "/desk", label: "Home" },
+  { href: "/desk/setup", label: "Setup" },
   { href: "/desk/queue", label: "Approve" },
   { href: "/desk/leads", label: "Leads" },
   { href: "/desk/jobs", label: "Hiring" },

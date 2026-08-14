@@ -103,7 +103,7 @@ function scheduleFollowups(state: DeskState, lead: Lead, message: Message) {
 
 export async function detectReplies(state: DeskState) {
   if (!state.settings.google?.refreshToken) return 0;
-  const fresh = await freshAccessToken(state.settings.google);
+  const fresh = await freshAccessToken(state.settings.google, state.settings);
   state.settings.google = fresh.tokens;
   let n = 0;
   const awaiting = state.leads.filter((l) => ["sent", "opened", "clicked"].includes(l.status));
@@ -111,9 +111,16 @@ export async function detectReplies(state: DeskState) {
     const last = state.messages.filter((m) => m.leadId === lead.id && m.sentAt).sort((a, b) => (b.sentAt || "").localeCompare(a.sentAt || ""))[0];
     if (!last?.sentAt) continue;
     const hit = await gmailReplied(fresh.access, lead.email, last.sentAt);
-    if (hit) {
+    if (hit.hit) {
       lead.status = "replied";
       lead.updatedAt = nowIso();
+      if (hit.snippet) lead.notes = [lead.notes, `Reply: ${hit.snippet}`].filter(Boolean).join("\n");
+      for (const m of state.messages.filter((x) => x.leadId === lead.id && ["draft", "pending_approval", "approved", "scheduled"].includes(x.status))) {
+        m.status = "cancelled";
+      }
+      for (const r of state.reminders.filter((x) => x.leadId === lead.id && x.type === "followup" && !x.doneAt)) {
+        r.doneAt = nowIso();
+      }
       n += 1;
       state.events.unshift({
         id: uid("evt"),
@@ -121,7 +128,7 @@ export async function detectReplies(state: DeskState) {
         type: "replied",
         leadId: lead.id,
         messageId: last.id,
-        detail: `${lead.contactName} replied`,
+        detail: `${lead.contactName} replied${hit.snippet ? `: ${hit.snippet}` : ""}`,
       });
     }
   }

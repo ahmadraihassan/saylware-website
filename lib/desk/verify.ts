@@ -77,8 +77,7 @@ type RemoteVerdict = {
   detail: string;
 };
 
-async function hunterVerify(email: string): Promise<RemoteVerdict | null> {
-  const key = process.env.HUNTER_API_KEY;
+async function hunterVerify(email: string, key: string): Promise<RemoteVerdict | null> {
   if (!key) return null;
   const url = `https://api.hunter.io/v2/email-verifier?email=${encodeURIComponent(email)}&api_key=${encodeURIComponent(key)}`;
   const res = await fetch(url, { cache: "no-store" });
@@ -105,8 +104,7 @@ async function hunterVerify(email: string): Promise<RemoteVerdict | null> {
   return { verdict: "unknown", source: "hunter", score, detail: `Hunter status: ${status || "empty"}.` };
 }
 
-async function neverbounceVerify(email: string): Promise<RemoteVerdict | null> {
-  const key = process.env.NEVERBOUNCE_API_KEY;
+async function neverbounceVerify(email: string, key: string): Promise<RemoteVerdict | null> {
   if (!key) return null;
   const res = await fetch("https://api.neverbounce.com/v4/single/check", {
     method: "POST",
@@ -127,8 +125,7 @@ async function neverbounceVerify(email: string): Promise<RemoteVerdict | null> {
   return { verdict: "unknown", source: "neverbounce", score: 0, detail: `NeverBounce: ${result || "empty"}.` };
 }
 
-async function abstractVerify(email: string): Promise<RemoteVerdict | null> {
-  const key = process.env.ABSTRACT_API_KEY;
+async function abstractVerify(email: string, key: string): Promise<RemoteVerdict | null> {
   if (!key) return null;
   const url = `https://emailreputation.abstractapi.com/v1/?api_key=${encodeURIComponent(key)}&email=${encodeURIComponent(email)}`;
   const res = await fetch(url, { cache: "no-store" });
@@ -144,11 +141,16 @@ async function abstractVerify(email: string): Promise<RemoteVerdict | null> {
   return { verdict: "unknown", source: "abstract", score, detail: `Abstract: ${status || "empty"}.` };
 }
 
-export async function verifyEmail(email: string) {
+export type VerifierKeys = { hunter?: string; neverbounce?: string; abstract?: string };
+
+export async function verifyEmail(email: string, keys: VerifierKeys = {}) {
   const normalized = email.trim().toLowerCase();
   const domain = normalized.split("@")[1] || "";
   const disposable = isDisposableDomain(domain);
   const roleAddress = isRoleAddress(normalized);
+  const hunterKey = keys.hunter || process.env.HUNTER_API_KEY || "";
+  const neverbounceKey = keys.neverbounce || process.env.NEVERBOUNCE_API_KEY || "";
+  const abstractKey = keys.abstract || process.env.ABSTRACT_API_KEY || "";
 
   if (!syntaxOk(normalized)) {
     return {
@@ -177,7 +179,10 @@ export async function verifyEmail(email: string) {
   }
 
   const mxFound = await mxLookup(domain);
-  const remote = (await hunterVerify(normalized)) || (await neverbounceVerify(normalized)) || (await abstractVerify(normalized));
+  const remote =
+    (await hunterVerify(normalized, hunterKey)) ||
+    (await neverbounceVerify(normalized, neverbounceKey)) ||
+    (await abstractVerify(normalized, abstractKey));
 
   if (remote) {
     return {
@@ -219,9 +224,9 @@ export async function verifyEmail(email: string) {
   };
 }
 
-export async function hunterFindPeople(domain: string) {
-  const key = process.env.HUNTER_API_KEY;
-  if (!key) return { ok: false as const, error: "Add HUNTER_API_KEY to look up people at a domain. We do not scrape job boards." };
+export async function hunterFindPeople(domain: string, hunterKey?: string) {
+  const key = hunterKey || process.env.HUNTER_API_KEY;
+  if (!key) return { ok: false as const, error: "Add a Hunter API key in Setup to look up people at a domain. We do not scrape job boards." };
   const url = `https://api.hunter.io/v2/domain-search?domain=${encodeURIComponent(domain)}&api_key=${encodeURIComponent(key)}&limit=10`;
   const res = await fetch(url, { cache: "no-store" });
   if (!res.ok) return { ok: false as const, error: `Hunter returned ${res.status}` };
