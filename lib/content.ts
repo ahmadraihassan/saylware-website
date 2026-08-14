@@ -409,7 +409,6 @@ export const contact = {
   description: "Send us a general note and we will point you to the right specialist.",
   email: "awaisu@saylware.com",
   phone: "+1 9153402356",
-  linkedin: "https://www.linkedin.com/company/saylware/",
   formspreeId: "xeeybvzn",
 };
 

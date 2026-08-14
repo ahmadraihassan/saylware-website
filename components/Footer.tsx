@@ -19,14 +19,6 @@ export default function Footer() {
               {contact.phone}
             </a>
             <a
-              href={contact.linkedin}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="rounded-full glass px-5 py-3 text-sm text-center"
-            >
-              LinkedIn
-            </a>
-            <a
               href="/#get-started"
               className="rounded-full bg-[var(--accent)] text-[var(--bg)] px-5 py-3 text-sm font-bold text-center"
             >
